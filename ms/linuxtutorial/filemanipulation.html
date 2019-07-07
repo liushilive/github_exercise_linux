@@ -1,0 +1,432 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+<meta charset="UTF-8">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>Linux 相关 - 文件操作</title>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="" name="description">
+<meta content="刘士" name="author">
+
+<link href="../..\../asserts/lsbook/less/website.css" rel="stylesheet">
+<link href="../..\../asserts/lsbook/katex/katex.min.css" rel="stylesheet">
+<link href="../..\../asserts/lsbook/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+<meta content="true" name="HandheldFriendly"/>
+<meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<link href="../..\../asserts/lsbook/images/apple-touch-icon-precomposed-152.png"
+      rel="apple-touch-icon-precomposed" sizes="152x152">
+<link href="../..\../asserts/lsbook/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<!--分页-->
+<link href="../../md/tools/bash-completion-zi-dong-bu-quan-gong-neng-zeng-qiang.html" rel="next"/>
+</head>
+<body>
+<div class="book"><div class="book-summary">
+    <div id="book-search-input" role="search">
+        <input placeholder="输入并搜索" type="text"/>
+    </div>
+    <nav role="navigation">
+        <ul class="summary">
+            <li class="header">Summary</li><li class="chapter" data-level="1.1" data-path="../../index.html">
+    <a href="../../index.html"><b>1.1.</b> 介绍</a>
+</li>
+<li class="header">Linux 教程</li><li class="chapter" data-level="2.1" data-path="index.html">
+    <a href="index.html"><b>2.1.</b> Linux 教程</a>
+    <ul class="articles">
+    <li class="chapter" data-level="2.1.1" data-path="linuxinstall.html">
+    <a href="linuxinstall.html"><b>2.1.1.</b> 获得 Linux</a>
+</li>
+<li class="chapter" data-level="2.1.2" data-path="commandline.html">
+    <a href="commandline.html"><b>2.1.2.</b> 命令行</a>
+</li>
+<li class="chapter" data-level="2.1.3" data-path="navigation.html">
+    <a href="navigation.html"><b>2.1.3.</b> 基本导航</a>
+</li>
+<li class="chapter" data-level="2.1.4" data-path="aboutfiles.html">
+    <a href="aboutfiles.html"><b>2.1.4.</b> 关于文件</a>
+</li>
+<li class="chapter" data-level="2.1.5" data-path="manual.html">
+    <a href="manual.html"><b>2.1.5.</b> 手册页</a>
+</li>
+<li class="chapter active" data-level="2.1.6" data-path="filemanipulation.html">
+    <a href="filemanipulation.html"><b>2.1.6.</b> 文件操作</a>
+</li>
+
+    </ul>
+</li>
+<li class="header">Linux 常用工具部署</li><li class="chapter" data-level="3.1" data-path="../../md/tools/bash-completion-zi-dong-bu-quan-gong-neng-zeng-qiang.html">
+    <a href="../../md/tools/bash-completion-zi-dong-bu-quan-gong-neng-zeng-qiang.html"><b>3.1.</b> 自动补全功能增强</a>
+</li>
+<li class="chapter" data-level="3.2" data-path="../../md/tools/sudo.html">
+    <a href="../../md/tools/sudo.html"><b>3.2.</b> 配置 Sudo</a>
+</li>
+<li class="chapter" data-level="3.3" data-path="../../md/tools/yum_repodata.html">
+    <a href="../../md/tools/yum_repodata.html"><b>3.3.</b> 部署 YUM 仓库</a>
+</li>
+<li class="chapter" data-level="3.4" data-path="../../md/tools/添加Swap.html">
+    <a href="../../md/tools/添加Swap.html"><b>3.4.</b> 添加 Swap</a>
+</li>
+<li class="chapter" data-level="3.5" data-path="../../md/tools/LEMP.html">
+    <a href="../../md/tools/LEMP.html"><b>3.5.</b> LEMP 环境</a>
+</li>
+<li class="chapter" data-level="3.6" data-path="../../md/tools/install-oracle-11g-express-xe-on-centos-7.html">
+    <a href="../../md/tools/install-oracle-11g-express-xe-on-centos-7.html"><b>3.6.</b> Oracle 11g Express (XE)</a>
+</li>
+<li class="chapter" data-level="3.7" data-path="../../md/tools/部署SVN.html">
+    <a href="../../md/tools/部署SVN.html"><b>3.7.</b> 部署 SVN</a>
+</li>
+<li class="chapter" data-level="3.8" data-path="../../md/tools/大商创环境部署.html">
+    <a href="../../md/tools/大商创环境部署.html"><b>3.8.</b> DSC 环境部署 教学环境</a>
+</li>
+<li class="chapter" data-level="3.9" data-path="../../md/tools/持续集成环境.html">
+    <a href="../../md/tools/持续集成环境.html"><b>3.9.</b> Jenkins 部署</a>
+</li>
+<li class="chapter" data-level="3.10" data-path="../../md/tools/持续集成环境-教学环境.html">
+    <a href="../../md/tools/持续集成环境-教学环境.html"><b>3.10.</b> Jenkins 部署 教学环境</a>
+</li>
+
+            <li class="divider"></li>
+            <li>
+                <a class="lsbook-link" href="https://github.com/liushilive/lsbook" target="blank">
+                    本书使用 LsBook 发布
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<div class="book-body">
+    <div class="body-inner">
+    <div class="book-header" role="navigation">
+        <!-- Title -->
+        <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i>
+            <a href="../..">文件操作</a>
+        </h1>
+    </div>
+
+    <div class="page-wrapper" role="main" tabindex="-1">
+        <div class="page-inner">
+            <div class="search-plus" id="book-search-results">
+                <div class="search-noresults">
+                    <section class="normal markdown-section">
+                        <div id='anchor-navigation-ex-navbar'><i class='fa fa-anchor'></i><ul><li><span class='title-icon fa fa-hand-o-right'></span><a aria-label class='on-toolbar-action' href='' onclick="$('.fa.fa-align-justify').parent()[0].click();">目录</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_1'><b></b>文件操作</a></li><ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_2'><b>1. </b>创建目录</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_3'><b>2. </b>删除目录</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_4'><b>3. </b>创建空白文件</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_5'><b>4. </b>复制文件或目录</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_6'><b>5. </b>移动文件或目录</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_7'><b>6. </b>重命名文件和目录</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_8'><b>7. </b>删除文件（和非空目录）</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_9'><b>8. </b>删除非空目录</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_10'><b>9. </b>最后一点</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_11'><b>10. </b>摘要</a></li><ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_12'><b>10.1. </b>学到什么</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_13'><b>10.2. </b>重要概念</a></li></ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_14'><b>11. </b>活动</a></li></ul></ul></div><a href='#anchor_1' id='anchorNavigationExGoTop'><i class='fa fa-arrow-up'></i></a>
+                        <h1 id="anchor_1"><a name="anchor_1" class="anchor-navigation-ex-anchor" href="#anchor_1"><i class="fa fa-link" aria-hidden="true"></i></a>文件操作</h1><!-- https://ryanstutorials.net/linuxtutorial/filemanipulation.php -->
+
+<p>我们已经有了一些基础知识。现在我们可以开始玩了。首先，我们将学习制作一些文件和目录并移动它们。未来部分将讨论将内容放入其中以及更有趣的操作。</p>
+<h2 id="anchor_2"><a name="anchor_2" class="anchor-navigation-ex-anchor" href="#anchor_2"><i class="fa fa-link" aria-hidden="true"></i></a>1. 创建目录</h2><p>Linux 以分层方式组织它的文件系统。
+随着时间的推移，你将建立相当数量的数据文件（存储容量总是在增加）。
+我们必须创建一个目录结构，以帮助我们以可管理的方式组织数据。
+我已经看到太多人只是将所有文件直接转储到他们的主目录的基础上，这将浪费了大量的时间来尝试在 100（甚至 1000）个文件中找到想要的文件。
+养成将你的文件组织成一个优雅的文件结构的习惯，你将在未来几年感谢自己。</p>
+<p>创建目录非常简单。命令是  <code class="language-markup">mkdir</code> ，它是  <code class="language-markup">Make Directory</code>  的缩写。</p>
+<pre class="line-numbers"><code class="lang-bash">mkdir [options] &lt;目录&gt;
+</code></pre>
+<p>在它最基本的形式中，我们可以运行  <code class="language-markup">mkdir</code>  只提供一个目录，它将为我们创建它。</p>
+<pre class="line-numbers"><code class="lang-bash">[root@localhost ~]# pwd
+/root
+[root@localhost ~]# ls
+anaconda-ks.cfg
+[root@localhost ~]# mkdir liushilive
+[root@localhost ~]# ls
+anaconda-ks.cfg  liushilive
+[root@localhost ~]#
+</code></pre>
+<p>让我们分解一下：</p>
+<ul>
+<li><p>第 1 行确定我们当前所在路径。（在上面的示例中，我在我的主目录中）</p>
+</li>
+<li><p>第 3 行快速列出内容，以便我们知道目录中已有的内容。</p>
+</li>
+<li><p>第 5 行运行命令  <code class="language-markup">mkdir</code>  并创建一个目录  <code class="language-markup">liushilive</code></p>
+</li>
+<li><p>第 7 行快速列出内容，以便我们知道目录中已经创建了新的内容。</p>
+</li>
+</ul>
+<p>请记住，当我们在上面的命令中提供目录时，我们实际上提供了一个路径。我们指定的路径是相对的还是绝对的？</p>
+<p>以下是我们提供要如何创建目录的更多示例</p>
+<pre class="line-numbers"><code class="lang-bash">mkdir /root/liushi_1
+mkdir ./liushi_2
+mkdir ../root/liushi_3
+mkdir ~/liushi_4
+</code></pre>
+<p>如果不认识其中符号，请查看 <a href="navigation.md">基本导航</a></p>
+<p><code class="language-markup">mkdir</code>  有一些有用的选项。你能记得我们去哪里找出特定命令支持的命令行选项吗？</p>
+<p>第一个是  <code class="language-markup">-p</code> ，它告诉  <code class="language-markup">mkdir</code>  根据需要创建父目录（演示下面实际意味着什么）。</p>
+<pre class="line-numbers"><code class="lang-bash">[root@localhost ~]# mkdir -p liushilive/foo/bar
+[root@localhost ~]# cd liushilive/foo/bar/
+[root@localhost bar]# pwd
+/root/liushilive/foo/bar
+[root@localhost bar]#
+</code></pre>
+<p>第二个是  <code class="language-markup">-v</code> ，这使得  <code class="language-markup">mkdir</code>  告诉我们它在做什么。</p>
+<pre class="line-numbers"><code class="lang-bash">[root@localhost ~]# cd ~
+[root@localhost ~]# mkdir -pv liushilive_1/foo/bar
+mkdir: 已创建目录 &quot;liushilive_1&quot;
+mkdir: 已创建目录 &quot;liushilive_1/foo&quot;
+mkdir: 已创建目录 &quot;liushilive_1/foo/bar&quot;
+[root@localhost ~]#
+</code></pre>
+<h2 id="anchor_3"><a name="anchor_3" class="anchor-navigation-ex-anchor" href="#anchor_3"><i class="fa fa-link" aria-hidden="true"></i></a>2. 删除目录</h2><p>创建目录非常简单。删除或删除目录也很容易。然而，需要注意的一点是，Linux 上的命令行没有撤消（Linux GUI 桌面环境通常会提供撤消功能，但命令行却没有）。小心你做的事情。删除目录的命令是  <code class="language-markup">rmdir</code> ， <code class="language-markup">remove directory</code>  的缩写。</p>
+<pre class="line-numbers"><code class="lang-bash">rmdir [options] &lt;目录&gt;
+</code></pre>
+<p>有两点需要注意。首先， <code class="language-markup">rmdir</code>  支持类似于  <code class="language-markup">mkdir</code>  的  <code class="language-markup">-v</code>  和  <code class="language-markup">-p</code>  选项。其次，一个目录必须是空的才能被删除（稍后我们会看到一种方法来解决这个问题）。</p>
+<pre class="line-numbers"><code class="lang-bash">[root@localhost ~]# rmdir liushilive/foo/bar
+[root@localhost ~]# ls liushilive/foo/
+[root@localhost ~]#
+</code></pre>
+<h2 id="anchor_4"><a name="anchor_4" class="anchor-navigation-ex-anchor" href="#anchor_4"><i class="fa fa-link" aria-hidden="true"></i></a>3. 创建空白文件</h2><p>许多涉及在文件中操作数据的命令都有一个很好的特性，即如果我们引用文件而该文件不存在，它们将自动创建该文件。事实上，我们可以利用这个特性来创建空白文件。</p>
+<pre class="line-numbers"><code class="lang-bash">touch [options] &lt;文件名&gt;
+</code></pre>
+<pre class="line-numbers"><code class="lang-bash">[root@localhost ~]# cd liushilive
+[root@localhost liushilive]# pwd
+/root/liushilive
+[root@localhost liushilive]# ls
+foo
+[root@localhost liushilive]# touch example1
+[root@localhost liushilive]# ls
+example1  foo
+[root@localhost liushilive]#
+</code></pre>
+<p>我知道有些学生尝试过使用这个命令，使他们的作业文件看起来在截止日期之后没有被修改（有一些方法可以检测到这一点，所以它永远不会起作用，但要有创造性）。我们在这里利用的是，如果我们触摸了一个文件，但它不存在，这个命令会帮我们一个忙，并自动为我们创建它。</p>
+<p><code class="language-markup">touch</code>  实际上是一个我们可以用来修改文件访问和修改时间的命令（通常不需要，但有时当你测试一个依赖于文件访问或修改时间的系统时，它可能是有用的）。我们在这里所利用的优势是，如果我们  <code class="language-markup">touch</code>  一个文件，它不存在，命令将帮助我们，并自动为我们创建它。</p>
+<blockquote><p>在 Linux 中，许多事情不是直接完成的，而是通过了解某些命令的行为和系统的某些方面，并以创造性的方式使用它们来达到预期的结果。
+还记得我们在介绍中提到的命令行为你提供了一系列构建块。你可以自由地以任何你喜欢的方式使用这些构建块，但是只有你了解它们是如何以及为什么这样做，你才能真正有效地做到这一点。</p>
+</blockquote>
+<p>目前文件是空白的，这有点无聊，但在接下来的章节中，我们将介绍如何将数据放入文件并从中提取数据。</p>
+<h2 id="anchor_5"><a name="anchor_5" class="anchor-navigation-ex-anchor" href="#anchor_5"><i class="fa fa-link" aria-hidden="true"></i></a>4. 复制文件或目录</h2><p>我们需要复制文件或目录的原因有很多。通常在更改某些内容之前，我们可能希望创建一个副本，以便在出现错误时可以轻松地恢复到原来的状态。我们使用的命令是  <code class="language-markup">cp</code> ，代表  <code class="language-markup">copy</code> 。</p>
+<pre class="line-numbers"><code class="lang-bash">cp [options] &lt;源&gt; &lt;目标&gt;
+</code></pre>
+<p>有相当多的选项可用于  <code class="language-markup">cp</code> 。 下面我将进一步介绍其中的一个，但是有必要查看  <code class="language-markup">cp</code>  的  <code class="language-markup">man</code>  页面，看看还有什么可用的。</p>
+<pre class="line-numbers"><code class="lang-bash">[root@localhost liushilive]# ls
+example1  foo
+[root@localhost liushilive]# cp example1 example2
+[root@localhost liushilive]# ls
+example1  example2  foo
+[root@localhost liushilive]#
+</code></pre>
+<p>请注意，源和目标都是路径。这意味着我们可以使用绝对路径和相对路径来引用它们。</p>
+<p>以下是一些例子：</p>
+<pre class="line-numbers"><code class="lang-bash">cp /root/liushilive/example2 example3
+cp example2 ../../tmp
+cp example2 ../../tmp/example4
+cp /root/liushilive/example2 /root/liushilive/example5
+</code></pre>
+<p>使用  <code class="language-markup">cp</code>  时，目的地可以是文件或目录的路径。
+如果是到一个文件（例如上面的示例 1、3 和 4)，那么它将创建源的一个副本，但是将副本命名为目标文件中指定的文件名。如果我们提供一个目录作为目标，那么它将把文件复制到该目录中，并且复制文件将具有与源文件相同的名称。</p>
+<p>在它的默认行为  <code class="language-markup">cp</code>  将只复制一个文件（有一种一次复制多个文件的方法，但是我们将在后面讨论这个问题：<a href="wildcards.md">通配符</a>）。使用  <code class="language-markup">-r</code>  选项（表示递归），我们可以复制目录。递归意味着我们要查看一个目录以及其中的所有文件和目录，对于子目录，进入它们并执行相同的操作，然后继续这样做。</p>
+<pre class="line-numbers"><code class="lang-bash">[root@localhost liushilive]# pwd
+/root/liushilive
+[root@localhost liushilive]# ls
+example1  example2  example3  example5  foo
+[root@localhost liushilive]# cp foo foo2
+cp: 略过目录&quot;foo&quot;
+[root@localhost liushilive]# ls
+example1  example2  example3  example5  foo
+[root@localhost liushilive]# cp -r foo foo2
+[root@localhost liushilive]# ls
+example1  example2  example3  example5  foo  foo2
+[root@localhost liushilive]#
+</code></pre>
+<h2 id="anchor_6"><a name="anchor_6" class="anchor-navigation-ex-anchor" href="#anchor_6"><i class="fa fa-link" aria-hidden="true"></i></a>5. 移动文件或目录</h2><p>要移动一个文件，我们使用命令  <code class="language-markup">mv</code> ，它是  <code class="language-markup">move</code>  的缩写。它的工作方式与  <code class="language-markup">cp</code>  相似。一个小小的优点是，我们可以移动目录而不必提供  <code class="language-markup">-r</code>  选项。</p>
+<pre class="line-numbers"><code class="lang-bash">mv [options] &lt;源&gt; &lt;目标&gt;
+</code></pre>
+<pre class="line-numbers"><code class="lang-bash">[root@localhost liushilive]# pwd
+/root/liushilive
+[root@localhost liushilive]# ls
+example1  example2  example3  example5  foo  foo2
+[root@localhost liushilive]# mkdir backups
+[root@localhost liushilive]# mv foo2 backups/foo3
+[root@localhost liushilive]# ls
+backups  example1  example2  example3  example5  foo
+[root@localhost liushilive]#
+</code></pre>
+<p>让我们来分析一下：</p>
+<ul>
+<li><p>第 5 行 我们创建了一个名为  <code class="language-markup">backups</code>  的新目录</p>
+</li>
+<li><p>第 6 行 我们将目录  <code class="language-markup">foo2</code>  移动到目录  <code class="language-markup">backups</code>  中，并将其重命名为  <code class="language-markup">foo3</code></p>
+</li>
+</ul>
+<p>请再次注意，源和目标都是路径，可以为绝对路径或相对路径。</p>
+<h2 id="anchor_7"><a name="anchor_7" class="anchor-navigation-ex-anchor" href="#anchor_7"><i class="fa fa-link" aria-hidden="true"></i></a>6. 重命名文件和目录</h2><p>现在就像上面的命令  <code class="language-markup">touch</code>  一样，我们可以创造性地使用命令  <code class="language-markup">mv</code>  的基本行为来实现一个稍微不同的结果。
+通常， <code class="language-markup">mv</code>  将用于将文件或目录移动到新目录中。
+正如我们在上面的第 6 行中看到的，我们可以为文件或目录提供一个新的名称，作为移动的一部分，它还将重命名它。
+现在，如果我们将目的地指定为与源目录相同的目录，但使用不同的名称，那么我们就有效地使用了  <code class="language-markup">mv</code>  来重命名文件或目录。</p>
+<pre class="line-numbers"><code class="lang-bash">[root@localhost liushilive]# ls
+backups  example1  example2  example3  example5  foo
+[root@localhost liushilive]# mv foo foo3
+[root@localhost liushilive]# ls
+backups  example1  example2  example3  example5  foo3
+[root@localhost liushilive]#
+</code></pre>
+<p>让我们来分析一下：</p>
+<ul>
+<li><p>第 3 行 我们将  <code class="language-markup">foo</code>  重命名为  <code class="language-markup">foo3</code></p>
+</li>
+</ul>
+<h2 id="anchor_8"><a name="anchor_8" class="anchor-navigation-ex-anchor" href="#anchor_8"><i class="fa fa-link" aria-hidden="true"></i></a>7. 删除文件（和非空目录）</h2><p>与  <code class="language-markup">rmdir</code>  一样，删除文件是一个不能撤消的操作，所以要小心。删除或删除文件的命令是  <code class="language-markup">rm</code> ，它代表  <code class="language-markup">remove</code> 。</p>
+<pre class="line-numbers"><code class="lang-bash">rm [options] &lt;file&gt;
+</code></pre>
+<pre class="line-numbers"><code class="lang-bash">[root@localhost liushilive]# clear
+[root@localhost liushilive]# ls
+backups  example1  example2  example3  example5  foo3
+[root@localhost liushilive]# rm example1
+rm：是否删除普通空文件 &quot;example1&quot;？y
+[root@localhost liushilive]# ls
+backups  example2  example3  example5  foo3
+[root@localhost liushilive]#
+</code></pre>
+<h2 id="anchor_9"><a name="anchor_9" class="anchor-navigation-ex-anchor" href="#anchor_9"><i class="fa fa-link" aria-hidden="true"></i></a>8. 删除非空目录</h2><p>与本节介绍的其他几个命令一样， <code class="language-markup">rm</code>  有几个选项可以改变它的行为。
+我将让你自己来查看  <code class="language-markup">man</code>  页面，看看它们是什么，但是我将介绍一个特别有用的选项，它是  <code class="language-markup">-r</code> ，类似于  <code class="language-markup">cp</code> ，它代表递归。
+当  <code class="language-markup">rm</code>  使用  <code class="language-markup">-r</code>  选项运行时，它允许我们删除目录以及其中包含的所有文件和目录。</p>
+<pre class="line-numbers"><code class="lang-bash">[root@localhost liushilive]# ls
+backups  example2  example3  example5  foo3
+[root@localhost liushilive]# rmdir backups/
+rmdir: 删除 &quot;backups/&quot; 失败: 目录非空
+[root@localhost liushilive]# rm backups/
+rm: 无法删除&quot;backups/&quot;: 是一个目录
+[root@localhost liushilive]# rm -r backups/
+rm：是否进入目录&quot;backups/&quot;? y
+rm：是否删除目录 &quot;backups/foo3&quot;？y
+rm：是否删除目录 &quot;backups/&quot;？y
+[root@localhost liushilive]# ls
+example2  example3  example5  foo3
+[root@localhost liushilive]#
+</code></pre>
+<p>在删除每个文件和目录之前提示你，并为你提供取消命令的选项。如果不想交互式提示，可加入  <code class="language-markup">-f</code> ，将不会有任何提示，直接删除！！！</p>
+<h2 id="anchor_10"><a name="anchor_10" class="anchor-navigation-ex-anchor" href="#anchor_10"><i class="fa fa-link" aria-hidden="true"></i></a>9. 最后一点</h2><p>我知道我已经强调了这一点，但是现在希望你能够理解，每当我们在命令行中引用一个文件或目录时，它实际上是一个路径。</p>
+<p>因此，它可以指定为绝对路径或相对路径。</p>
+<p>这是几乎总是这样的情况，所以记住这一点很重要。</p>
+<p>在以后的章节中，我不会一直提醒你这一点，给出的例子通常也不会说明这一点。</p>
+<p>记住在命令中实验绝对路径和相对路径，因为它们有时会在输出中提供细微但有用的差异。</p>
+<p>（命令的输出可能略有不同，但是命令的操作总是相同的。)</p>
+<h2 id="anchor_11"><a name="anchor_11" class="anchor-navigation-ex-anchor" href="#anchor_11"><i class="fa fa-link" aria-hidden="true"></i></a>10. 摘要</h2><h3 id="anchor_12"><a name="anchor_12" class="anchor-navigation-ex-anchor" href="#anchor_12"><i class="fa fa-link" aria-hidden="true"></i></a>10.1. 学到什么</h3><ul>
+<li><p><code class="language-markup">mkdir</code> 
+创建一个目录</p>
+</li>
+<li><p><code class="language-markup">rmdir</code> 
+删除一个目录</p>
+</li>
+<li><p><code class="language-markup">touch</code> 
+创建一个空白文件</p>
+</li>
+<li><p><code class="language-markup">cp</code> 
+复制文件或目录</p>
+</li>
+<li><p><code class="language-markup">mv</code> 
+移动文件或目录（也可用于重命名）</p>
+</li>
+<li><p><code class="language-markup">rm</code> 
+ 删除文件</p>
+</li>
+</ul>
+<h3 id="anchor_13"><a name="anchor_13" class="anchor-navigation-ex-anchor" href="#anchor_13"><i class="fa fa-link" aria-hidden="true"></i></a>10.2. 重要概念</h3><ul>
+<li><p>没有挽回的余地
+Linux 命令行没有撤销功能！！！</p>
+</li>
+<li><p>命令行选项
+大多数命令都有许多有用的命令行选项。</p>
+<p>请确保浏览<a href="manual.md">手册页</a>以获取新命令，以便熟悉它们的功能和可用内容</p>
+</li>
+</ul>
+<h2 id="anchor_14"><a name="anchor_14" class="anchor-navigation-ex-anchor" href="#anchor_14"><i class="fa fa-link" aria-hidden="true"></i></a>11. 活动</h2><p>是的，现在让我们把这些东西付诸实践。请参阅以下内容：</p>
+<ul>
+<li><p>首先在你的主目录中创建一个目录，在其中进行试验</p>
+</li>
+<li><p>在该目录中，创建一系列文件和目录（以及这些目录中的文件和目录）</p>
+</li>
+<li><p>现在重命名一些文件和目录</p>
+</li>
+<li><p>删除包含其他文件和目录的目录之一</p>
+</li>
+<li><p>回到你的主目录，从那里将一个文件从一个子目录复制到你创建的初始目录中</p>
+</li>
+<li><p>现在将该文件移回另一个目录</p>
+</li>
+<li><p>重命名一些文件</p>
+</li>
+<li><p>接下来，移动一个文件并在此过程中重命名它</p>
+</li>
+<li><p>最后，查看一下你的主目录中的现有目录</p>
+</li>
+</ul>
+
+                        <footer class="page-footer"><span class="copyright">© 2019 刘士. 
+All rights reserved.</span><span class="footer-modification">
+<span id="busuanzi_container_site_uv" style="display:none">本站访客数 <span id="busuanzi_value_site_uv">
+</span> 人次</span></span></footer>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+var _hmt = _hmt || [];
+(function () {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?921ac157b25b6c9fd562a97abf2806a7";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+(function () {
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else {
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script>
+                    </section>
+                </div>
+                <div class="search-results">
+                    <div class="has-results">
+                        <h1 class="search-results-title"><span class='search-results-count'></span> 结果匹配 "<span class='search-query'></span>"</h1>
+                        <ul class="search-results-list"></ul>
+                    </div>
+                    <div class="no-results">
+                        <h1 class="search-results-title">没有匹配的结果 "<span class='search-query'></span>"</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<a aria-label="Previous page: 手册页" class="navigation navigation-prev" href="manual.html">
+    <i class="fa fa-angle-left"></i>
+</a>
+
+
+<a aria-label="Next page: 自动补全功能增强" class="navigation navigation-next" href="../../md/tools/bash-completion-zi-dong-bu-quan-gong-neng-zeng-qiang.html">
+    <i class="fa fa-angle-right"></i>
+</a>
+
+
+</div>
+<script>
+    var lsbook = lsbook || [];
+    lsbook.push(function () {
+        lsbook.page.hasChanged({
+            "config": {
+                "github_url":"https://liushilive.github.io/",
+                "language": "zh-cn"
+            },
+            "basePath": "../..",
+            "js": {'prism': ['../..\\../asserts/lsbook/prismjs/clipboard.min.js', '../..\\../asserts/lsbook/prismjs/prism.js']}
+        });
+    });
+</script>
+</div>
+
+<script src="../..\../asserts/lsbook/jquery-3.3.1.min.js"></script>
+<script charset="UTF-8" src="../..\../asserts/lsbook/jquery_mar/jquery.mark.js"></script>
+<script src="../..\../asserts/lsbook/lightbox/js/lightbox.min.js"></script>
+<script src="../..\../asserts/lsbook/lsbook.min.js"></script>
+
+</body>
+</html>

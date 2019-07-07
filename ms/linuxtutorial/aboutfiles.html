@@ -1,0 +1,276 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+<meta charset="UTF-8">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>Linux 相关 - 关于文件</title>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="" name="description">
+<meta content="刘士" name="author">
+
+<link href="../..\../asserts/lsbook/less/website.css" rel="stylesheet">
+<link href="../..\../asserts/lsbook/katex/katex.min.css" rel="stylesheet">
+<link href="../..\../asserts/lsbook/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+<meta content="true" name="HandheldFriendly"/>
+<meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<link href="../..\../asserts/lsbook/images/apple-touch-icon-precomposed-152.png"
+      rel="apple-touch-icon-precomposed" sizes="152x152">
+<link href="../..\../asserts/lsbook/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<!--分页-->
+<link href="manual.html" rel="next"/>
+</head>
+<body>
+<div class="book"><div class="book-summary">
+    <div id="book-search-input" role="search">
+        <input placeholder="输入并搜索" type="text"/>
+    </div>
+    <nav role="navigation">
+        <ul class="summary">
+            <li class="header">Summary</li><li class="chapter" data-level="1.1" data-path="../../index.html">
+    <a href="../../index.html"><b>1.1.</b> 介绍</a>
+</li>
+<li class="header">Linux 教程</li><li class="chapter" data-level="2.1" data-path="index.html">
+    <a href="index.html"><b>2.1.</b> Linux 教程</a>
+    <ul class="articles">
+    <li class="chapter" data-level="2.1.1" data-path="linuxinstall.html">
+    <a href="linuxinstall.html"><b>2.1.1.</b> 获得 Linux</a>
+</li>
+<li class="chapter" data-level="2.1.2" data-path="commandline.html">
+    <a href="commandline.html"><b>2.1.2.</b> 命令行</a>
+</li>
+<li class="chapter" data-level="2.1.3" data-path="navigation.html">
+    <a href="navigation.html"><b>2.1.3.</b> 基本导航</a>
+</li>
+<li class="chapter active" data-level="2.1.4" data-path="aboutfiles.html">
+    <a href="aboutfiles.html"><b>2.1.4.</b> 关于文件</a>
+</li>
+<li class="chapter" data-level="2.1.5" data-path="manual.html">
+    <a href="manual.html"><b>2.1.5.</b> 手册页</a>
+</li>
+<li class="chapter" data-level="2.1.6" data-path="filemanipulation.html">
+    <a href="filemanipulation.html"><b>2.1.6.</b> 文件操作</a>
+</li>
+
+    </ul>
+</li>
+<li class="header">Linux 常用工具部署</li><li class="chapter" data-level="3.1" data-path="../../md/tools/bash-completion-zi-dong-bu-quan-gong-neng-zeng-qiang.html">
+    <a href="../../md/tools/bash-completion-zi-dong-bu-quan-gong-neng-zeng-qiang.html"><b>3.1.</b> 自动补全功能增强</a>
+</li>
+<li class="chapter" data-level="3.2" data-path="../../md/tools/sudo.html">
+    <a href="../../md/tools/sudo.html"><b>3.2.</b> 配置 Sudo</a>
+</li>
+<li class="chapter" data-level="3.3" data-path="../../md/tools/yum_repodata.html">
+    <a href="../../md/tools/yum_repodata.html"><b>3.3.</b> 部署 YUM 仓库</a>
+</li>
+<li class="chapter" data-level="3.4" data-path="../../md/tools/添加Swap.html">
+    <a href="../../md/tools/添加Swap.html"><b>3.4.</b> 添加 Swap</a>
+</li>
+<li class="chapter" data-level="3.5" data-path="../../md/tools/LEMP.html">
+    <a href="../../md/tools/LEMP.html"><b>3.5.</b> LEMP 环境</a>
+</li>
+<li class="chapter" data-level="3.6" data-path="../../md/tools/install-oracle-11g-express-xe-on-centos-7.html">
+    <a href="../../md/tools/install-oracle-11g-express-xe-on-centos-7.html"><b>3.6.</b> Oracle 11g Express (XE)</a>
+</li>
+<li class="chapter" data-level="3.7" data-path="../../md/tools/部署SVN.html">
+    <a href="../../md/tools/部署SVN.html"><b>3.7.</b> 部署 SVN</a>
+</li>
+<li class="chapter" data-level="3.8" data-path="../../md/tools/大商创环境部署.html">
+    <a href="../../md/tools/大商创环境部署.html"><b>3.8.</b> DSC 环境部署 教学环境</a>
+</li>
+<li class="chapter" data-level="3.9" data-path="../../md/tools/持续集成环境.html">
+    <a href="../../md/tools/持续集成环境.html"><b>3.9.</b> Jenkins 部署</a>
+</li>
+<li class="chapter" data-level="3.10" data-path="../../md/tools/持续集成环境-教学环境.html">
+    <a href="../../md/tools/持续集成环境-教学环境.html"><b>3.10.</b> Jenkins 部署 教学环境</a>
+</li>
+
+            <li class="divider"></li>
+            <li>
+                <a class="lsbook-link" href="https://github.com/liushilive/lsbook" target="blank">
+                    本书使用 LsBook 发布
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<div class="book-body">
+    <div class="body-inner">
+    <div class="book-header" role="navigation">
+        <!-- Title -->
+        <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i>
+            <a href="../..">关于文件</a>
+        </h1>
+    </div>
+
+    <div class="page-wrapper" role="main" tabindex="-1">
+        <div class="page-inner">
+            <div class="search-plus" id="book-search-results">
+                <div class="search-noresults">
+                    <section class="normal markdown-section">
+                        <div id='anchor-navigation-ex-navbar'><i class='fa fa-anchor'></i><ul><li><span class='title-icon fa fa-hand-o-right'></span><a aria-label class='on-toolbar-action' href='' onclick="$('.fa.fa-align-justify').parent()[0].click();">目录</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_1'><b></b>更多关于文件</a></li><ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_2'><b>1. </b>一切都是文件</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_3'><b>2. </b>Linux 是一个无扩展系统</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_4'><b>3. </b>Linux 是区分大小写的</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_5'><b>4. </b>名称中的空格</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_6'><b>5. </b>隐藏文件和目录</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_7'><b>6. </b>摘要</a></li><ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_8'><b>6.1. </b>学到什么</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_9'><b>6.2. </b>重要概念</a></li></ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_10'><b>7. </b>活动</a></li></ul></ul></div><a href='#anchor_1' id='anchorNavigationExGoTop'><i class='fa fa-arrow-up'></i></a>
+                        <h1 id="anchor_1"><a name="anchor_1" class="anchor-navigation-ex-anchor" href="#anchor_1"><i class="fa fa-link" aria-hidden="true"></i></a>更多关于文件</h1><!-- https://ryanstutorials.net/linuxtutorial/aboutfiles.php -->
+
+<p>在上一节之后，我确信你很敏锐，并且渴望陷入更多的命令并开始对系统进行一些实际操作。我们很快就会讨论这个问题，但首先我们需要介绍一些理论，这样当我们开始使用系统时，你就可以完全理解为什么它的行为方式以及如何进一步学习你学到的命令。这就是本节和下一节打算做的事情。在那之后，我会开始变得有趣，我保证。</p>
+<h2 id="anchor_2"><a name="anchor_2" class="anchor-navigation-ex-anchor" href="#anchor_2"><i class="fa fa-link" aria-hidden="true"></i></a>1. 一切都是文件</h2><p>我们需要首先了解的是 linux 底层，一切都是文件。文本文件是文件，目录是文件，键盘是文件（系统只从中读取），监视器是文件（系统只写入一个文件）等。</p>
+<p>首先，这不会过多地影响我们的工作，但是请记住这一点，因为它有助于在管理文件和目录时理解 Linux 的行为。</p>
+<h2 id="anchor_3"><a name="anchor_3" class="anchor-navigation-ex-anchor" href="#anchor_3"><i class="fa fa-link" aria-hidden="true"></i></a>2. Linux 是一个无扩展系统</h2><p>这个问题有时候很难让你理解，但是当你完成这些部分时，它会开始变得更有意义。文件扩展名通常是在文件末尾  <code class="language-markup">.</code>  后的 2 到 4 个字符的集合，表示它是什么类型的文件。</p>
+<p>以下是常见的扩展：</p>
+<ul>
+<li><p><code class="language-markup">file.exe</code>  - 可执行文件或程序。</p>
+</li>
+<li><p><code class="language-markup">file.txt</code>  - 纯文本文件。</p>
+</li>
+<li><p><code class="language-markup">file.png</code> ， <code class="language-markup">file.gif</code> ， <code class="language-markup">file.jpg</code>  - 一个图片。</p>
+</li>
+</ul>
+<p>在其他系统（如 Windows）中，扩展很重要，系统使用它来确定它是什么类型的文件。</p>
+<p>在 Linux 下，系统实际上忽略了扩展并查看文件内部以确定它是什么类型的文件。</p>
+<p>所以例如我可以有一个文件  <code class="language-markup">1.png</code>  这是我的照片。我可以将文件重命名为  <code class="language-markup">1.txt</code>  或  <code class="language-markup">1</code>  ，Linux 仍然将该文件视为图像文件。</p>
+<p>幸运的是，有一个名为  <code class="language-markup">file</code>  的命令，我们可以用来识别它。</p>
+<pre class="line-numbers"><code class="lang-bash">file [路径]
+</code></pre>
+<p>现在大家可能想知道为什么我将上面的命令行参数指定为  <code class="language-markup">路径</code>  而不是  <code class="language-markup">文件</code> 。在 Linux 中无论何时我们在命令行上指定文件或目录，它实际上都是一个路径。另外，因为目录（如上所述）实际上只是一种特殊类型的文件，所以说路径是到达系统中特定位置的方法并且该位置是文件会更准确。</p>
+<pre class="line-numbers"><code class="lang-bash">[root@localhost ~]# pwd
+/root
+[root@localhost ~]# file anaconda-ks.cfg
+anaconda-ks.cfg: ASCII text
+[root@localhost ~]#
+</code></pre>
+<h2 id="anchor_4"><a name="anchor_4" class="anchor-navigation-ex-anchor" href="#anchor_4"><i class="fa fa-link" aria-hidden="true"></i></a>3. Linux 是区分大小写的</h2><p>这对于刚接触 Linux 的人来说非常重要，并且是产生常见问题的根源。在引用文件时，Windows 等其他系统不区分大小写。Linux 不是这样的。</p>
+<p>因此，可以有两个或多个具有相同名称但不同大小写字母的文件和目录。Linux 将这些视为不同且独立的文件。</p>
+<p>处理命令行选项时也要注意区分大小写。例如，使用命令  <code class="language-markup">ls</code>  有两个选项  <code class="language-markup">s</code>  和  <code class="language-markup">S</code>  ，它们都做不同的事情。一个常见的错误是大小写不注意。</p>
+<h2 id="anchor_5"><a name="anchor_5" class="anchor-navigation-ex-anchor" href="#anchor_5"><i class="fa fa-link" aria-hidden="true"></i></a>4. 名称中的空格</h2><p>文件和目录名称中的空格完全有效，但我们需要对它们稍加注意。</p>
+<p>大家可能还记得，我们在命令行上使用空格分隔参数选项。</p>
+<p>因此如果路径中存在空格，请使用引号，使用单引号或双引号（稍后我们将看到两者之间存在细微差别，但目前差异不是问题）</p>
+<pre class="line-numbers"><code class="lang-bash">[root@localhost ~]# cd &#39;/proc/irq/24/PCIe PME&#39;
+[root@localhost PCIe PME]# pwd
+/proc/irq/24/PCIe PME
+[root@localhost PCIe PME]# cd
+[root@localhost ~]# pwd
+/root
+[root@localhost ~]# cd /proc/irq/24/PCIe\ PME
+[root@localhost PCIe PME]# pwd
+/proc/irq/24/PCIe PME
+[root@localhost PCIe PME]# cd
+[root@localhost ~]#
+</code></pre>
+<blockquote><p>在前面我们在前面使用  <code class="language-markup">Tab</code>  按键补全内容。如果在遇到目录名称中的空格之前使用它，则终端将自动转义（第 7 行  <code class="language-markup">\</code> ） 名称中的任何空格。引号内的任何内容都被视为单个项目。</p>
+</blockquote>
+<h2 id="anchor_6"><a name="anchor_6" class="anchor-navigation-ex-anchor" href="#anchor_6"><i class="fa fa-link" aria-hidden="true"></i></a>5. 隐藏文件和目录</h2><p>隐藏文件与目录在 Windows 中直接是不可见。</p>
+<p>Linux 实际上有一个非常简单和优雅的机制来指定隐藏文件或目录。如果文件或目录的名称以  <code class="language-markup">.</code>  开头，它被认为是隐藏的。出于各种原因，可能隐藏文件和目录。例如，需要把存放小电影的目录隐藏起来。</p>
+<p>要隐藏文件或目录，你需要创建的文件或目录的名称以  <code class="language-markup">.</code>  开头，或者将其重命名为  <code class="language-markup">.</code>  开头。同样，你可以重命名隐藏文件以删除  <code class="language-markup">.</code>  它会变得不被隐藏。</p>
+<p>我们在上一节中看到的命令  <code class="language-markup">ls</code>  默认不会列出隐藏文件和目录。我们可以通过包含命令行选项  <code class="language-markup">-a</code>  来修改它，r 让它显示隐藏的文件和目录。</p>
+<pre class="line-numbers"><code class="lang-bash">[root@localhost ~]# pwd
+/root
+[root@localhost ~]# ls
+anaconda-ks.cfg
+[root@localhost ~]# ls -a
+.  ..  anaconda-ks.cfg  .bash_history  .bash_logout  .bash_profile  .bashrc  .cshrc  .tcshrc
+[root@localhost ~]#
+</code></pre>
+<p>在上面的例子中，可以看到我们列出当前目录中的所有项目，前两个项目是  <code class="language-markup">.</code>  与  <code class="language-markup">..</code>  。还记得我们之前关于路径的部分，它们各代表啥意思？</p>
+<h2 id="anchor_7"><a name="anchor_7" class="anchor-navigation-ex-anchor" href="#anchor_7"><i class="fa fa-link" aria-hidden="true"></i></a>6. 摘要</h2><h3 id="anchor_8"><a name="anchor_8" class="anchor-navigation-ex-anchor" href="#anchor_8"><i class="fa fa-link" aria-hidden="true"></i></a>6.1. 学到什么</h3><ul>
+<li><p><code class="language-markup">file</code> 
+获取有关文件或目录的文件类型的信息。</p>
+</li>
+<li><p><code class="language-markup">ls -a</code> 
+列出目录的内容，包括隐藏文件。</p>
+</li>
+</ul>
+<h3 id="anchor_9"><a name="anchor_9" class="anchor-navigation-ex-anchor" href="#anchor_9"><i class="fa fa-link" aria-hidden="true"></i></a>6.2. 重要概念</h3><ul>
+<li><p>Linux 下一切都是文件，甚至是目录。</p>
+</li>
+<li><p>Linux 是一个无扩展的系统，文件可以包含他们喜欢的任何扩展名，也可以不包含任何扩展名</p>
+</li>
+<li><p>Linux 区分大小写，小心愚蠢的错别字。</p>
+</li>
+</ul>
+<h2 id="anchor_10"><a name="anchor_10" class="anchor-navigation-ex-anchor" href="#anchor_10"><i class="fa fa-link" aria-hidden="true"></i></a>7. 活动</h2><p>是的，现在让我们把这些东西付诸实践。请参阅以下内容：</p>
+<ul>
+<li><p>尝试运行命令  <code class="language-markup">file</code> ，查看下文件的类型。这样做时，请确保使用各种绝对路径和相对路径。</p>
+</li>
+<li><p>现在执行一个命令，列出根目录的内容，包括隐藏文件和目录。</p>
+</li>
+</ul>
+
+                        <footer class="page-footer"><span class="copyright">© 2019 刘士. 
+All rights reserved.</span><span class="footer-modification">
+<span id="busuanzi_container_site_uv" style="display:none">本站访客数 <span id="busuanzi_value_site_uv">
+</span> 人次</span></span></footer>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+var _hmt = _hmt || [];
+(function () {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?921ac157b25b6c9fd562a97abf2806a7";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+(function () {
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else {
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script>
+                    </section>
+                </div>
+                <div class="search-results">
+                    <div class="has-results">
+                        <h1 class="search-results-title"><span class='search-results-count'></span> 结果匹配 "<span class='search-query'></span>"</h1>
+                        <ul class="search-results-list"></ul>
+                    </div>
+                    <div class="no-results">
+                        <h1 class="search-results-title">没有匹配的结果 "<span class='search-query'></span>"</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<a aria-label="Previous page: 基本导航" class="navigation navigation-prev" href="navigation.html">
+    <i class="fa fa-angle-left"></i>
+</a>
+
+
+<a aria-label="Next page: 手册页" class="navigation navigation-next" href="manual.html">
+    <i class="fa fa-angle-right"></i>
+</a>
+
+
+</div>
+<script>
+    var lsbook = lsbook || [];
+    lsbook.push(function () {
+        lsbook.page.hasChanged({
+            "config": {
+                "github_url":"https://liushilive.github.io/",
+                "language": "zh-cn"
+            },
+            "basePath": "../..",
+            "js": {'prism': ['../..\\../asserts/lsbook/prismjs/clipboard.min.js', '../..\\../asserts/lsbook/prismjs/prism.js']}
+        });
+    });
+</script>
+</div>
+
+<script src="../..\../asserts/lsbook/jquery-3.3.1.min.js"></script>
+<script charset="UTF-8" src="../..\../asserts/lsbook/jquery_mar/jquery.mark.js"></script>
+<script src="../..\../asserts/lsbook/lightbox/js/lightbox.min.js"></script>
+<script src="../..\../asserts/lsbook/lsbook.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,319 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+<meta charset="UTF-8">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>Linux 相关 - LEMP 环境</title>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="" name="description">
+<meta content="刘士" name="author">
+
+<link href="../..\../asserts/lsbook/less/website.css" rel="stylesheet">
+<link href="../..\../asserts/lsbook/katex/katex.min.css" rel="stylesheet">
+<link href="../..\../asserts/lsbook/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+<meta content="true" name="HandheldFriendly"/>
+<meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<link href="../..\../asserts/lsbook/images/apple-touch-icon-precomposed-152.png"
+      rel="apple-touch-icon-precomposed" sizes="152x152">
+<link href="../..\../asserts/lsbook/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<!--分页-->
+<link href="install-oracle-11g-express-xe-on-centos-7.html" rel="next"/>
+</head>
+<body>
+<div class="book"><div class="book-summary">
+    <div id="book-search-input" role="search">
+        <input placeholder="输入并搜索" type="text"/>
+    </div>
+    <nav role="navigation">
+        <ul class="summary">
+            <li class="header">Summary</li><li class="chapter" data-level="1.1" data-path="../../index.html">
+    <a href="../../index.html"><b>1.1.</b> 介绍</a>
+</li>
+<li class="header">Linux 教程</li><li class="chapter" data-level="2.1" data-path="../../ms/linuxtutorial/index.html">
+    <a href="../../ms/linuxtutorial/index.html"><b>2.1.</b> Linux 教程</a>
+    <ul class="articles">
+    <li class="chapter" data-level="2.1.1" data-path="../../ms/linuxtutorial/linuxinstall.html">
+    <a href="../../ms/linuxtutorial/linuxinstall.html"><b>2.1.1.</b> 获得 Linux</a>
+</li>
+<li class="chapter" data-level="2.1.2" data-path="../../ms/linuxtutorial/commandline.html">
+    <a href="../../ms/linuxtutorial/commandline.html"><b>2.1.2.</b> 命令行</a>
+</li>
+<li class="chapter" data-level="2.1.3" data-path="../../ms/linuxtutorial/navigation.html">
+    <a href="../../ms/linuxtutorial/navigation.html"><b>2.1.3.</b> 基本导航</a>
+</li>
+<li class="chapter" data-level="2.1.4" data-path="../../ms/linuxtutorial/aboutfiles.html">
+    <a href="../../ms/linuxtutorial/aboutfiles.html"><b>2.1.4.</b> 关于文件</a>
+</li>
+<li class="chapter" data-level="2.1.5" data-path="../../ms/linuxtutorial/manual.html">
+    <a href="../../ms/linuxtutorial/manual.html"><b>2.1.5.</b> 手册页</a>
+</li>
+<li class="chapter" data-level="2.1.6" data-path="../../ms/linuxtutorial/filemanipulation.html">
+    <a href="../../ms/linuxtutorial/filemanipulation.html"><b>2.1.6.</b> 文件操作</a>
+</li>
+
+    </ul>
+</li>
+<li class="header">Linux 常用工具部署</li><li class="chapter" data-level="3.1" data-path="bash-completion-zi-dong-bu-quan-gong-neng-zeng-qiang.html">
+    <a href="bash-completion-zi-dong-bu-quan-gong-neng-zeng-qiang.html"><b>3.1.</b> 自动补全功能增强</a>
+</li>
+<li class="chapter" data-level="3.2" data-path="sudo.html">
+    <a href="sudo.html"><b>3.2.</b> 配置 Sudo</a>
+</li>
+<li class="chapter" data-level="3.3" data-path="yum_repodata.html">
+    <a href="yum_repodata.html"><b>3.3.</b> 部署 YUM 仓库</a>
+</li>
+<li class="chapter" data-level="3.4" data-path="添加Swap.html">
+    <a href="添加Swap.html"><b>3.4.</b> 添加 Swap</a>
+</li>
+<li class="chapter active" data-level="3.5" data-path="LEMP.html">
+    <a href="LEMP.html"><b>3.5.</b> LEMP 环境</a>
+</li>
+<li class="chapter" data-level="3.6" data-path="install-oracle-11g-express-xe-on-centos-7.html">
+    <a href="install-oracle-11g-express-xe-on-centos-7.html"><b>3.6.</b> Oracle 11g Express (XE)</a>
+</li>
+<li class="chapter" data-level="3.7" data-path="部署SVN.html">
+    <a href="部署SVN.html"><b>3.7.</b> 部署 SVN</a>
+</li>
+<li class="chapter" data-level="3.8" data-path="大商创环境部署.html">
+    <a href="大商创环境部署.html"><b>3.8.</b> DSC 环境部署 教学环境</a>
+</li>
+<li class="chapter" data-level="3.9" data-path="持续集成环境.html">
+    <a href="持续集成环境.html"><b>3.9.</b> Jenkins 部署</a>
+</li>
+<li class="chapter" data-level="3.10" data-path="持续集成环境-教学环境.html">
+    <a href="持续集成环境-教学环境.html"><b>3.10.</b> Jenkins 部署 教学环境</a>
+</li>
+
+            <li class="divider"></li>
+            <li>
+                <a class="lsbook-link" href="https://github.com/liushilive/lsbook" target="blank">
+                    本书使用 LsBook 发布
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<div class="book-body">
+    <div class="body-inner">
+    <div class="book-header" role="navigation">
+        <!-- Title -->
+        <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i>
+            <a href="../..">LEMP 环境</a>
+        </h1>
+    </div>
+
+    <div class="page-wrapper" role="main" tabindex="-1">
+        <div class="page-inner">
+            <div class="search-plus" id="book-search-results">
+                <div class="search-noresults">
+                    <section class="normal markdown-section">
+                        <div id='anchor-navigation-ex-navbar'><i class='fa fa-anchor'></i><ul><li><span class='title-icon fa fa-hand-o-right'></span><a aria-label class='on-toolbar-action' href='' onclick="$('.fa.fa-align-justify').parent()[0].click();">目录</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_1'><b></b>如何在 CentOS 7 上安装 Linux，Nginx，MySQL，PHP（LEMP）环境</a></li><ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_2'><b>1. </b>第一步 - 安装 Nginx</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_3'><b>2. </b>第二步 - 安装 MySQL（MariaDB）</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_4'><b>3. </b>第三步 - 安装 PHP</a></li><ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_5'><b>3.1. </b>配置 PHP 处理器</a></li></ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_6'><b>4. </b>第四步 - 配置 Nginx 来处理 PHP 页面</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_7'><b>5. </b>第五步 - 在 Web 服务器上测试 PHP 处理</a></li></ul></ul></div><a href='#anchor_1' id='anchorNavigationExGoTop'><i class='fa fa-arrow-up'></i></a>
+                        <h1 id="anchor_1"><a name="anchor_1" class="anchor-navigation-ex-anchor" href="#anchor_1"><i class="fa fa-link" aria-hidden="true"></i></a>如何在 CentOS 7 上安装 Linux，Nginx，MySQL，PHP（LEMP）环境</h1><h2 id="anchor_2"><a name="anchor_2" class="anchor-navigation-ex-anchor" href="#anchor_2"><i class="fa fa-link" aria-hidden="true"></i></a>1. 第一步 - 安装 Nginx</h2><p>要添加 CentOS 7 EPEL 仓库，请打开终端并使用以下命令：</p>
+<pre class="line-numbers"><code class="lang-bash">echo nameserver 8.8.8.8 &gt;&gt; /etc/resolv.conf
+curl -o /etc/yum.repos.d/CentOS-Base-ali.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+yum makecache
+yum install -y epel-release
+</code></pre>
+<p>现在 Nginx 存储库已经安装在你的服务器上，使用以下 yum 命令安装 Nginx ：</p>
+<pre class="line-numbers"><code class="lang-bash">yum install -y nginx
+</code></pre>
+<p>之后，你的 Web 服务器已安装。</p>
+<p>一旦安装，你就可以在你的 VPS 上启动 Nginx：</p>
+<pre class="line-numbers"><code class="lang-bash">systemctl start nginx
+</code></pre>
+<p>添加防火墙规则</p>
+<pre class="line-numbers"><code class="lang-bash">firewall-cmd --add-port=80/tcp --permanent
+firewall-cmd --reload
+</code></pre>
+<p>你可以立即进行现场检查，通过在你的 Web 浏览器中访问服务器的公共 IP 地址来验证所有事情是否按计划进行（请参阅下一个标题下的注释，以了解你的公共 IP 地址是什么，如果你没有此信息已经）：</p>
+<pre class="line-numbers"><code class="lang-bash">http://server_domain_name_or_IP/
+</code></pre>
+<p>你会看到默认的 CentOS 7 Nginx 网页，这是为了提供信息和测试目的。</p>
+<p>如果你看到这个页面，那么你的 Web 服务器现在已经正确安装了。</p>
+<p>在继续之前，你需要做的是启用 Nginx 启动。使用以下命令来执行此操作：</p>
+<pre class="line-numbers"><code class="lang-bash">systemctl enable nginx
+</code></pre>
+<h2 id="anchor_3"><a name="anchor_3" class="anchor-navigation-ex-anchor" href="#anchor_3"><i class="fa fa-link" aria-hidden="true"></i></a>2. 第二步 - 安装 MySQL（MariaDB）</h2><p>现在我们已经启动了 Web 服务器，现在是时候安装一个 MySQL 插件替代品 MariaDB 了。MariaDB 是 MySQL 关系数据库管理系统的一个社区开发的分支。基本上，它将组织和提供访问我们的网站可以存储信息的数据库。</p>
+<p>再次，我们可以使用 yum 获取和安装我们的软件。这一次，我们还将安装一些其他“帮手”软件包，这些软件包可以帮助我们获得组件之间的通信。</p>
+<pre class="line-numbers"><code class="lang-bash">yum install -y mariadb-server mariadb
+</code></pre>
+<p>安装完成后，我们需要使用以下命令启动 MariaDB：</p>
+<pre class="line-numbers"><code class="lang-bash">systemctl start mariadb
+</code></pre>
+<p>现在我们的 MySQL 数据库正在运行，我们希望运行一个简单的安全脚本，它将删除一些危险的默认值，并锁定对数据库系统的访问。运行以下命令启动交互式脚本：</p>
+<pre class="line-numbers"><code class="lang-bash">mysql_secure_installation
+</code></pre>
+<p>提示符会询问你当前的 root 密码。由于你刚刚安装了 MySQL，你很可能不会拥有一个，因此请按 Enter 键将其留空。然后提示符会询问你是否要设置 root 密码。继续前进 Y，并按照说明：</p>
+<pre class="line-numbers"><code class="lang-bash">mysql_secure_installation prompts:
+Enter current password for root (enter for none):
+OK, successfully used password, moving on...
+
+Setting the root password ensures that nobody can log into the MariaDB
+root user without the proper authorisation.
+
+New password: password
+Re-enter new password: password
+Password updated successfully!
+Reloading privilege tables..
+ ... Success!
+</code></pre>
+<p>对于其余的问题，你应该简单地通过每个提示点击“ENTER”键来接受默认值。这将删除一些示例用户和数据库，禁用远程 root 登录，并加载这些新规则，以便 MySQL 立即尊重我们所做的更改。</p>
+<p>你要做的最后一件事是启用 MariaDB 启动。使用以下命令来执行此操作：</p>
+<pre class="line-numbers"><code class="lang-bash">systemctl enable mariadb
+</code></pre>
+<p>在这一点上，你的数据库系统现在已经建立，我们可以继续前进。</p>
+<h2 id="anchor_4"><a name="anchor_4" class="anchor-navigation-ex-anchor" href="#anchor_4"><i class="fa fa-link" aria-hidden="true"></i></a>3. 第三步 - 安装 PHP</h2><p>PHP 是我们设置的组件，它将处理代码以显示动态内容。它可以运行脚本，连接到我们的 MySQL 数据库来获取信息，并将处理的内容交给我们的 Web 服务器来显示。</p>
+<p>我们可以再次利用该 yum 系统来安装我们的组件。我们将包括 php-mysql 和 php-fpm 包：</p>
+<pre class="line-numbers"><code class="lang-bash">rpm -Uvh https://mirror.webtatic.com/yum/el7/epel-release.rpm
+rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
+
+yum install -y yum install php56w php56w-mysql php56w-gd  php56w-imap php56w-ldap php56w-odbc php56w-pear php56w-xml php56w-xmlrpc php56w-mbstring php56w-mcrypt php56w-bcmath php56w-mhash php56w-fpm php56w-opcache
+</code></pre>
+<h3 id="anchor_5"><a name="anchor_5" class="anchor-navigation-ex-anchor" href="#anchor_5"><i class="fa fa-link" aria-hidden="true"></i></a>3.1. 配置 PHP 处理器</h3><p>我们现在已经安装了我们的 PHP 组件，但是我们需要稍作修改，以使我们的安装更加安全。</p>
+<pre class="line-numbers"><code class="lang-bash">sed -i &#39;s/^;date.timezone =/date.timezone = PRC/&#39; /etc/php.ini
+sed -i &#39;s/^;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/&#39; /etc/php.ini
+</code></pre>
+<p>接下来，打开 php-fpm 配置文件 www.conf：</p>
+<pre class="line-numbers"><code class="lang-bash">sed -i &#39;s/127.0.0.1:9000/\/var\/run\/php-fpm\/php-fpm.sock/&#39; /etc/php-fpm.d/www.conf
+sed -i &#39;s/;listen.owner = nobody/listen.owner = nginx/&#39; /etc/php-fpm.d/www.conf
+sed -i &#39;s/;listen.group = nobody/listen.group = nginx/&#39; /etc/php-fpm.d/www.conf
+sed -i &#39;s/;user = apache/user = nginx/&#39; /etc/php-fpm.d/www.conf
+sed -i &#39;s/group = apache/group = nginx/&#39; /etc/php-fpm.d/www.conf
+</code></pre>
+<p>现在，我们只需要键入以下命令启动我们的 PHP 处理器：</p>
+<pre class="line-numbers"><code class="lang-bash">systemctl start php-fpm
+chmod 666 /var/run/php-fpm/php-fpm.sock
+chown nginx:nginx /var/run/php-fpm/php-fpm.sock
+systemctl restart php-fpm
+</code></pre>
+<p>这将实施我们所做的改变。</p>
+<p>接下来，启用 php-fpm 在启动时启动：</p>
+<pre class="line-numbers"><code class="lang-bash">systemctl enable php-fpm
+</code></pre>
+<h2 id="anchor_6"><a name="anchor_6" class="anchor-navigation-ex-anchor" href="#anchor_6"><i class="fa fa-link" aria-hidden="true"></i></a>4. 第四步 - 配置 Nginx 来处理 PHP 页面</h2><p>现在，我们已经安装了所有必需的组件。我们仍然需要做的唯一配置更改是告诉 Nginx 使用我们的 PHP 处理器来处理动态内容。</p>
+<p>我们在服务器块级别上执行此操作（服务器块类似于 Apache 的虚拟主机）。输入以下命令：</p>
+<pre class="line-numbers"><code class="lang-bash">(
+cat &lt;&lt;EOF
+index index.php index.html index.htm;
+server_name your domain name or IP;
+# pass the PHP scripts to FastCGI server listening on the php-fpm socket
+location ~ \.php$ {
+    try_files \$uri =404;
+    fastcgi_pass unix:/run/php-fpm/php-fpm.sock;
+    fastcgi_index index.php;
+    fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
+    include fastcgi_params;
+}
+EOF
+) &gt; /etc/nginx/default.d/default.conf
+</code></pre>
+<p>完成上述更改后，可以保存并关闭文件。</p>
+<p>重新启动 Nginx 进行必要的更改：</p>
+<pre class="line-numbers"><code class="lang-bash">systemctl restart nginx
+</code></pre>
+<h2 id="anchor_7"><a name="anchor_7" class="anchor-navigation-ex-anchor" href="#anchor_7"><i class="fa fa-link" aria-hidden="true"></i></a>5. 第五步 - 在 Web 服务器上测试 PHP 处理</h2><p>为了测试我们的系统是否正确配置了 PHP，我们可以创建一个非常基本的 PHP 脚本。</p>
+<p>我们将调用这个脚本 info.php。为了让 Apache 找到并正确提供，必须将其保存到一个非常特定的目录中，这个目录称为“Web 根目录”。</p>
+<p>在 CentOS 7 中，这个目录位于 /usr/share/nginx/html/。我们可以通过键入以下内容在该位置创建文件：</p>
+<pre class="line-numbers"><code class="lang-bash">vi /usr/share/nginx/html/info.php
+</code></pre>
+<p>这将打开一个空白文件。我们希望在文件中放入以下有效的 PHP 代码文本：</p>
+<pre class="line-numbers"><code class="lang-bash">(
+cat &lt;&lt; EOF
+&lt;?php
+phpinfo();
+?&gt;
+EOF
+) &gt;  /usr/share/nginx/html/info.php
+</code></pre>
+<p>完成后，保存并关闭文件。</p>
+<p>现在我们可以测试我们的 Web 服务器是否可以正确显示由 PHP 脚本生成的内容。要尝试这一点，我们只需要在我们的网页浏览器中访问这个页面。你将需要你的服务器的公共 IP 地址。</p>
+<p>你想要访问的地址是：</p>
+<pre class="line-numbers"><code class="lang-bash">http://your_server_IP_address/info.php
+</code></pre>
+<p>如果这是成功的，那么你的 PHP 工作正常。</p>
+<p>在测试之后，你可能希望删除此文件，因为它实际上可能会将你的服务器信息提供给未经授权的用户。要做到这一点，你可以输入这个：</p>
+<pre class="line-numbers"><code class="lang-bash">rm /usr/share/nginx/html/info.php
+</code></pre>
+<p>如果你以后需要再次访问该信息，则可以随时重新创建此页面。</p>
+
+                        <footer class="page-footer"><span class="copyright">© 2019 刘士. 
+All rights reserved.</span><span class="footer-modification">
+<span id="busuanzi_container_site_uv" style="display:none">本站访客数 <span id="busuanzi_value_site_uv">
+</span> 人次</span></span></footer>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+var _hmt = _hmt || [];
+(function () {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?921ac157b25b6c9fd562a97abf2806a7";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+(function () {
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else {
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script>
+                    </section>
+                </div>
+                <div class="search-results">
+                    <div class="has-results">
+                        <h1 class="search-results-title"><span class='search-results-count'></span> 结果匹配 "<span class='search-query'></span>"</h1>
+                        <ul class="search-results-list"></ul>
+                    </div>
+                    <div class="no-results">
+                        <h1 class="search-results-title">没有匹配的结果 "<span class='search-query'></span>"</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<a aria-label="Previous page: 添加 Swap" class="navigation navigation-prev" href="添加Swap.html">
+    <i class="fa fa-angle-left"></i>
+</a>
+
+
+<a aria-label="Next page: Oracle 11g Express (XE)" class="navigation navigation-next" href="install-oracle-11g-express-xe-on-centos-7.html">
+    <i class="fa fa-angle-right"></i>
+</a>
+
+
+</div>
+<script>
+    var lsbook = lsbook || [];
+    lsbook.push(function () {
+        lsbook.page.hasChanged({
+            "config": {
+                "github_url":"https://liushilive.github.io/",
+                "language": "zh-cn"
+            },
+            "basePath": "../..",
+            "js": {'prism': ['../..\\../asserts/lsbook/prismjs/clipboard.min.js', '../..\\../asserts/lsbook/prismjs/prism.js']}
+        });
+    });
+</script>
+</div>
+
+<script src="../..\../asserts/lsbook/jquery-3.3.1.min.js"></script>
+<script charset="UTF-8" src="../..\../asserts/lsbook/jquery_mar/jquery.mark.js"></script>
+<script src="../..\../asserts/lsbook/lightbox/js/lightbox.min.js"></script>
+<script src="../..\../asserts/lsbook/lsbook.min.js"></script>
+
+</body>
+</html>

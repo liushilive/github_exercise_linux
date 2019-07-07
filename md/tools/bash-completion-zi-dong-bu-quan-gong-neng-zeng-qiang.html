@@ -1,0 +1,197 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+<meta charset="UTF-8">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>Linux 相关 - 自动补全功能增强</title>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="" name="description">
+<meta content="刘士" name="author">
+
+<link href="../..\../asserts/lsbook/less/website.css" rel="stylesheet">
+<link href="../..\../asserts/lsbook/katex/katex.min.css" rel="stylesheet">
+<link href="../..\../asserts/lsbook/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+<meta content="true" name="HandheldFriendly"/>
+<meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<link href="../..\../asserts/lsbook/images/apple-touch-icon-precomposed-152.png"
+      rel="apple-touch-icon-precomposed" sizes="152x152">
+<link href="../..\../asserts/lsbook/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<!--分页-->
+<link href="sudo.html" rel="next"/>
+</head>
+<body>
+<div class="book"><div class="book-summary">
+    <div id="book-search-input" role="search">
+        <input placeholder="输入并搜索" type="text"/>
+    </div>
+    <nav role="navigation">
+        <ul class="summary">
+            <li class="header">Summary</li><li class="chapter" data-level="1.1" data-path="../../index.html">
+    <a href="../../index.html"><b>1.1.</b> 介绍</a>
+</li>
+<li class="header">Linux 教程</li><li class="chapter" data-level="2.1" data-path="../../ms/linuxtutorial/index.html">
+    <a href="../../ms/linuxtutorial/index.html"><b>2.1.</b> Linux 教程</a>
+    <ul class="articles">
+    <li class="chapter" data-level="2.1.1" data-path="../../ms/linuxtutorial/linuxinstall.html">
+    <a href="../../ms/linuxtutorial/linuxinstall.html"><b>2.1.1.</b> 获得 Linux</a>
+</li>
+<li class="chapter" data-level="2.1.2" data-path="../../ms/linuxtutorial/commandline.html">
+    <a href="../../ms/linuxtutorial/commandline.html"><b>2.1.2.</b> 命令行</a>
+</li>
+<li class="chapter" data-level="2.1.3" data-path="../../ms/linuxtutorial/navigation.html">
+    <a href="../../ms/linuxtutorial/navigation.html"><b>2.1.3.</b> 基本导航</a>
+</li>
+<li class="chapter" data-level="2.1.4" data-path="../../ms/linuxtutorial/aboutfiles.html">
+    <a href="../../ms/linuxtutorial/aboutfiles.html"><b>2.1.4.</b> 关于文件</a>
+</li>
+<li class="chapter" data-level="2.1.5" data-path="../../ms/linuxtutorial/manual.html">
+    <a href="../../ms/linuxtutorial/manual.html"><b>2.1.5.</b> 手册页</a>
+</li>
+<li class="chapter" data-level="2.1.6" data-path="../../ms/linuxtutorial/filemanipulation.html">
+    <a href="../../ms/linuxtutorial/filemanipulation.html"><b>2.1.6.</b> 文件操作</a>
+</li>
+
+    </ul>
+</li>
+<li class="header">Linux 常用工具部署</li><li class="chapter active" data-level="3.1" data-path="bash-completion-zi-dong-bu-quan-gong-neng-zeng-qiang.html">
+    <a href="bash-completion-zi-dong-bu-quan-gong-neng-zeng-qiang.html"><b>3.1.</b> 自动补全功能增强</a>
+</li>
+<li class="chapter" data-level="3.2" data-path="sudo.html">
+    <a href="sudo.html"><b>3.2.</b> 配置 Sudo</a>
+</li>
+<li class="chapter" data-level="3.3" data-path="yum_repodata.html">
+    <a href="yum_repodata.html"><b>3.3.</b> 部署 YUM 仓库</a>
+</li>
+<li class="chapter" data-level="3.4" data-path="添加Swap.html">
+    <a href="添加Swap.html"><b>3.4.</b> 添加 Swap</a>
+</li>
+<li class="chapter" data-level="3.5" data-path="LEMP.html">
+    <a href="LEMP.html"><b>3.5.</b> LEMP 环境</a>
+</li>
+<li class="chapter" data-level="3.6" data-path="install-oracle-11g-express-xe-on-centos-7.html">
+    <a href="install-oracle-11g-express-xe-on-centos-7.html"><b>3.6.</b> Oracle 11g Express (XE)</a>
+</li>
+<li class="chapter" data-level="3.7" data-path="部署SVN.html">
+    <a href="部署SVN.html"><b>3.7.</b> 部署 SVN</a>
+</li>
+<li class="chapter" data-level="3.8" data-path="大商创环境部署.html">
+    <a href="大商创环境部署.html"><b>3.8.</b> DSC 环境部署 教学环境</a>
+</li>
+<li class="chapter" data-level="3.9" data-path="持续集成环境.html">
+    <a href="持续集成环境.html"><b>3.9.</b> Jenkins 部署</a>
+</li>
+<li class="chapter" data-level="3.10" data-path="持续集成环境-教学环境.html">
+    <a href="持续集成环境-教学环境.html"><b>3.10.</b> Jenkins 部署 教学环境</a>
+</li>
+
+            <li class="divider"></li>
+            <li>
+                <a class="lsbook-link" href="https://github.com/liushilive/lsbook" target="blank">
+                    本书使用 LsBook 发布
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<div class="book-body">
+    <div class="body-inner">
+    <div class="book-header" role="navigation">
+        <!-- Title -->
+        <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i>
+            <a href="../..">自动补全功能增强</a>
+        </h1>
+    </div>
+
+    <div class="page-wrapper" role="main" tabindex="-1">
+        <div class="page-inner">
+            <div class="search-plus" id="book-search-results">
+                <div class="search-noresults">
+                    <section class="normal markdown-section">
+                        <div id='anchor-navigation-ex-navbar'><i class='fa fa-anchor'></i><ul><li><span class='title-icon fa fa-hand-o-right'></span><a aria-label class='on-toolbar-action' href='' onclick="$('.fa.fa-align-justify').parent()[0].click();">目录</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_1'><b></b>bash-completion 自动补全功能增强</a></li></ul></div><a href='#anchor_1' id='anchorNavigationExGoTop'><i class='fa fa-arrow-up'></i></a>
+                        <h1 id="anchor_1"><a name="anchor_1" class="anchor-navigation-ex-anchor" href="#anchor_1"><i class="fa fa-link" aria-hidden="true"></i></a>bash-completion 自动补全功能增强</h1><p>在 RHEL7/CentOS7 以前的版本中，bash 自动补全功能仅限于命令和文件名，然而网络设备往往可以自动补全命令的参数，常常让搞网络出身的工程师唏嘘不已。</p>
+<p>在新出的 RHEL7/CentOS7 中的 Bash 已经可以自动补全命令参数了，需要注意的是 RHEL7/CentOS7 的默认安装类型是最小安装，它是没有这个功能的。要启用这个功能，你需要安装一个 bash-completion 包，然后退出 bash，重新登录即可（未重启 bash 的情况下继续使用可能出现补全功能异常，出现一堆代码）。</p>
+<p>bash-2.05 及以后的版本提供了自动补齐的编程接口，通过安装 bash-completion 来使用 TAB 键自动补齐几乎任何内容，包括参数、文件、目录甚至包名称等等。在最近的 Linux 各个发行版中基本都带有 bash-completion 包，如果没有的话，可以从网上下载源码包安装。</p>
+<pre class="line-numbers"><code class="lang-bash">yum install bash-completion
+</code></pre>
+
+                        <footer class="page-footer"><span class="copyright">© 2019 刘士. 
+All rights reserved.</span><span class="footer-modification">
+<span id="busuanzi_container_site_uv" style="display:none">本站访客数 <span id="busuanzi_value_site_uv">
+</span> 人次</span></span></footer>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+var _hmt = _hmt || [];
+(function () {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?921ac157b25b6c9fd562a97abf2806a7";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+(function () {
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else {
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script>
+                    </section>
+                </div>
+                <div class="search-results">
+                    <div class="has-results">
+                        <h1 class="search-results-title"><span class='search-results-count'></span> 结果匹配 "<span class='search-query'></span>"</h1>
+                        <ul class="search-results-list"></ul>
+                    </div>
+                    <div class="no-results">
+                        <h1 class="search-results-title">没有匹配的结果 "<span class='search-query'></span>"</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<a aria-label="Previous page: 文件操作" class="navigation navigation-prev" href="../../ms/linuxtutorial/filemanipulation.html">
+    <i class="fa fa-angle-left"></i>
+</a>
+
+
+<a aria-label="Next page: 配置 Sudo" class="navigation navigation-next" href="sudo.html">
+    <i class="fa fa-angle-right"></i>
+</a>
+
+
+</div>
+<script>
+    var lsbook = lsbook || [];
+    lsbook.push(function () {
+        lsbook.page.hasChanged({
+            "config": {
+                "github_url":"https://liushilive.github.io/",
+                "language": "zh-cn"
+            },
+            "basePath": "../..",
+            "js": {'prism': ['../..\\../asserts/lsbook/prismjs/clipboard.min.js', '../..\\../asserts/lsbook/prismjs/prism.js']}
+        });
+    });
+</script>
+</div>
+
+<script src="../..\../asserts/lsbook/jquery-3.3.1.min.js"></script>
+<script charset="UTF-8" src="../..\../asserts/lsbook/jquery_mar/jquery.mark.js"></script>
+<script src="../..\../asserts/lsbook/lightbox/js/lightbox.min.js"></script>
+<script src="../..\../asserts/lsbook/lsbook.min.js"></script>
+
+</body>
+</html>

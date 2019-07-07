@@ -1,0 +1,255 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+<meta charset="UTF-8">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>Linux 相关 - 配置 Sudo</title>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="" name="description">
+<meta content="刘士" name="author">
+
+<link href="../..\../asserts/lsbook/less/website.css" rel="stylesheet">
+<link href="../..\../asserts/lsbook/katex/katex.min.css" rel="stylesheet">
+<link href="../..\../asserts/lsbook/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+<meta content="true" name="HandheldFriendly"/>
+<meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<link href="../..\../asserts/lsbook/images/apple-touch-icon-precomposed-152.png"
+      rel="apple-touch-icon-precomposed" sizes="152x152">
+<link href="../..\../asserts/lsbook/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<!--分页-->
+<link href="yum_repodata.html" rel="next"/>
+</head>
+<body>
+<div class="book"><div class="book-summary">
+    <div id="book-search-input" role="search">
+        <input placeholder="输入并搜索" type="text"/>
+    </div>
+    <nav role="navigation">
+        <ul class="summary">
+            <li class="header">Summary</li><li class="chapter" data-level="1.1" data-path="../../index.html">
+    <a href="../../index.html"><b>1.1.</b> 介绍</a>
+</li>
+<li class="header">Linux 教程</li><li class="chapter" data-level="2.1" data-path="../../ms/linuxtutorial/index.html">
+    <a href="../../ms/linuxtutorial/index.html"><b>2.1.</b> Linux 教程</a>
+    <ul class="articles">
+    <li class="chapter" data-level="2.1.1" data-path="../../ms/linuxtutorial/linuxinstall.html">
+    <a href="../../ms/linuxtutorial/linuxinstall.html"><b>2.1.1.</b> 获得 Linux</a>
+</li>
+<li class="chapter" data-level="2.1.2" data-path="../../ms/linuxtutorial/commandline.html">
+    <a href="../../ms/linuxtutorial/commandline.html"><b>2.1.2.</b> 命令行</a>
+</li>
+<li class="chapter" data-level="2.1.3" data-path="../../ms/linuxtutorial/navigation.html">
+    <a href="../../ms/linuxtutorial/navigation.html"><b>2.1.3.</b> 基本导航</a>
+</li>
+<li class="chapter" data-level="2.1.4" data-path="../../ms/linuxtutorial/aboutfiles.html">
+    <a href="../../ms/linuxtutorial/aboutfiles.html"><b>2.1.4.</b> 关于文件</a>
+</li>
+<li class="chapter" data-level="2.1.5" data-path="../../ms/linuxtutorial/manual.html">
+    <a href="../../ms/linuxtutorial/manual.html"><b>2.1.5.</b> 手册页</a>
+</li>
+<li class="chapter" data-level="2.1.6" data-path="../../ms/linuxtutorial/filemanipulation.html">
+    <a href="../../ms/linuxtutorial/filemanipulation.html"><b>2.1.6.</b> 文件操作</a>
+</li>
+
+    </ul>
+</li>
+<li class="header">Linux 常用工具部署</li><li class="chapter" data-level="3.1" data-path="bash-completion-zi-dong-bu-quan-gong-neng-zeng-qiang.html">
+    <a href="bash-completion-zi-dong-bu-quan-gong-neng-zeng-qiang.html"><b>3.1.</b> 自动补全功能增强</a>
+</li>
+<li class="chapter active" data-level="3.2" data-path="sudo.html">
+    <a href="sudo.html"><b>3.2.</b> 配置 Sudo</a>
+</li>
+<li class="chapter" data-level="3.3" data-path="yum_repodata.html">
+    <a href="yum_repodata.html"><b>3.3.</b> 部署 YUM 仓库</a>
+</li>
+<li class="chapter" data-level="3.4" data-path="添加Swap.html">
+    <a href="添加Swap.html"><b>3.4.</b> 添加 Swap</a>
+</li>
+<li class="chapter" data-level="3.5" data-path="LEMP.html">
+    <a href="LEMP.html"><b>3.5.</b> LEMP 环境</a>
+</li>
+<li class="chapter" data-level="3.6" data-path="install-oracle-11g-express-xe-on-centos-7.html">
+    <a href="install-oracle-11g-express-xe-on-centos-7.html"><b>3.6.</b> Oracle 11g Express (XE)</a>
+</li>
+<li class="chapter" data-level="3.7" data-path="部署SVN.html">
+    <a href="部署SVN.html"><b>3.7.</b> 部署 SVN</a>
+</li>
+<li class="chapter" data-level="3.8" data-path="大商创环境部署.html">
+    <a href="大商创环境部署.html"><b>3.8.</b> DSC 环境部署 教学环境</a>
+</li>
+<li class="chapter" data-level="3.9" data-path="持续集成环境.html">
+    <a href="持续集成环境.html"><b>3.9.</b> Jenkins 部署</a>
+</li>
+<li class="chapter" data-level="3.10" data-path="持续集成环境-教学环境.html">
+    <a href="持续集成环境-教学环境.html"><b>3.10.</b> Jenkins 部署 教学环境</a>
+</li>
+
+            <li class="divider"></li>
+            <li>
+                <a class="lsbook-link" href="https://github.com/liushilive/lsbook" target="blank">
+                    本书使用 LsBook 发布
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<div class="book-body">
+    <div class="body-inner">
+    <div class="book-header" role="navigation">
+        <!-- Title -->
+        <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i>
+            <a href="../..">配置 Sudo</a>
+        </h1>
+    </div>
+
+    <div class="page-wrapper" role="main" tabindex="-1">
+        <div class="page-inner">
+            <div class="search-plus" id="book-search-results">
+                <div class="search-noresults">
+                    <section class="normal markdown-section">
+                        <div id='anchor-navigation-ex-navbar'><i class='fa fa-anchor'></i><ul><li><span class='title-icon fa fa-hand-o-right'></span><a aria-label class='on-toolbar-action' href='' onclick="$('.fa.fa-align-justify').parent()[0].click();">目录</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_1'><b></b>CentOS 配置 Sudo</a></li><ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_2'><b>1. </b>步骤 1：安装 sudo</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_3'><b>2. </b>步骤 2：添加 sudo 用户</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_4'><b>3. </b>步骤 3：将新用户添加到 wheel 组（可选的）</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_5'><b>4. </b>步骤 4：确保你的 sudoers 文件设置正确</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_6'><b>5. </b>步骤 5：允许不属于的用户 wheel 也不是 sudo 组执行 sudo 命令</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_7'><b>6. </b>步骤 6：重新启动 SSHD 服务器</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_8'><b>7. </b>步骤 7：测试</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_9'><b>8. </b>步骤 8：禁用直接 root 访问</a></li></ul></ul></div><a href='#anchor_1' id='anchorNavigationExGoTop'><i class='fa fa-arrow-up'></i></a>
+                        <h1 id="anchor_1"><a name="anchor_1" class="anchor-navigation-ex-anchor" href="#anchor_1"><i class="fa fa-link" aria-hidden="true"></i></a>CentOS 配置 Sudo</h1><p>使用 sudo 用户访问服务器并在根级别执行命令是 Linux 和 Unix 系统管理员中非常常见的做法。使用 asudo 用户通常通过禁用对其服务器的直接根访问来防止未经授权的访问。</p>
+<p>在本教程中，我们将介绍禁用直接 root 访问，创建 sudo 用户以及在 CentOS 上设置 sudo 组的基本步骤。</p>
+<h2 id="anchor_2"><a name="anchor_2" class="anchor-navigation-ex-anchor" href="#anchor_2"><i class="fa fa-link" aria-hidden="true"></i></a>1. 步骤 1：安装 sudo</h2><pre class="line-numbers"><code class="lang-bash">yum install sudo -y
+</code></pre>
+<h2 id="anchor_3"><a name="anchor_3" class="anchor-navigation-ex-anchor" href="#anchor_3"><i class="fa fa-link" aria-hidden="true"></i></a>2. 步骤 2：添加 sudo 用户</h2><blockquote><p>一个 sudo 用户是 Linux 机器上的普通用户帐户。</p>
+</blockquote>
+<pre class="line-numbers"><code class="lang-bash">adduser mynewusername
+</code></pre>
+<h2 id="anchor_4"><a name="anchor_4" class="anchor-navigation-ex-anchor" href="#anchor_4"><i class="fa fa-link" aria-hidden="true"></i></a>3. 步骤 3：将新用户添加到 wheel 组（可选的）</h2><blockquote><p>wheel 组是一个用户组，只有属于 wheel 组的用户才可以用 su 登录为
+root，添加你的 sudo 用户到 wheel 组是完全可选的，但建议。</p>
+</blockquote>
+<p>在 CentOS 中，属于的 wheel 组的用户可以执行 <code class="language-markup">su</code> 直接上升到 root。同时，sudo 用户将会使用 <code class="language-markup">sudo su</code> 。基本上除了语法之外没有什么真正的区别成为 root，而属于这两个组的用户可以使用 sudo 命令。</p>
+<pre class="line-numbers"><code class="lang-bash">usermod -aG wheel mynewusername
+</code></pre>
+<h2 id="anchor_5"><a name="anchor_5" class="anchor-navigation-ex-anchor" href="#anchor_5"><i class="fa fa-link" aria-hidden="true"></i></a>4. 步骤 4：确保你的 sudoers 文件设置正确</h2><p>确保这一点很重要 sudoers 文件位于 /etc/sudoers 正确设置为了允许 sudo users 有效使用 sudo 命令。为了达到这个目标，我们将会看到内容 /etc/sudoers 并在适用的地方进行编辑。</p>
+<pre class="line-numbers"><code class="lang-bash">vim /etc/sudoers
+</code></pre>
+<p>开始审查和编辑下面这行：</p>
+<pre class="line-numbers"><code class="lang-bash"># Allow members of group sudo to execute any command
+</code></pre>
+<p>这一节 /etc/sudoers 经常看起来像这样：</p>
+<pre class="line-numbers"><code class="lang-bash"># Allow members of group sudo to execute any command
+%sudo   ALL=(ALL:ALL) ALL
+</code></pre>
+<p>在某些系统中，你可能找不到 %wheel 代替 %sudo; 在这种情况下，这将是你将开始修改的行。</p>
+<p>如果行开始 %sudo 在 Debian 或 %wheel 在 CentOS 中没有注释掉（前缀为＃），这意味着 sudo 已经被设置并启用了。然后，你可以转到下一步。</p>
+<h2 id="anchor_6"><a name="anchor_6" class="anchor-navigation-ex-anchor" href="#anchor_6"><i class="fa fa-link" aria-hidden="true"></i></a>5. 步骤 5：允许不属于的用户 wheel 也不是 sudo 组执行 sudo 命令</h2><p>可以允许不在用户组中的用户执行 sudo 只需将它们添加到命令中即可 /etc/sudoers 如下：</p>
+<pre class="line-numbers"><code class="lang-bash">anotherusername ALL=(ALL) ALL
+</code></pre>
+<h2 id="anchor_7"><a name="anchor_7" class="anchor-navigation-ex-anchor" href="#anchor_7"><i class="fa fa-link" aria-hidden="true"></i></a>6. 步骤 6：重新启动 SSHD 服务器</h2><p>为了应用你所做的更改 /etc/sudoers，你需要重新启动 SSHD 服务器，如下所示：</p>
+<p>CentOS 6</p>
+<pre class="line-numbers"><code class="lang-bash">/etc/init.d/sshd restart
+</code></pre>
+<p>CentOS 7</p>
+<pre class="line-numbers"><code class="lang-bash">systemctl restart sshd.service
+</code></pre>
+<h2 id="anchor_8"><a name="anchor_8" class="anchor-navigation-ex-anchor" href="#anchor_8"><i class="fa fa-link" aria-hidden="true"></i></a>7. 步骤 7：测试</h2><p>重新启动 SSH 服务器后，请注销，然后重新登录 sudo user，然后尝试执行一些测试命令，如下所示：</p>
+<pre class="line-numbers"><code class="lang-bash">sudo uptime
+sudo whoami
+</code></pre>
+<p>任何以下命令将允许 sudo user 成为 root。</p>
+<pre class="line-numbers"><code class="lang-bash">sudo su -
+sudo -i
+sudo -S
+</code></pre>
+<p>笔记：</p>
+<p>该 whoami 命令将返回 root 当加上 sudo。
+执行时将提示你输入用户密码 sudo 命令，除非你明确指示系统不提示 sudo users 为他们的密码。请注意，这不是推荐的做法。
+可选：允许 sudo 而不输入用户的密码</p>
+<p>如前所述，这不是推荐的做法，仅在演示目的中包含在本教程中。</p>
+<p>为了让你的 sudo user 执行 sudo 命令，而不被提示输入密码，后缀为访问行 /etc/sudoers 同 NOPASSWD: ALL 如下：</p>
+<p>%sudo   ALL=(ALL:ALL) ALL   NOPASSWD: ALL
+注意：你需要重新启动 SSHD 服务器才能应用更改。</p>
+<h2 id="anchor_9"><a name="anchor_9" class="anchor-navigation-ex-anchor" href="#anchor_9"><i class="fa fa-link" aria-hidden="true"></i></a>8. 步骤 8：禁用直接 root 访问</h2><p>现在你已经确认可以使用你的 sudo user 没有问题，现在是第八步的禁用直接根访问的时间。</p>
+<p>首先打开 <code class="language-markup">/etc/ssh/sshd_config</code> 使用你喜欢的文本编辑器，并找到包含以下字符串的行。它可能有一个前缀#字符。</p>
+<pre class="line-numbers"><code class="lang-bash">PermitRootLogin
+</code></pre>
+<p>无论前缀或该选项的值 /etc/ssh/sshd_config 你需要将该行更改为以下内容：</p>
+<pre class="line-numbers"><code class="lang-bash">PermitRootLogin no
+</code></pre>
+<p>最后，重新启动你的 SSHD 服务器。</p>
+<p>注意：不要忘了通过尝试将 SSH 更改为服务器来测试你的更改 root。如果你无法这样做，这意味着你已成功完成所有必要的步骤。</p>
+<p>我们的教程结束了。</p>
+
+                        <footer class="page-footer"><span class="copyright">© 2019 刘士. 
+All rights reserved.</span><span class="footer-modification">
+<span id="busuanzi_container_site_uv" style="display:none">本站访客数 <span id="busuanzi_value_site_uv">
+</span> 人次</span></span></footer>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+var _hmt = _hmt || [];
+(function () {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?921ac157b25b6c9fd562a97abf2806a7";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+(function () {
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else {
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script>
+                    </section>
+                </div>
+                <div class="search-results">
+                    <div class="has-results">
+                        <h1 class="search-results-title"><span class='search-results-count'></span> 结果匹配 "<span class='search-query'></span>"</h1>
+                        <ul class="search-results-list"></ul>
+                    </div>
+                    <div class="no-results">
+                        <h1 class="search-results-title">没有匹配的结果 "<span class='search-query'></span>"</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<a aria-label="Previous page: 自动补全功能增强" class="navigation navigation-prev" href="bash-completion-zi-dong-bu-quan-gong-neng-zeng-qiang.html">
+    <i class="fa fa-angle-left"></i>
+</a>
+
+
+<a aria-label="Next page: 部署 YUM 仓库" class="navigation navigation-next" href="yum_repodata.html">
+    <i class="fa fa-angle-right"></i>
+</a>
+
+
+</div>
+<script>
+    var lsbook = lsbook || [];
+    lsbook.push(function () {
+        lsbook.page.hasChanged({
+            "config": {
+                "github_url":"https://liushilive.github.io/",
+                "language": "zh-cn"
+            },
+            "basePath": "../..",
+            "js": {'prism': ['../..\\../asserts/lsbook/prismjs/clipboard.min.js', '../..\\../asserts/lsbook/prismjs/prism.js']}
+        });
+    });
+</script>
+</div>
+
+<script src="../..\../asserts/lsbook/jquery-3.3.1.min.js"></script>
+<script charset="UTF-8" src="../..\../asserts/lsbook/jquery_mar/jquery.mark.js"></script>
+<script src="../..\../asserts/lsbook/lightbox/js/lightbox.min.js"></script>
+<script src="../..\../asserts/lsbook/lsbook.min.js"></script>
+
+</body>
+</html>

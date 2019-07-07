@@ -1,0 +1,326 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+<meta charset="UTF-8">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>Linux 相关 - 添加 Swap</title>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="" name="description">
+<meta content="刘士" name="author">
+
+<link href="../..\../asserts/lsbook/less/website.css" rel="stylesheet">
+<link href="../..\../asserts/lsbook/katex/katex.min.css" rel="stylesheet">
+<link href="../..\../asserts/lsbook/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+<meta content="true" name="HandheldFriendly"/>
+<meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<link href="../..\../asserts/lsbook/images/apple-touch-icon-precomposed-152.png"
+      rel="apple-touch-icon-precomposed" sizes="152x152">
+<link href="../..\../asserts/lsbook/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<!--分页-->
+<link href="LEMP.html" rel="next"/>
+</head>
+<body>
+<div class="book"><div class="book-summary">
+    <div id="book-search-input" role="search">
+        <input placeholder="输入并搜索" type="text"/>
+    </div>
+    <nav role="navigation">
+        <ul class="summary">
+            <li class="header">Summary</li><li class="chapter" data-level="1.1" data-path="../../index.html">
+    <a href="../../index.html"><b>1.1.</b> 介绍</a>
+</li>
+<li class="header">Linux 教程</li><li class="chapter" data-level="2.1" data-path="../../ms/linuxtutorial/index.html">
+    <a href="../../ms/linuxtutorial/index.html"><b>2.1.</b> Linux 教程</a>
+    <ul class="articles">
+    <li class="chapter" data-level="2.1.1" data-path="../../ms/linuxtutorial/linuxinstall.html">
+    <a href="../../ms/linuxtutorial/linuxinstall.html"><b>2.1.1.</b> 获得 Linux</a>
+</li>
+<li class="chapter" data-level="2.1.2" data-path="../../ms/linuxtutorial/commandline.html">
+    <a href="../../ms/linuxtutorial/commandline.html"><b>2.1.2.</b> 命令行</a>
+</li>
+<li class="chapter" data-level="2.1.3" data-path="../../ms/linuxtutorial/navigation.html">
+    <a href="../../ms/linuxtutorial/navigation.html"><b>2.1.3.</b> 基本导航</a>
+</li>
+<li class="chapter" data-level="2.1.4" data-path="../../ms/linuxtutorial/aboutfiles.html">
+    <a href="../../ms/linuxtutorial/aboutfiles.html"><b>2.1.4.</b> 关于文件</a>
+</li>
+<li class="chapter" data-level="2.1.5" data-path="../../ms/linuxtutorial/manual.html">
+    <a href="../../ms/linuxtutorial/manual.html"><b>2.1.5.</b> 手册页</a>
+</li>
+<li class="chapter" data-level="2.1.6" data-path="../../ms/linuxtutorial/filemanipulation.html">
+    <a href="../../ms/linuxtutorial/filemanipulation.html"><b>2.1.6.</b> 文件操作</a>
+</li>
+
+    </ul>
+</li>
+<li class="header">Linux 常用工具部署</li><li class="chapter" data-level="3.1" data-path="bash-completion-zi-dong-bu-quan-gong-neng-zeng-qiang.html">
+    <a href="bash-completion-zi-dong-bu-quan-gong-neng-zeng-qiang.html"><b>3.1.</b> 自动补全功能增强</a>
+</li>
+<li class="chapter" data-level="3.2" data-path="sudo.html">
+    <a href="sudo.html"><b>3.2.</b> 配置 Sudo</a>
+</li>
+<li class="chapter" data-level="3.3" data-path="yum_repodata.html">
+    <a href="yum_repodata.html"><b>3.3.</b> 部署 YUM 仓库</a>
+</li>
+<li class="chapter active" data-level="3.4" data-path="添加Swap.html">
+    <a href="添加Swap.html"><b>3.4.</b> 添加 Swap</a>
+</li>
+<li class="chapter" data-level="3.5" data-path="LEMP.html">
+    <a href="LEMP.html"><b>3.5.</b> LEMP 环境</a>
+</li>
+<li class="chapter" data-level="3.6" data-path="install-oracle-11g-express-xe-on-centos-7.html">
+    <a href="install-oracle-11g-express-xe-on-centos-7.html"><b>3.6.</b> Oracle 11g Express (XE)</a>
+</li>
+<li class="chapter" data-level="3.7" data-path="部署SVN.html">
+    <a href="部署SVN.html"><b>3.7.</b> 部署 SVN</a>
+</li>
+<li class="chapter" data-level="3.8" data-path="大商创环境部署.html">
+    <a href="大商创环境部署.html"><b>3.8.</b> DSC 环境部署 教学环境</a>
+</li>
+<li class="chapter" data-level="3.9" data-path="持续集成环境.html">
+    <a href="持续集成环境.html"><b>3.9.</b> Jenkins 部署</a>
+</li>
+<li class="chapter" data-level="3.10" data-path="持续集成环境-教学环境.html">
+    <a href="持续集成环境-教学环境.html"><b>3.10.</b> Jenkins 部署 教学环境</a>
+</li>
+
+            <li class="divider"></li>
+            <li>
+                <a class="lsbook-link" href="https://github.com/liushilive/lsbook" target="blank">
+                    本书使用 LsBook 发布
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<div class="book-body">
+    <div class="body-inner">
+    <div class="book-header" role="navigation">
+        <!-- Title -->
+        <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i>
+            <a href="../..">添加 Swap</a>
+        </h1>
+    </div>
+
+    <div class="page-wrapper" role="main" tabindex="-1">
+        <div class="page-inner">
+            <div class="search-plus" id="book-search-results">
+                <div class="search-noresults">
+                    <section class="normal markdown-section">
+                        <div id='anchor-navigation-ex-navbar'><i class='fa fa-anchor'></i><ul><li><span class='title-icon fa fa-hand-o-right'></span><a aria-label class='on-toolbar-action' href='' onclick="$('.fa.fa-align-justify').parent()[0].click();">目录</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_1'><b></b>如何在 CentOS 7 上添加 Swap</a></li><ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_2'><b>1. </b>介绍</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_3'><b>2. </b>检查系统的交换信息</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_4'><b>3. </b>检查硬盘驱动器分区上的可用空间</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_5'><b>4. </b>创建一个交换文件</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_6'><b>5. </b>启用交换文件</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_7'><b>6. </b>永久使交换文件</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_8'><b>7. </b>调整你的交换设置</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_9'><b>8. </b>结论</a></li></ul></ul></div><a href='#anchor_1' id='anchorNavigationExGoTop'><i class='fa fa-arrow-up'></i></a>
+                        <h1 id="anchor_1"><a name="anchor_1" class="anchor-navigation-ex-anchor" href="#anchor_1"><i class="fa fa-link" aria-hidden="true"></i></a>如何在 CentOS 7 上添加 Swap</h1><h2 id="anchor_2"><a name="anchor_2" class="anchor-navigation-ex-anchor" href="#anchor_2"><i class="fa fa-link" aria-hidden="true"></i></a>1. 介绍</h2><p>提高服务器响应速度和防止应用程序内存不足错误的最简单方法之一是添加一些交换空间。 Swap 是硬盘上的一个区域，它被指定为操作系统可以临时存储数据的地方，这些数据不能再保存在 RAM 中。</p>
+<p>写入磁盘的信息将比保存在 RAM 中的信息慢，但操作系统更愿意将应用程序数据保存在内存中，并使用 Swap 交换旧数据。总的来说，当系统的 RAM 耗尽时，将 Swap 作为数据存储空间是一个很好的选择。</p>
+<p>在本指南中，我们将介绍如何在 CentOS 7 服务器上创建和启用交换文件。</p>
+<h2 id="anchor_3"><a name="anchor_3" class="anchor-navigation-ex-anchor" href="#anchor_3"><i class="fa fa-link" aria-hidden="true"></i></a>2. 检查系统的交换信息</h2><p>在我们开始之前，我们将看看我们的操作系统，看看我们是否已经有一些可用的交换空间。我们可以有多个交换文件或交换分区，但通常一个就足够了。</p>
+<p>我们可以通过键入以下命令来查看系统是否有任何配置交换：</p>
+<pre class="line-numbers"><code class="lang-bash">sudo swapon -s
+</code></pre>
+<p>如果返回空，表示目前没有启用任何 Swap。</p>
+<p>另一个检查 Swap 的方法是使用 <code class="language-markup">free</code> 命令，它显示了系统内存使用的情况：</p>
+<pre class="line-numbers"><code class="lang-bash">free -m
+</code></pre>
+<pre class="line-numbers"><code class="lang-bash">              total        used        free      shared  buff/cache   available
+Mem:            472         111          36           4         324         308
+Swap:             0           0           0
+</code></pre>
+<h2 id="anchor_4"><a name="anchor_4" class="anchor-navigation-ex-anchor" href="#anchor_4"><i class="fa fa-link" aria-hidden="true"></i></a>3. 检查硬盘驱动器分区上的可用空间</h2><p>为 swap 分配空间的典型方式是使用专门用于该任务的单独分区。但是，改变分区方案并不总是可能的。我们可以轻松地创建驻留在现有分区上的交换文件。</p>
+<p>在我们这样做之前，我们应该知道我们当前的磁盘使用情况。我们可以通过输入以下内容来获得这些信息：</p>
+<pre class="line-numbers"><code class="lang-bash">df -h
+</code></pre>
+<pre class="line-numbers"><code class="lang-bash">文件系统             容量  已用  可用 已用% 挂载点
+/dev/mapper/cl-root   17G  5.0G   13G   30% /
+devtmpfs             226M     0  226M    0% /dev
+tmpfs                237M     0  237M    0% /dev/shm
+tmpfs                237M  4.6M  232M    2% /run
+tmpfs                237M     0  237M    0% /sys/fs/cgroup
+/dev/sda1           1014M  139M  876M   14% /boot
+tmpfs                 48M     0   48M    0% /run/user/0
+</code></pre>
+<p>正如第一行中看到的，我们的硬盘分区有 13G 可用，所以我们有大量空间可用。这是在一个新的，中等规模的 VPS 实例上，所以你的实际使用可能会有很大的不同。</p>
+<p>尽管对于交换空间的适当大小有很多意见，但这取决于你的个人偏好和应用程序要求。一般来说，等于或者是系统内存量的两倍是一个很好的起点。</p>
+<p>由于我的老古董机器只具有 512M 的 RAM，并且加倍会占用我不太愿意被占用的大量磁盘空间，所以我将创建 1GB 的交换空间以匹配我系统的 RAM。</p>
+<h2 id="anchor_5"><a name="anchor_5" class="anchor-navigation-ex-anchor" href="#anchor_5"><i class="fa fa-link" aria-hidden="true"></i></a>4. 创建一个交换文件</h2><p>现在我们知道了可用的存储空间，我们可以在我们的文件系统中创建一个交换文件。我们将 <code class="language-markup">swapfile</code> 在我们的 root（ <code class="language-markup">/</code> ）目录中创建一个文件，尽管如果你愿意，可以将文件命名为其他文件。该文件必须分配我们想要的交换文件的空间量。</p>
+<p>传统上，我们将通过使用该 <code class="language-markup">dd</code> 命令来创建具有预分配空间的文件。这个多功能的磁盘工具从一个位置写入另一个位置。</p>
+<p>我们可以使用它在 Linux 系统中的特殊设备上将文件零写入文件，该系统 <code class="language-markup">/dev/zero</code> 只需要根据请求分配尽可能多的零。</p>
+<p>我们使用 <code class="language-markup">bs</code> 块大小和 <code class="language-markup">count</code> 块数的组合来指定文件大小。我们分配给每个参数几乎完全是任意的。重要的是它们相乘的结果。</p>
+<p>例如，在我们的例子中，我们正在创建一个 1G 的文件。我们可以通过指定 1M 的块大小和 1024：</p>
+<blockquote><p>也可以指定 1G 的块大小和 1，但是如果在系统本身内存小于 1G 的情况下会由于 <code class="language-markup">输入缓冲导致内存耗尽</code> 而失败
+块大小越大速度越快</p>
+</blockquote>
+<pre class="line-numbers"><code class="lang-bash">dd if=/dev/zero of=/swapfile bs=1M count=1024
+</code></pre>
+<pre class="line-numbers"><code class="lang-bash">记录了1024+0 的读入
+记录了1024+0 的写出
+1073741824字节(1.1 GB)已复制，4.76434 秒，225 MB/秒
+</code></pre>
+<p>在按 ENTER 之前检查你的命令，因为如果你指出 of（代表输出文件）到错误的位置，这可能会破坏数据。</p>
+<p>我们可以看到 1 千兆字节已经分配：</p>
+<pre class="line-numbers"><code class="lang-bash">ls -lh /swapfile
+</code></pre>
+<pre class="line-numbers"><code class="lang-bash">-rw-r--r--. 1 root root 1.0G 2月  22 16:36 /swapfile
+</code></pre>
+<h2 id="anchor_6"><a name="anchor_6" class="anchor-navigation-ex-anchor" href="#anchor_6"><i class="fa fa-link" aria-hidden="true"></i></a>5. 启用交换文件</h2><p>目前，我们的文件已创建，但我们的系统不知道这应该用于交换。我们需要告诉我们的系统将该文件格式化为交换，然后启用它。</p>
+<p>在我们这样做之前，我们需要调整我们文件的权限，以便除 root 之外的任何人都无法读取它。允许其他用户读取或写入此文件将是一个巨大的安全风险。我们可以通过输入以下内容来锁定权限：</p>
+<pre class="line-numbers"><code class="lang-bash">chmod 600 /swapfile
+</code></pre>
+<p>通过输入以下内容验证文件是否具有正确的权限：</p>
+<pre class="line-numbers"><code class="lang-bash">ls -lh /swapfile
+</code></pre>
+<pre class="line-numbers"><code class="lang-bash">-rw-------. 1 root root 1.0G 2月  22 16:36 /swapfile
+</code></pre>
+<p>如你所见，只有 root 用户的列才能启用读取和写入标志。</p>
+<p>现在我们的文件更安全了，我们可以通过键入以下命令来告诉我们的系统设置交换空间：</p>
+<pre class="line-numbers"><code class="lang-bash">mkswap /swapfile
+</code></pre>
+<pre class="line-numbers"><code class="lang-bash">正在设置交换空间版本 1，大小 = 1048572 KiB
+无标签，UUID=d945f99d-f025-4b62-adde-1ea635329bfd
+</code></pre>
+<p>我们的文件现在已准备好用作交换空间。我们可以输入以下命令来启用它</p>
+<pre class="line-numbers"><code class="lang-bash">swapon /swapfile
+</code></pre>
+<p>我们可以通过检查我们的系统现在是否报告交换空间来验证过程是否成功：</p>
+<pre class="line-numbers"><code class="lang-bash">swapon -s
+</code></pre>
+<pre class="line-numbers"><code class="lang-bash">文件名        类型    大小  已用  权限
+/swapfile                                file  1048572  0  -1
+</code></pre>
+<p>我们在这里有一个新的交换文件。我们可以 <code class="language-markup">free</code> 再次使用该实用程序来证实我们的发现：</p>
+<pre class="line-numbers"><code class="lang-bash">free -m
+</code></pre>
+<pre class="line-numbers"><code class="lang-bash">              total        used        free      shared  buff/cache   available
+Mem:            472         106           5           4         360         314
+Swap:          1023           0        1023
+</code></pre>
+<p>我们的交换已成功建立，我们的操作系统将根据需要开始使用它。</p>
+<h2 id="anchor_7"><a name="anchor_7" class="anchor-navigation-ex-anchor" href="#anchor_7"><i class="fa fa-link" aria-hidden="true"></i></a>6. 永久使交换文件</h2><p>我们启用了我们的交换文件，但是当我们重新启动时，服务器不会自动启用该文件。我们可以通过修改 <code class="language-markup">fstab</code> 文件来改变它。</p>
+<pre class="line-numbers"><code class="lang-bash">vi /etc/fstab
+</code></pre>
+<p>在文件底部，你需要添加一行代码，告诉操作系统自动使用你创建的文件：</p>
+<pre class="line-numbers"><code class="lang-bash">/swapfile   none    swap    sw    0   0
+</code></pre>
+<p>完成后保存并关闭文件。</p>
+<h2 id="anchor_8"><a name="anchor_8" class="anchor-navigation-ex-anchor" href="#anchor_8"><i class="fa fa-link" aria-hidden="true"></i></a>7. 调整你的交换设置</h2><p>在处理交换时，可以配置几个选项，这些选项会影响系统的性能。</p>
+<p>该 <code class="language-markup">swappiness</code> 参数配置系统将数据从 RAM 交换到交换空间的频率。这是介于 0 和 100 之间的值，表示百分比。</p>
+<p>如果值接近零，内核将不会将数据交换到磁盘，除非绝对必要。请记住，与交换文件的交互是“昂贵的”，因为它们比与 RAM 的交互花费更多时间，并且可能导致性能的显着降低。告诉系统不要太依赖交换通常会使系统更快。</p>
+<p>接近 100 的值将尝试将更多的数据放入交换中以努力保持更多的 RAM 空间。根据你的应用程序的内存配置文件或你使用的服务器，在某些情况下可能会更好。</p>
+<p>通过输入以下内容我们可以看到当前的 swappiness 值：</p>
+<pre class="line-numbers"><code class="lang-bash">cat /proc/sys/vm/swappiness
+</code></pre>
+<pre class="line-numbers"><code class="lang-bash">60
+</code></pre>
+<p>对于桌面，60 的 swappiness 设置并不是一个坏的值。对于 VPS 系统，我们可能希望将其移近 0。</p>
+<p>我们可以使用该 <code class="language-markup">sysctl</code> 命令将 swappiness 设置为不同的值。</p>
+<p>例如，要将 swappiness 设置为 10，我们可以键入：</p>
+<pre class="line-numbers"><code class="lang-bash">sysctl vm.swappiness=10
+</code></pre>
+<pre class="line-numbers"><code class="lang-bash">vm.swappiness = 10
+</code></pre>
+<p>该设置将持续到下一次重新启动。我们可以在重启时自动设置该值，方法是将该行添加到我们的 /etc/sysctl.conf 文件中：</p>
+<pre class="line-numbers"><code class="lang-bash">vi /etc/sysctl.conf
+</code></pre>
+<p>在底部，你可以添加：</p>
+<pre class="line-numbers"><code class="lang-bash">vm.swappiness=10
+</code></pre>
+<p>完成后保存并关闭文件。</p>
+<p>你可能想要修改的另一个相关值是 <code class="language-markup">vfs_cache_pressure</code> 。此设置配置系统将选择多少数据缓存 inode 和 dentry 信息。</p>
+<p>基本上，这是访问有关文件系统的数据。这通常是非常昂贵的查找和频繁请求，所以对于你的系统来说缓存是一件很棒的事情。你可以通过 proc 再次查询文件系统来查看当前值：</p>
+<pre class="line-numbers"><code class="lang-bash">cat /proc/sys/vm/vfs_cache_pressure
+</code></pre>
+<pre class="line-numbers"><code class="lang-bash">100
+</code></pre>
+<p>正如目前配置的那样，系统太快地从缓存中删除索引节点信息。通过输入以下内容，可以将其设置为更保守的设置，如 50：</p>
+<pre class="line-numbers"><code class="lang-bash">sysctl vm.vfs_cache_pressure=50
+</code></pre>
+<pre class="line-numbers"><code class="lang-bash">vm.vfs_cache_pressure = 50
+</code></pre>
+<p>这只对目前的 session 有效。我们可以通过将它添加到配置文件中来改变它，就像使用 swappiness 设置一样：</p>
+<pre class="line-numbers"><code class="lang-bash">vi /etc/sysctl.conf
+</code></pre>
+<p>在底部，添加指定新值的行：</p>
+<pre class="line-numbers"><code class="lang-bash">vm.vfs_cache_pressure = 50
+</code></pre>
+<p>完成后保存并关闭文件。</p>
+<h2 id="anchor_9"><a name="anchor_9" class="anchor-navigation-ex-anchor" href="#anchor_9"><i class="fa fa-link" aria-hidden="true"></i></a>8. 结论</h2><p>按照本指南中的步骤，将为你提供一些 Swap，以便使用 RAM。交换空间在避免一些常见问题方面非常有用。</p>
+<p>如果遇到 OOM（内存不足）错误，或者如果发现系统无法使用所需的应用程序，则最佳解决方案是优化应用程序配置或升级服务器。然而，配置交换空间可以给你更多的灵活性。</p>
+
+                        <footer class="page-footer"><span class="copyright">© 2019 刘士. 
+All rights reserved.</span><span class="footer-modification">
+<span id="busuanzi_container_site_uv" style="display:none">本站访客数 <span id="busuanzi_value_site_uv">
+</span> 人次</span></span></footer>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+var _hmt = _hmt || [];
+(function () {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?921ac157b25b6c9fd562a97abf2806a7";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+(function () {
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else {
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script>
+                    </section>
+                </div>
+                <div class="search-results">
+                    <div class="has-results">
+                        <h1 class="search-results-title"><span class='search-results-count'></span> 结果匹配 "<span class='search-query'></span>"</h1>
+                        <ul class="search-results-list"></ul>
+                    </div>
+                    <div class="no-results">
+                        <h1 class="search-results-title">没有匹配的结果 "<span class='search-query'></span>"</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<a aria-label="Previous page: 部署 YUM 仓库" class="navigation navigation-prev" href="yum_repodata.html">
+    <i class="fa fa-angle-left"></i>
+</a>
+
+
+<a aria-label="Next page: LEMP 环境" class="navigation navigation-next" href="LEMP.html">
+    <i class="fa fa-angle-right"></i>
+</a>
+
+
+</div>
+<script>
+    var lsbook = lsbook || [];
+    lsbook.push(function () {
+        lsbook.page.hasChanged({
+            "config": {
+                "github_url":"https://liushilive.github.io/",
+                "language": "zh-cn"
+            },
+            "basePath": "../..",
+            "js": {'prism': ['../..\\../asserts/lsbook/prismjs/clipboard.min.js', '../..\\../asserts/lsbook/prismjs/prism.js']}
+        });
+    });
+</script>
+</div>
+
+<script src="../..\../asserts/lsbook/jquery-3.3.1.min.js"></script>
+<script charset="UTF-8" src="../..\../asserts/lsbook/jquery_mar/jquery.mark.js"></script>
+<script src="../..\../asserts/lsbook/lightbox/js/lightbox.min.js"></script>
+<script src="../..\../asserts/lsbook/lsbook.min.js"></script>
+
+</body>
+</html>

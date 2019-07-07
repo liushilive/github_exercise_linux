@@ -1,0 +1,296 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+<meta charset="UTF-8">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>Linux 相关 - 部署 SVN</title>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="" name="description">
+<meta content="刘士" name="author">
+
+<link href="../..\../asserts/lsbook/less/website.css" rel="stylesheet">
+<link href="../..\../asserts/lsbook/katex/katex.min.css" rel="stylesheet">
+<link href="../..\../asserts/lsbook/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+<meta content="true" name="HandheldFriendly"/>
+<meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<link href="../..\../asserts/lsbook/images/apple-touch-icon-precomposed-152.png"
+      rel="apple-touch-icon-precomposed" sizes="152x152">
+<link href="../..\../asserts/lsbook/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<!--分页-->
+<link href="大商创环境部署.html" rel="next"/>
+</head>
+<body>
+<div class="book"><div class="book-summary">
+    <div id="book-search-input" role="search">
+        <input placeholder="输入并搜索" type="text"/>
+    </div>
+    <nav role="navigation">
+        <ul class="summary">
+            <li class="header">Summary</li><li class="chapter" data-level="1.1" data-path="../../index.html">
+    <a href="../../index.html"><b>1.1.</b> 介绍</a>
+</li>
+<li class="header">Linux 教程</li><li class="chapter" data-level="2.1" data-path="../../ms/linuxtutorial/index.html">
+    <a href="../../ms/linuxtutorial/index.html"><b>2.1.</b> Linux 教程</a>
+    <ul class="articles">
+    <li class="chapter" data-level="2.1.1" data-path="../../ms/linuxtutorial/linuxinstall.html">
+    <a href="../../ms/linuxtutorial/linuxinstall.html"><b>2.1.1.</b> 获得 Linux</a>
+</li>
+<li class="chapter" data-level="2.1.2" data-path="../../ms/linuxtutorial/commandline.html">
+    <a href="../../ms/linuxtutorial/commandline.html"><b>2.1.2.</b> 命令行</a>
+</li>
+<li class="chapter" data-level="2.1.3" data-path="../../ms/linuxtutorial/navigation.html">
+    <a href="../../ms/linuxtutorial/navigation.html"><b>2.1.3.</b> 基本导航</a>
+</li>
+<li class="chapter" data-level="2.1.4" data-path="../../ms/linuxtutorial/aboutfiles.html">
+    <a href="../../ms/linuxtutorial/aboutfiles.html"><b>2.1.4.</b> 关于文件</a>
+</li>
+<li class="chapter" data-level="2.1.5" data-path="../../ms/linuxtutorial/manual.html">
+    <a href="../../ms/linuxtutorial/manual.html"><b>2.1.5.</b> 手册页</a>
+</li>
+<li class="chapter" data-level="2.1.6" data-path="../../ms/linuxtutorial/filemanipulation.html">
+    <a href="../../ms/linuxtutorial/filemanipulation.html"><b>2.1.6.</b> 文件操作</a>
+</li>
+
+    </ul>
+</li>
+<li class="header">Linux 常用工具部署</li><li class="chapter" data-level="3.1" data-path="bash-completion-zi-dong-bu-quan-gong-neng-zeng-qiang.html">
+    <a href="bash-completion-zi-dong-bu-quan-gong-neng-zeng-qiang.html"><b>3.1.</b> 自动补全功能增强</a>
+</li>
+<li class="chapter" data-level="3.2" data-path="sudo.html">
+    <a href="sudo.html"><b>3.2.</b> 配置 Sudo</a>
+</li>
+<li class="chapter" data-level="3.3" data-path="yum_repodata.html">
+    <a href="yum_repodata.html"><b>3.3.</b> 部署 YUM 仓库</a>
+</li>
+<li class="chapter" data-level="3.4" data-path="添加Swap.html">
+    <a href="添加Swap.html"><b>3.4.</b> 添加 Swap</a>
+</li>
+<li class="chapter" data-level="3.5" data-path="LEMP.html">
+    <a href="LEMP.html"><b>3.5.</b> LEMP 环境</a>
+</li>
+<li class="chapter" data-level="3.6" data-path="install-oracle-11g-express-xe-on-centos-7.html">
+    <a href="install-oracle-11g-express-xe-on-centos-7.html"><b>3.6.</b> Oracle 11g Express (XE)</a>
+</li>
+<li class="chapter active" data-level="3.7" data-path="部署SVN.html">
+    <a href="部署SVN.html"><b>3.7.</b> 部署 SVN</a>
+</li>
+<li class="chapter" data-level="3.8" data-path="大商创环境部署.html">
+    <a href="大商创环境部署.html"><b>3.8.</b> DSC 环境部署 教学环境</a>
+</li>
+<li class="chapter" data-level="3.9" data-path="持续集成环境.html">
+    <a href="持续集成环境.html"><b>3.9.</b> Jenkins 部署</a>
+</li>
+<li class="chapter" data-level="3.10" data-path="持续集成环境-教学环境.html">
+    <a href="持续集成环境-教学环境.html"><b>3.10.</b> Jenkins 部署 教学环境</a>
+</li>
+
+            <li class="divider"></li>
+            <li>
+                <a class="lsbook-link" href="https://github.com/liushilive/lsbook" target="blank">
+                    本书使用 LsBook 发布
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<div class="book-body">
+    <div class="body-inner">
+    <div class="book-header" role="navigation">
+        <!-- Title -->
+        <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i>
+            <a href="../..">部署 SVN</a>
+        </h1>
+    </div>
+
+    <div class="page-wrapper" role="main" tabindex="-1">
+        <div class="page-inner">
+            <div class="search-plus" id="book-search-results">
+                <div class="search-noresults">
+                    <section class="normal markdown-section">
+                        <div id='anchor-navigation-ex-navbar'><i class='fa fa-anchor'></i><ul><li><span class='title-icon fa fa-hand-o-right'></span><a aria-label class='on-toolbar-action' href='' onclick="$('.fa.fa-align-justify').parent()[0].click();">目录</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_1'><b></b>CentOS 7 上部署 Apache Subversion（SVN）服务器</a></li><ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_2'><b>1. </b>先决条件</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_3'><b>2. </b>安装 Apache</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_4'><b>3. </b>安装 SVN 和 mod_dav_svn 模块</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_5'><b>4. </b>配置 SVN</a></li></ul></ul></div><a href='#anchor_1' id='anchorNavigationExGoTop'><i class='fa fa-arrow-up'></i></a>
+                        <h1 id="anchor_1"><a name="anchor_1" class="anchor-navigation-ex-anchor" href="#anchor_1"><i class="fa fa-link" aria-hidden="true"></i></a>CentOS 7 上部署 Apache Subversion（SVN）服务器</h1><p>Apache Subversion（SVN）是一种广泛使用的版本控制解决方案，可帮助存储各种版本的文件，如源代码和文档。</p>
+<p>在本文中，我将介绍如何使用 Apache Subversion 和 Apache 在 CentOS 7 服务器实例上构建 SVN 服务器。</p>
+<h2 id="anchor_2"><a name="anchor_2" class="anchor-navigation-ex-anchor" href="#anchor_2"><i class="fa fa-link" aria-hidden="true"></i></a>1. 先决条件</h2><ul>
+<li><p>CentOS 7（最小化安装，但不是必需）。</p>
+</li>
+<li><p>一个 sudo  用户登录（直接使用 root 亦可）。</p>
+</li>
+</ul>
+<p>非 root 用户请在命令前加  <code class="language-markup">sudo</code>  。</p>
+<h2 id="anchor_3"><a name="anchor_3" class="anchor-navigation-ex-anchor" href="#anchor_3"><i class="fa fa-link" aria-hidden="true"></i></a>2. 安装 Apache</h2><p>使用 YUM 安装 Apache：</p>
+<pre class="line-numbers"><code class="lang-bash">yum install -y httpd
+</code></pre>
+<p>删除 Apache 的默认欢迎页面：</p>
+<pre class="line-numbers"><code class="lang-bash">sed -i &#39;s/^/#&amp;/g&#39; /etc/httpd/conf.d/welcome.conf
+</code></pre>
+<p>防止 Apache 在 <code class="language-markup">/var/www/html</code> 目录中显示文件：</p>
+<pre class="line-numbers"><code class="lang-bash">sed -i &quot;s/Options Indexes FollowSymLinks/Options FollowSymLinks/&quot; /etc/httpd/conf/httpd.conf
+</code></pre>
+<h2 id="anchor_4"><a name="anchor_4" class="anchor-navigation-ex-anchor" href="#anchor_4"><i class="fa fa-link" aria-hidden="true"></i></a>3. 安装 SVN 和 mod_dav_svn 模块</h2><p>要使 SVN 与 Apache 配合使用，需要安装除 SVN 之外的 Apache 模块 <code class="language-markup">mod dav svn</code> ：</p>
+<pre class="line-numbers"><code class="lang-bash">yum install -y subversion mod_dav_svn
+</code></pre>
+<h2 id="anchor_5"><a name="anchor_5" class="anchor-navigation-ex-anchor" href="#anchor_5"><i class="fa fa-link" aria-hidden="true"></i></a>4. 配置 SVN</h2><ol>
+<li><p>修改 SVN 配置文件</p>
+<pre class="line-numbers"><code class="lang-bash">vi /etc/httpd/conf.modules.d/10-subversion.conf
+
+cat &gt;&gt; /etc/httpd/conf.modules.d/10-subversion.conf &lt;&lt;EOF
+&lt;Location /svn&gt;
+DAV svn
+SVNParentPath /svn
+AuthName &quot;SVN Repos&quot;
+AuthType Basic
+AuthUserFile /etc/svn/svn-auth
+AuthzSVNAccessFile /svn/authz
+Require valid-user
+&lt;/Location&gt;
+EOF
+</code></pre>
+<p><strong>注意：</strong> 在此配置中，我们指定了一个 HTTP 访问认证文件 <code class="language-markup">/etc/svn/svn-auth</code> 和用户权限控制文件 <code class="language-markup">/svn/authz</code> 。两者都将在以后创建。</p>
+</li>
+<li><p>创建 SVN 仓库</p>
+<pre class="line-numbers"><code class="lang-bash">mkdir /svn
+cd /svn
+svnadmin create repo1
+chown -R apache:apache repo1
+</code></pre>
+</li>
+<li><p>设置 SVN 用户帐号</p>
+<p>使用以下命令创建 HTTP 访问认证文件 <code class="language-markup">/svn/svn-auth</code> 和 SVN 用户帐户 <code class="language-markup">user001</code> ：</p>
+<pre class="line-numbers"><code class="lang-bash">mkdir /etc/svn
+htpasswd -cm /etc/svn/svn-auth user001
+chown root:apache /etc/svn/svn-auth
+chmod 640 /etc/svn/svn-auth
+</code></pre>
+<p>如果要创建更多 SVN 用户帐户，请参阅以下命令：</p>
+<pre class="line-numbers"><code class="lang-bash">htpasswd -m /etc/svn/svn-auth user002
+htpasswd -m /etc/svn/svn-auth user003
+</code></pre>
+<p><strong>警告：</strong> 现在不要使用 <code class="language-markup">-c</code> 标志，否则将重建身份验证文件，并清除之前设置的所有用户帐户。</p>
+</li>
+<li><p>为用户设置权限</p>
+<pre class="line-numbers"><code class="lang-bash">cp /svn/repo1/conf/authz /svn/authz
+vi /svn/authz
+</code></pre>
+<p>假设：</p>
+<ul>
+<li><p>用户 <code class="language-markup">user001</code> 是管理员。</p>
+</li>
+<li><p>用户 <code class="language-markup">user002</code> 具有读写权限。</p>
+</li>
+<li><p>用户 <code class="language-markup">user003</code> 只能读。</p>
+</li>
+</ul>
+<p>然后，可以修改以下设置：</p>
+<pre class="line-numbers"><code class="lang-bash">[groups]
+admin=user001
+repo1_user=user002
+repo1_trainee=user003
+
+[/]
+@admin=rw
+
+[repo1:/]
+@repo1_user=rw
+@repo1_trainee=r
+</code></pre>
+<p>保存并退出：</p>
+<pre class="line-numbers"><code class="lang-bash">:wq
+</code></pre>
+</li>
+<li><p>启动 Apache 并修改防火墙规则</p>
+<p>启动 Apache：</p>
+<pre class="line-numbers"><code class="lang-bash">systemctl start httpd.service
+systemctl enable httpd.service
+</code></pre>
+<p>打开 HTTP 服务端口：</p>
+<pre class="line-numbers"><code class="lang-bash">firewall-cmd --zone=public --permanent --add-service=http
+firewall-cmd --reload
+</code></pre>
+<p>最后，使用以下路径从 SVN 客户端访问服务器上的 SVN repo  <code class="language-markup">repo1</code> ：</p>
+<pre class="line-numbers"><code class="lang-bash">http://&lt;your-server-ip&gt;/svn/repo1/
+</code></pre>
+</li>
+</ol>
+<p>教程结束了。谢谢阅读。</p>
+
+                        <footer class="page-footer"><span class="copyright">© 2019 刘士. 
+All rights reserved.</span><span class="footer-modification">
+<span id="busuanzi_container_site_uv" style="display:none">本站访客数 <span id="busuanzi_value_site_uv">
+</span> 人次</span></span></footer>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+var _hmt = _hmt || [];
+(function () {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?921ac157b25b6c9fd562a97abf2806a7";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+(function () {
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else {
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script>
+                    </section>
+                </div>
+                <div class="search-results">
+                    <div class="has-results">
+                        <h1 class="search-results-title"><span class='search-results-count'></span> 结果匹配 "<span class='search-query'></span>"</h1>
+                        <ul class="search-results-list"></ul>
+                    </div>
+                    <div class="no-results">
+                        <h1 class="search-results-title">没有匹配的结果 "<span class='search-query'></span>"</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<a aria-label="Previous page: Oracle 11g Express (XE)" class="navigation navigation-prev" href="install-oracle-11g-express-xe-on-centos-7.html">
+    <i class="fa fa-angle-left"></i>
+</a>
+
+
+<a aria-label="Next page: DSC 环境部署 教学环境" class="navigation navigation-next" href="大商创环境部署.html">
+    <i class="fa fa-angle-right"></i>
+</a>
+
+
+</div>
+<script>
+    var lsbook = lsbook || [];
+    lsbook.push(function () {
+        lsbook.page.hasChanged({
+            "config": {
+                "github_url":"https://liushilive.github.io/",
+                "language": "zh-cn"
+            },
+            "basePath": "../..",
+            "js": {'prism': ['../..\\../asserts/lsbook/prismjs/clipboard.min.js', '../..\\../asserts/lsbook/prismjs/prism.js']}
+        });
+    });
+</script>
+</div>
+
+<script src="../..\../asserts/lsbook/jquery-3.3.1.min.js"></script>
+<script charset="UTF-8" src="../..\../asserts/lsbook/jquery_mar/jquery.mark.js"></script>
+<script src="../..\../asserts/lsbook/lightbox/js/lightbox.min.js"></script>
+<script src="../..\../asserts/lsbook/lsbook.min.js"></script>
+
+</body>
+</html>
