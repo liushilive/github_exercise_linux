@@ -187,19 +187,19 @@ firewall-cmd --reload
 yum -y install zlib zlib-devel libffi-devel openssl-devel
 </code></pre>
 <p>Python 官网下载最新版 Python 源代码。</p>
-<blockquote><p>本文以 Python-3.7.2 为例</p>
+<blockquote><p>本文以 Python-3.7.4 为例</p>
 </blockquote>
 <pre class="line-numbers"><code class="lang-bash">cd /tmp
 
-curl -O https://www.python.org/ftp/python/3.7.2/Python-3.7.2.tgz
+curl -O https://www.python.org/ftp/python/3.7.4/Python-3.7.4.tgz
 
-tar xf Python-3.7.2.tgz
+tar xf Python-3.7.4.tgz
 </code></pre>
 <p>Python 配置</p>
-<pre class="line-numbers"><code class="lang-bash">./Python-3.7.2/configure
+<pre class="line-numbers"><code class="lang-bash">./Python-3.7.4/configure
 </code></pre>
 <p>构建并安装 Python 3</p>
-<pre class="line-numbers"><code class="lang-bash">make install Python-3.7.2
+<pre class="line-numbers"><code class="lang-bash">make install Python-3.7.4
 </code></pre>
 <p>确认 Python 3 部署成功</p>
 <pre class="line-numbers"><code class="lang-bash">python3 --version

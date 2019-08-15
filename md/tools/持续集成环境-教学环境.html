@@ -112,7 +112,7 @@
             <div class="search-plus" id="book-search-results">
                 <div class="search-noresults">
                     <section class="normal markdown-section">
-                        <div id='anchor-navigation-ex-navbar'><i class='fa fa-anchor'></i><ul><li><span class='title-icon fa fa-hand-o-right'></span><a aria-label class='on-toolbar-action' href='' onclick="$('.fa.fa-align-justify').parent()[0].click();">目录</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_1'><b></b>CentOS 7 部署 Jenkins 持续集成环境（教学环境）</a></li><ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_2'><b>1. </b>先决条件</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_3'><b>2. </b>部署本地 yum 源</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_4'><b>3. </b>安装 Java</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_5'><b>4. </b>安装 Jenkins</a></li><ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_6'><b>4.1. </b>基本配置</a></li></ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_7'><b>5. </b>部署 Python 3</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_8'><b>6. </b>Jenkins 相关</a></li></ul></ul></div><a href='#anchor_1' id='anchorNavigationExGoTop'><i class='fa fa-arrow-up'></i></a>
+                        <div id='anchor-navigation-ex-navbar'><i class='fa fa-anchor'></i><ul><li><span class='title-icon fa fa-hand-o-right'></span><a aria-label class='on-toolbar-action' href='' onclick="$('.fa.fa-align-justify').parent()[0].click();">目录</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_1'><b></b>CentOS 7 部署 Jenkins 持续集成环境（教学环境）</a></li><ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_2'><b>1. </b>先决条件</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_3'><b>2. </b>部署本地 yum 源</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_4'><b>3. </b>安装 Java</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_5'><b>4. </b>安装 Jenkins</a></li><ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_6'><b>4.1. </b>基本配置</a></li></ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_7'><b>5. </b>部署 Python 3</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_8'><b>6. </b>Jenkins 相关</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_9'><b>7. </b>sh</a></li></ul></ul></div><a href='#anchor_1' id='anchorNavigationExGoTop'><i class='fa fa-arrow-up'></i></a>
                         <h1 id="anchor_1"><a name="anchor_1" class="anchor-navigation-ex-anchor" href="#anchor_1"><i class="fa fa-link" aria-hidden="true"></i></a>CentOS 7 部署 Jenkins 持续集成环境（教学环境）</h1><p>詹金斯是一种流行的开源 CI（持续集成）工具，广泛用于项目开发，部署和自动化。</p>
 <p>本文将引导你完成在 CentOS 7 服务器实例上安装 Jenkins 的过程。</p>
 <h2 id="anchor_2"><a name="anchor_2" class="anchor-navigation-ex-anchor" href="#anchor_2"><i class="fa fa-link" aria-hidden="true"></i></a>1. 先决条件</h2><p>在继续之前，你必须具备：</p>
@@ -182,19 +182,19 @@ firewall-cmd --reload
 yum -y install zlib zlib-devel libffi-devel openssl-devel
 </code></pre>
 <p>Python 官网下载最新版 Python 源代码。</p>
-<blockquote><p>本文以 Python-3.7.2 为例</p>
+<blockquote><p>本文以 Python-3.7.4 为例</p>
 </blockquote>
 <pre class="line-numbers"><code class="lang-bash">cd /tmp
 
-curl -O http://192.168.2.251/Centos/python/Python-3.7.2.tgz
+curl -O http://192.168.2.251/Centos/python/Python-3.7.4.tgz
 
-tar xf Python-3.7.2.tgz
+tar xf Python-3.7.4.tgz
 </code></pre>
 <p>Python 配置</p>
-<pre class="line-numbers"><code class="lang-bash">./Python-3.7.2/configure
+<pre class="line-numbers"><code class="lang-bash">./Python-3.7.4/configure
 </code></pre>
 <p>构建并安装 Python 3</p>
-<pre class="line-numbers"><code class="lang-bash">make install Python-3.7.2
+<pre class="line-numbers"><code class="lang-bash">make install Python-3.7.4
 </code></pre>
 <p>确认 Python 3 部署成功</p>
 <pre class="line-numbers"><code class="lang-bash">python3 --version
@@ -224,6 +224,33 @@ pip3 list
 <li><p>重启服务  <code class="language-markup">systemctl restart jenkins</code></p>
 </li>
 </ul>
+<h2 id="anchor_9"><a name="anchor_9" class="anchor-navigation-ex-anchor" href="#anchor_9"><i class="fa fa-link" aria-hidden="true"></i></a>7. sh</h2><pre class="line-numbers"><code class="lang-bash">rm -rf /etc/yum.repos.d/*
+curl -o /etc/yum.repos.d/CentOS-Base.repo http://192.168.2.251/Centos/CentOS7.repo
+yum clean all
+yum makecache
+
+yum install -y java
+java -version
+
+yum install -y jenkins
+systemctl start jenkins.service
+systemctl enable jenkins.service
+firewall-cmd --zone=public --permanent --add-port=8080/tcp
+firewall-cmd --reload
+
+yum -y groupinstall &#39;Development Tools&#39;
+yum -y install zlib zlib-devel libffi-devel openssl-devel
+
+cd /tmp
+curl -O http://192.168.2.251/Centos/python/Python-3.7.4.tgz
+tar xf Python-3.7.4.tgz
+./Python-3.7.4/configure
+make install Python-3.7.4
+python3 --version
+
+pip3 install selenium ddt htmlreport
+pip3 list
+</code></pre>
 
                         <footer class="page-footer"><span class="copyright">© 2019 刘士. 
 All rights reserved.</span><span class="footer-modification">
