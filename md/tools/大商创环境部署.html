@@ -119,7 +119,7 @@ sed -i &#39;s/SELINUX=enforcing/SELINUX=disabled/&#39; /etc/selinux/config
 </code></pre>
 <h2 id="anchor_3"><a name="anchor_3" class="anchor-navigation-ex-anchor" href="#anchor_3"><i class="fa fa-link" aria-hidden="true"></i></a>2. 部署本地 yum 源</h2><pre class="line-numbers"><code class="lang-bash">rm -rf /etc/yum.repos.d/*
 
-curl -o /etc/yum.repos.d/CentOS-Base.repo http://192.168.2.251/Centos/CentOS7.repo
+curl -o /etc/yum.repos.d/CentOS-7.repo http://192.168.2.251/Centos/CentOS7.repo
 
 yum clean all
 
@@ -231,7 +231,7 @@ chmod 700 /var/lib/php/session
 <h2 id="anchor_17"><a name="anchor_17" class="anchor-navigation-ex-anchor" href="#anchor_17"><i class="fa fa-link" aria-hidden="true"></i></a>16. 一键部署</h2><pre class="line-numbers"><code class="lang-bash">setenforce 0
 sed -i &#39;s/SELINUX=enforcing/SELINUX=disabled/&#39; /etc/selinux/config
 rm -rf /etc/yum.repos.d/*
-curl -o /etc/yum.repos.d/CentOS-Base.repo http://192.168.2.251/Centos/CentOS7.repo
+curl -o /etc/yum.repos.d/CentOS-7.repo http://192.168.2.251/Centos/CentOS7.repo
 yum clean all
 yum makecache
 yum install -y nginx
