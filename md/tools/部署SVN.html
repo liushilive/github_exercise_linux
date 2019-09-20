@@ -115,45 +115,45 @@
 </code></pre>
 <h2 id="anchor_5"><a name="anchor_5" class="anchor-navigation-ex-anchor" href="#anchor_5"><i class="fa fa-link" aria-hidden="true"></i></a>4. 配置 SVN</h2><ol>
 <li><p>修改 SVN 配置文件</p>
-<pre class="line-numbers"><code class="lang-bash">vi /etc/httpd/conf.modules.d/10-subversion.conf
+<pre class="line-numbers"><code class="lang-bash"> vi /etc/httpd/conf.modules.d/10-subversion.conf
 
-cat &gt;&gt; /etc/httpd/conf.modules.d/10-subversion.conf &lt;&lt;EOF
-&lt;Location /svn&gt;
-DAV svn
-SVNParentPath /svn
-AuthName &quot;SVN Repos&quot;
-AuthType Basic
-AuthUserFile /etc/svn/svn-auth
-AuthzSVNAccessFile /svn/authz
-Require valid-user
-&lt;/Location&gt;
-EOF
+ cat &gt;&gt; /etc/httpd/conf.modules.d/10-subversion.conf &lt;&lt;EOF
+ &lt;Location /svn&gt;
+ DAV svn
+ SVNParentPath /svn
+ AuthName &quot;SVN Repos&quot;
+ AuthType Basic
+ AuthUserFile /etc/svn/svn-auth
+ AuthzSVNAccessFile /svn/authz
+ Require valid-user
+ &lt;/Location&gt;
+ EOF
 </code></pre>
 <p><strong>注意：</strong> 在此配置中，我们指定了一个 HTTP 访问认证文件 <code class="language-markup">/etc/svn/svn-auth</code> 和用户权限控制文件 <code class="language-markup">/svn/authz</code> 。两者都将在以后创建。</p>
 </li>
 <li><p>创建 SVN 仓库</p>
-<pre class="line-numbers"><code class="lang-bash">mkdir /svn
-cd /svn
-svnadmin create repo1
-chown -R apache:apache repo1
+<pre class="line-numbers"><code class="lang-bash"> mkdir /svn
+ cd /svn
+ svnadmin create repo1
+ chown -R apache:apache repo1
 </code></pre>
 </li>
 <li><p>设置 SVN 用户帐号</p>
 <p>使用以下命令创建 HTTP 访问认证文件 <code class="language-markup">/svn/svn-auth</code> 和 SVN 用户帐户 <code class="language-markup">user001</code> ：</p>
-<pre class="line-numbers"><code class="lang-bash">mkdir /etc/svn
-htpasswd -cm /etc/svn/svn-auth user001
-chown root:apache /etc/svn/svn-auth
-chmod 640 /etc/svn/svn-auth
+<pre class="line-numbers"><code class="lang-bash"> mkdir /etc/svn
+ htpasswd -cm /etc/svn/svn-auth user001
+ chown root:apache /etc/svn/svn-auth
+ chmod 640 /etc/svn/svn-auth
 </code></pre>
 <p>如果要创建更多 SVN 用户帐户，请参阅以下命令：</p>
-<pre class="line-numbers"><code class="lang-bash">htpasswd -m /etc/svn/svn-auth user002
-htpasswd -m /etc/svn/svn-auth user003
+<pre class="line-numbers"><code class="lang-bash"> htpasswd -m /etc/svn/svn-auth user002
+ htpasswd -m /etc/svn/svn-auth user003
 </code></pre>
 <p><strong>警告：</strong> 现在不要使用 <code class="language-markup">-c</code> 标志，否则将重建身份验证文件，并清除之前设置的所有用户帐户。</p>
 </li>
 <li><p>为用户设置权限</p>
-<pre class="line-numbers"><code class="lang-bash">cp /svn/repo1/conf/authz /svn/authz
-vi /svn/authz
+<pre class="line-numbers"><code class="lang-bash"> cp /svn/repo1/conf/authz /svn/authz
+ vi /svn/authz
 </code></pre>
 <p>假设：</p>
 <ul>
@@ -162,8 +162,6 @@ vi /svn/authz
 <li><p>用户 <code class="language-markup">user002</code> 具有读写权限。</p>
 </li>
 <li><p>用户 <code class="language-markup">user003</code> 只能读。</p>
-</li>
-</ul>
 <p>然后，可以修改以下设置：</p>
 <pre class="line-numbers"><code class="lang-bash">[groups]
 admin=user001
@@ -181,17 +179,19 @@ repo1_trainee=user003
 <pre class="line-numbers"><code class="lang-bash">:wq
 </code></pre>
 </li>
+</ul>
+</li>
 <li><p>启动 Apache 并修改防火墙规则</p>
 <p>启动 Apache：</p>
-<pre class="line-numbers"><code class="lang-bash">systemctl start httpd.service
-systemctl enable httpd.service
+<pre class="line-numbers"><code class="lang-bash"> systemctl start httpd.service
+ systemctl enable httpd.service
 </code></pre>
 <p>打开 HTTP 服务端口：</p>
-<pre class="line-numbers"><code class="lang-bash">firewall-cmd --zone=public --permanent --add-service=http
-firewall-cmd --reload
+<pre class="line-numbers"><code class="lang-bash"> firewall-cmd --zone=public --permanent --add-service=http
+ firewall-cmd --reload
 </code></pre>
 <p>最后，使用以下路径从 SVN 客户端访问服务器上的 SVN repo  <code class="language-markup">repo1</code> ：</p>
-<pre class="line-numbers"><code class="lang-bash">http://&lt;your-server-ip&gt;/svn/repo1/
+<pre class="line-numbers"><code class="lang-bash"> http://&lt;your-server-ip&gt;/svn/repo1/
 </code></pre>
 </li>
 </ol>
