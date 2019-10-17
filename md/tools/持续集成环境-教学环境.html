@@ -114,34 +114,34 @@ firewall-cmd --reload
 </code></pre>
 <h3 id="anchor_6"><a class="anchor-navigation-ex-anchor" href="#anchor_6" name="anchor_6"><i aria-hidden="true" class="fa fa-link"></i></a>4.1. 基本配置</h3>
 <ol>
-<li>解锁 jenkins</li>
-</ol>
+<li>
+<p>解锁 jenkins</p>
 <p>根据提示使用 <code class="language-vim">cat</code> 命令查看密码</p>
 <pre class="line-numbers"><code class="lang-bash">cat /var/lib/jenkins/secrets/initialAdminPassword
 </code></pre>
-<ol>
-<li>自定义 Jenkins</li>
-</ol>
+</li>
+<li>
+<p>自定义 Jenkins</p>
 <p>Jenkins 插件自动从网络下载安装，由于插件服务器在国外，会产生网络延迟问题导致安装失败。</p>
 <p>因此选择<code class="language-vim">选择插件来安装</code>。本次我们将不选择任何插件以快速安装，后期将通过<code class="language-vim">插件管理器</code>安装所需插件。</p>
-<ol>
+</li>
 <li>
 <p>创建第一个管理员用户</p>
 </li>
 <li>
 <p>实例配置</p>
-</li>
-</ol>
 <p>可修改 地址与端口，不建议修改。保持默认。</p>
-<ol>
-<li>插件安装</li>
-</ol>
+</li>
+<li>
+<p>插件安装</p>
 <p>系统管理 -&gt; 管理插件 -&gt; 可选插件 -&gt; 过滤</p>
 <p><code class="language-vim">HTML Publisher</code></p>
 <p><code class="language-vim">Workspace Cleanup</code></p>
 <p><code class="language-vim">Subversion</code></p>
 <p><code class="language-vim">Startup Trigger</code></p>
 <p><code class="language-vim">Groovy</code></p>
+</li>
+</ol>
 <h2 id="anchor_7"><a class="anchor-navigation-ex-anchor" href="#anchor_7" name="anchor_7"><i aria-hidden="true" class="fa fa-link"></i></a>5. 部署 Python 3</h2>
 <p>部署编译环境</p>
 <pre class="line-numbers"><code class="lang-bash">yum -y groupinstall &#x27;Development Tools&#x27;
