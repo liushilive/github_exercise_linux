@@ -99,7 +99,7 @@ firewall-cmd --reload
 </code></pre>
 <h2 id="anchor_3"><a class="anchor-navigation-ex-anchor" href="#anchor_3" name="anchor_3"><i aria-hidden="true" class="fa fa-link"></i></a>2. 第二步 - 安装 MySQL（MariaDB）</h2>
 <p>现在我们已经启动了 Web 服务器，现在是时候安装一个 MySQL 插件替代品 MariaDB 了。MariaDB 是 MySQL 关系数据库管理系统的一个社区开发的分支。基本上，它将组织和提供访问我们的网站可以存储信息的数据库。</p>
-<p>再次，我们可以使用 yum 获取和安装我们的软件。这一次，我们还将安装一些其他“帮手”软件包，这些软件包可以帮助我们获得组件之间的通信。</p>
+<p>再次，我们可以使用 yum 获取和安装我们的软件。这一次，我们还将安装一些其他<code class="language-vim">帮手</code>软件包，这些软件包可以帮助我们获得组件之间的通信。</p>
 <pre class="line-numbers"><code class="lang-bash">yum install -y mariadb-server mariadb
 </code></pre>
 <p>安装完成后，我们需要使用以下命令启动 MariaDB：</p>
@@ -122,7 +122,7 @@ Password updated successfully!
 Reloading privilege tables..
  ... Success!
 </code></pre>
-<p>对于其余的问题，你应该简单地通过每个提示点击“ENTER”键来接受默认值。这将删除一些示例用户和数据库，禁用远程 root 登录，并加载这些新规则，以便 MySQL 立即尊重我们所做的更改。</p>
+<p>对于其余的问题，你应该简单地通过每个提示点击<code class="language-vim">ENTER</code>键来接受默认值。这将删除一些示例用户和数据库，禁用远程 root 登录，并加载这些新规则，以便 MySQL 立即尊重我们所做的更改。</p>
 <p>你要做的最后一件事是启用 MariaDB 启动。使用以下命令来执行此操作：</p>
 <pre class="line-numbers"><code class="lang-bash">systemctl enable mariadb
 </code></pre>
@@ -181,7 +181,7 @@ EOF
 </code></pre>
 <h2 id="anchor_7"><a class="anchor-navigation-ex-anchor" href="#anchor_7" name="anchor_7"><i aria-hidden="true" class="fa fa-link"></i></a>5. 第五步 - 在 Web 服务器上测试 PHP 处理</h2>
 <p>为了测试我们的系统是否正确配置了 PHP，我们可以创建一个非常基本的 PHP 脚本。</p>
-<p>我们将调用这个脚本 info.php。为了让 Apache 找到并正确提供，必须将其保存到一个非常特定的目录中，这个目录称为“Web 根目录”。</p>
+<p>我们将调用这个脚本 info.php。为了让 Apache 找到并正确提供，必须将其保存到一个非常特定的目录中，这个目录称为<code class="language-vim">Web 根目录</code>。</p>
 <p>在 CentOS 7 中，这个目录位于 /usr/share/nginx/html/。我们可以通过键入以下内容在该位置创建文件：</p>
 <pre class="line-numbers"><code class="lang-bash">vi /usr/share/nginx/html/info.php
 </code></pre>

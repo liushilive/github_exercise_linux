@@ -172,7 +172,7 @@ Swap:          1023           0        1023
 <h2 id="anchor_8"><a class="anchor-navigation-ex-anchor" href="#anchor_8" name="anchor_8"><i aria-hidden="true" class="fa fa-link"></i></a>7. 调整你的交换设置</h2>
 <p>在处理交换时，可以配置几个选项，这些选项会影响系统的性能。</p>
 <p>该<code class="language-vim">swappiness</code>参数配置系统将数据从 RAM 交换到交换空间的频率。这是介于 0 和 100 之间的值，表示百分比。</p>
-<p>如果值接近零，内核将不会将数据交换到磁盘，除非绝对必要。请记住，与交换文件的交互是“昂贵的”，因为它们比与 RAM 的交互花费更多时间，并且可能导致性能的显着降低。告诉系统不要太依赖交换通常会使系统更快。</p>
+<p>如果值接近零，内核将不会将数据交换到磁盘，除非绝对必要。请记住，与交换文件的交互是<code class="language-vim">昂贵的</code>，因为它们比与 RAM 的交互花费更多时间，并且可能导致性能的显着降低。告诉系统不要太依赖交换通常会使系统更快。</p>
 <p>接近 100 的值将尝试将更多的数据放入交换中以努力保持更多的 RAM 空间。根据你的应用程序的内存配置文件或你使用的服务器，在某些情况下可能会更好。</p>
 <p>通过输入以下内容我们可以看到当前的 swappiness 值：</p>
 <pre class="line-numbers"><code class="lang-bash">cat /proc/sys/vm/swappiness
