@@ -135,6 +135,9 @@ firewall-cmd --reload
 <li>
 <p>插件安装</p>
 <p>系统管理 -&gt; 管理插件 -&gt; 可选插件 -&gt; 过滤</p>
+<blockquote>
+<p>如果网络不好，可以配置清华大学镜像：<code class="language-vim">https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json</code></p>
+</blockquote>
 <p><code class="language-vim">HTML Publisher</code></p>
 <p><code class="language-vim">Workspace Cleanup</code></p>
 <p><code class="language-vim">Subversion</code></p>
@@ -208,8 +211,6 @@ java -version
 yum install -y jenkins
 systemctl start jenkins.service
 systemctl enable jenkins.service
-firewall-cmd --zone=public --permanent --add-port=8080/tcp
-firewall-cmd --reload
 
 yum -y groupinstall &#x27;Development Tools&#x27;
 yum -y install zlib zlib-devel libffi-devel openssl-devel
@@ -224,6 +225,8 @@ python3 --version
 pip3 install selenium ddt htmlreport
 pip3 list
 
+firewall-cmd --zone=public --permanent --add-port=8080/tcp
+firewall-cmd --reload
 </code></pre>
 
                         <footer class="page-footer"><span class="copyright">© 2019 刘士. 
