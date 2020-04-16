@@ -69,7 +69,7 @@
             <div class="search-plus" id="book-search-results">
                 <div class="search-noresults">
                     <section class="normal markdown-section">
-                        <div id='anchor-navigation-ex-navbar'><i class='fa fa-anchor'></i><ul><li><span class='title-icon fa fa-hand-o-right'></span><a aria-label class='on-toolbar-action' href='' onclick="$('.fa.fa-align-justify').parent()[0].click();">目录</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_1'><b></b>Oracle 部署</a></li><ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_2'><b>1. </b>上传安装包</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_3'><b>2. </b>安装必需的安装包</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_4'><b>3. </b>安装</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_5'><b>4. </b>配置 Oralce</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_6'><b>5. </b>环境变量配置</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_7'><b>6. </b>允许远程访问 Oracle 11g XE GUI</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_8'><b>7. </b>直接关闭防火墙</a></li></ul></ul></div><a href='#anchor_1' id='anchorNavigationExGoTop'><i class='fa fa-arrow-up'></i></a>
+                        <div id='anchor-navigation-ex-navbar'><i class='fa fa-anchor'></i><ul><li><span class='title-icon fa fa-hand-o-right'></span><a aria-label class='on-toolbar-action' href='' onclick="$('.fa.fa-align-justify').parent()[0].click();">目录</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_1'><b></b>Oracle 部署</a></li><ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_2'><b>1. </b>安装必需的安装包</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_3'><b>2. </b>安装 Oracle</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_4'><b>3. </b>配置 Oracle</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_5'><b>4. </b>环境变量配置</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_6'><b>5. </b>允许远程访问 Oracle 11g XE GUI</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_7'><b>6. </b>直接关闭防火墙</a></li></ul></ul></div><a href='#anchor_1' id='anchorNavigationExGoTop'><i class='fa fa-arrow-up'></i></a>
                         <h1 id="anchor_1"><a class="anchor-navigation-ex-anchor" href="#anchor_1" name="anchor_1"><i aria-hidden="true" class="fa fa-link"></i></a>Oracle 部署</h1>
 <ul>
 <li>
@@ -79,15 +79,13 @@
 <p><a href="http://docs.oracle.com/cd/E17781_01/install.112/e18802/toc.htm">Oracle XE 官方文档</a></p>
 </li>
 </ul>
-<h2 id="anchor_2"><a class="anchor-navigation-ex-anchor" href="#anchor_2" name="anchor_2"><i aria-hidden="true" class="fa fa-link"></i></a>1. 上传安装包</h2>
-<p><code class="language-vim">oracle-xe-11.2.0-1.0.x86_64.rpm</code></p>
-<h2 id="anchor_3"><a class="anchor-navigation-ex-anchor" href="#anchor_3" name="anchor_3"><i aria-hidden="true" class="fa fa-link"></i></a>2. 安装必需的安装包</h2>
+<h2 id="anchor_2"><a class="anchor-navigation-ex-anchor" href="#anchor_2" name="anchor_2"><i aria-hidden="true" class="fa fa-link"></i></a>1. 安装必需的安装包</h2>
 <pre class="line-numbers"><code class="lang-bash">yum install -y libaio bc flex net-tools
 </code></pre>
-<h2 id="anchor_4"><a class="anchor-navigation-ex-anchor" href="#anchor_4" name="anchor_4"><i aria-hidden="true" class="fa fa-link"></i></a>3. 安装</h2>
-<pre class="line-numbers"><code class="lang-bash">rpm -ivh oracle-xe-11.2.0-1.0.x86_64.rpm
+<h2 id="anchor_3"><a class="anchor-navigation-ex-anchor" href="#anchor_3" name="anchor_3"><i aria-hidden="true" class="fa fa-link"></i></a>2. 安装 Oracle</h2>
+<pre class="line-numbers"><code class="lang-bash">rpm -ivh https://github.com/liushilive/github_exercise_linux/releases/download/1.0/oracle-xe-11.2.0-1.0.x86_64.rpm
 </code></pre>
-<h2 id="anchor_5"><a class="anchor-navigation-ex-anchor" href="#anchor_5" name="anchor_5"><i aria-hidden="true" class="fa fa-link"></i></a>4. 配置 Oralce</h2>
+<h2 id="anchor_4"><a class="anchor-navigation-ex-anchor" href="#anchor_4" name="anchor_4"><i aria-hidden="true" class="fa fa-link"></i></a>3. 配置 Oracle</h2>
 <ul>
 <li>
 <p>Oracle Application Express 的有效 HTTP 端口（默认值为 <code class="language-vim">8080</code>）</p>
@@ -107,7 +105,7 @@
 </ul>
 <pre class="line-numbers"><code class="lang-bash">echo -e &quot;\n\n123456\n123456\ny&quot; | /etc/init.d/oracle-xe configure
 </code></pre>
-<h2 id="anchor_6"><a class="anchor-navigation-ex-anchor" href="#anchor_6" name="anchor_6"><i aria-hidden="true" class="fa fa-link"></i></a>5. 环境变量配置</h2>
+<h2 id="anchor_5"><a class="anchor-navigation-ex-anchor" href="#anchor_5" name="anchor_5"><i aria-hidden="true" class="fa fa-link"></i></a>4. 环境变量配置</h2>
 <pre class="line-numbers"><code class="lang-bash">cat &gt;&gt; .bash_profile &lt;&lt; EOF
 . /u01/app/oracle/product/11.2.0/xe/bin/oracle_env.sh
 EOF
@@ -115,13 +113,13 @@ EOF
 <p>让环境变量生效</p>
 <pre class="line-numbers"><code class="lang-bash">su -
 </code></pre>
-<h2 id="anchor_7"><a class="anchor-navigation-ex-anchor" href="#anchor_7" name="anchor_7"><i aria-hidden="true" class="fa fa-link"></i></a>6. 允许远程访问 Oracle 11g XE GUI</h2>
+<h2 id="anchor_6"><a class="anchor-navigation-ex-anchor" href="#anchor_6" name="anchor_6"><i aria-hidden="true" class="fa fa-link"></i></a>5. 允许远程访问 Oracle 11g XE GUI</h2>
 <p>进入 SQL 命令窗口</p>
 <pre class="line-numbers"><code class="lang-bash">sqlplus &quot;sys/123456 as sysdba&quot; &lt;&lt;EOF
 EXEC DBMS_XDB.SETLISTENERLOCALACCESS(FALSE);
 EOF
 </code></pre>
-<h2 id="anchor_8"><a class="anchor-navigation-ex-anchor" href="#anchor_8" name="anchor_8"><i aria-hidden="true" class="fa fa-link"></i></a>7. 直接关闭防火墙</h2>
+<h2 id="anchor_7"><a class="anchor-navigation-ex-anchor" href="#anchor_7" name="anchor_7"><i aria-hidden="true" class="fa fa-link"></i></a>6. 直接关闭防火墙</h2>
 <pre class="line-numbers"><code class="lang-bash">systemctl stop firewalld
 systemctl disable firewalld
 </code></pre>
