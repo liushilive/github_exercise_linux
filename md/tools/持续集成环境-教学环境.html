@@ -41,9 +41,8 @@
 <li class="chapter" data-level="3.5" data-path="LEMP.html"><a href="LEMP.html"><b>3.5.</b>LEMP 环境</a></li>
 <li class="chapter" data-level="3.6" data-path="install-oracle-11g-express-xe-on-centos-7.html"><a href="install-oracle-11g-express-xe-on-centos-7.html"><b>3.6.</b>Oracle 11g Express (XE)</a></li>
 <li class="chapter" data-level="3.7" data-path="部署SVN.html"><a href="部署SVN.html"><b>3.7.</b>部署 SVN</a></li>
-<li class="chapter" data-level="3.8" data-path="大商创环境部署.html"><a href="大商创环境部署.html"><b>3.8.</b>DSC 环境部署 教学环境</a></li>
-<li class="chapter" data-level="3.9" data-path="持续集成环境.html"><a href="持续集成环境.html"><b>3.9.</b>Jenkins 部署</a></li>
-<li class="chapter active" data-level="3.10" data-path="持续集成环境-教学环境.html"><a href="持续集成环境-教学环境.html"><b>3.10.</b>Jenkins 部署 教学环境</a></li></ul>
+<li class="chapter" data-level="3.8" data-path="持续集成环境.html"><a href="持续集成环境.html"><b>3.8.</b>Jenkins 部署</a></li>
+<li class="chapter active" data-level="3.9" data-path="持续集成环境-教学环境.html"><a href="持续集成环境-教学环境.html"><b>3.9.</b>Jenkins 部署 教学环境</a></li></ul>
             <li class="divider"></li>
             <li>
                 <a class="lsbook-link" href="https://github.com/liushilive/lsbook" target="blank">
@@ -154,19 +153,19 @@ yum -y install zlib zlib-devel libffi-devel openssl-devel
 </code></pre>
 <p>Python 官网下载最新版 Python 源代码。</p>
 <blockquote>
-<p>本文以 Python-3.8.0 为例</p>
+<p>本文以 Python-3.8.2 为例</p>
 </blockquote>
 <pre class="line-numbers"><code class="lang-bash">cd /tmp
 
-curl -O http://192.168.2.251/Centos/python/Python-3.8.0.tgz
+curl -O http://192.168.2.251/Centos/tools/Python-3.8.2.tgz
 
-tar xf Python-3.8.0.tgz
+tar xf Python-3.8.2.tgz
 </code></pre>
 <p>Python 配置</p>
-<pre class="line-numbers"><code class="lang-bash">./Python-3.8.0/configure
+<pre class="line-numbers"><code class="lang-bash">./Python-3.8.2/configure
 </code></pre>
 <p>构建并安装 Python 3</p>
-<pre class="line-numbers"><code class="lang-bash">make install Python-3.8.0
+<pre class="line-numbers"><code class="lang-bash">make install Python-3.8.2
 </code></pre>
 <p>确认 Python 3 部署成功</p>
 <pre class="line-numbers"><code class="lang-bash">python3 --version
@@ -217,10 +216,10 @@ yum -y groupinstall &#x27;Development Tools&#x27;
 yum -y install zlib zlib-devel libffi-devel openssl-devel
 
 cd /tmp
-curl -O http://192.168.2.251/Centos/python/Python-3.8.0.tgz
-tar xf Python-3.8.0.tgz
-./Python-3.8.0/configure
-make install Python-3.8.0
+curl -O http://192.168.2.251/Centos/tools/Python-3.8.2.tgz
+tar xf Python-3.8.2.tgz
+./Python-3.8.2/configure
+make install Python-3.8.2
 python3 --version
 
 pip3 install selenium ddt htmlreport
