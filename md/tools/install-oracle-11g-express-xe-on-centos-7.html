@@ -68,7 +68,7 @@
             <div class="search-plus" id="book-search-results">
                 <div class="search-noresults">
                     <section class="normal markdown-section">
-                        <div id='anchor-navigation-ex-navbar'><i class='fa fa-anchor'></i><ul><li><span class='title-icon fa fa-hand-o-right'></span><a aria-label class='on-toolbar-action' href='' onclick="$('.fa.fa-align-justify').parent()[0].click();">目录</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_1'><b></b>Oracle 部署</a></li><ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_2'><b>1. </b>安装必需的安装包</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_3'><b>2. </b>安装 Oracle</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_4'><b>3. </b>配置 Oracle</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_5'><b>4. </b>环境变量配置</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_6'><b>5. </b>允许远程访问 Oracle 11g XE GUI</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_7'><b>6. </b>直接关闭防火墙</a></li></ul></ul></div><a href='#anchor_1' id='anchorNavigationExGoTop'><i class='fa fa-arrow-up'></i></a>
+                        <div id='anchor-navigation-ex-navbar'><i class='fa fa-anchor'></i><ul><li><span class='title-icon fa fa-hand-o-right'></span><a aria-label class='on-toolbar-action' href='' onclick="$('.fa.fa-align-justify').parent()[0].click();">目录</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_1'><b></b>Oracle 部署</a></li><ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_2'><b>1. </b>安装必需的安装包</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_3'><b>2. </b>安装 Oracle</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_4'><b>3. </b>配置 Oracle</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_5'><b>4. </b>环境变量配置</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_6'><b>5. </b>允许远程访问 Oracle 11g XE GUI</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_7'><b>6. </b>配置防火墙</a></li></ul></ul></div><a href='#anchor_1' id='anchorNavigationExGoTop'><i class='fa fa-arrow-up'></i></a>
                         <h1 id="anchor_1"><a class="anchor-navigation-ex-anchor" href="#anchor_1" name="anchor_1"><i aria-hidden="true" class="fa fa-link"></i></a>Oracle 部署</h1>
 <ul>
 <li>
@@ -118,9 +118,10 @@ EOF
 EXEC DBMS_XDB.SETLISTENERLOCALACCESS(FALSE);
 EOF
 </code></pre>
-<h2 id="anchor_7"><a class="anchor-navigation-ex-anchor" href="#anchor_7" name="anchor_7"><i aria-hidden="true" class="fa fa-link"></i></a>6. 直接关闭防火墙</h2>
-<pre class="line-numbers"><code class="lang-bash">systemctl stop firewalld
-systemctl disable firewalld
+<h2 id="anchor_7"><a class="anchor-navigation-ex-anchor" href="#anchor_7" name="anchor_7"><i aria-hidden="true" class="fa fa-link"></i></a>6. 配置防火墙</h2>
+<pre class="line-numbers"><code class="lang-bash">firewall-cmd --add-port=8080/tcp --permanent
+firewall-cmd --add-port=1521/tcp --permanent
+firewall-cmd --reload
 </code></pre>
 <blockquote>
 <p>可通下面网址访问确认安装成功</p>
