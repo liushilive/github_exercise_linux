@@ -211,6 +211,9 @@ yum install -y java
 java -version
 
 yum install -y jenkins
+
+curl -o /var/cache/jenkins/war/WEB-INF/update-center-rootCAs/update-center.der http://192.168.2.251/Centos/jenkins/update-center.der
+
 systemctl start jenkins.service
 systemctl enable jenkins.service
 
