@@ -85,7 +85,7 @@ yum install -y epel-release
 <pre class="line-numbers"><code class="lang-bash">systemctl start nginx
 </code></pre>
 <p>添加防火墙规则</p>
-<pre class="line-numbers"><code class="lang-bash">firewall-cmd --add-port=80/tcp --permanent
+<pre class="line-numbers"><code class="lang-bash">firewall-cmd --zone=public --add-port=80/tcp --permanent
 firewall-cmd --reload
 </code></pre>
 <p>你可以立即进行现场检查，通过在你的 Web 浏览器中访问服务器的公共 IP 地址来验证所有事情是否按计划进行（请参阅下一个标题下的注释，以了解你的公共 IP 地址是什么，如果你没有此信息已经）：</p>

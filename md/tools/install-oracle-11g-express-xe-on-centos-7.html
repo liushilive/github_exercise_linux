@@ -119,8 +119,8 @@ EXEC DBMS_XDB.SETLISTENERLOCALACCESS(FALSE);
 EOF
 </code></pre>
 <h2 id="anchor_7"><a class="anchor-navigation-ex-anchor" href="#anchor_7" name="anchor_7"><i aria-hidden="true" class="fa fa-link"></i></a>6. 配置防火墙</h2>
-<pre class="line-numbers"><code class="lang-bash">firewall-cmd --add-port=8080/tcp --permanent
-firewall-cmd --add-port=1521/tcp --permanent
+<pre class="line-numbers"><code class="lang-bash">firewall-cmd --zone=public --add-port=8080/tcp --permanent
+firewall-cmd --zone=public --add-port=1521/tcp --permanent
 firewall-cmd --reload
 </code></pre>
 <blockquote>
