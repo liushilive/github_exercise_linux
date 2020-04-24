@@ -97,13 +97,14 @@ yum makecache
 <h2 id="anchor_5"><a class="anchor-navigation-ex-anchor" href="#anchor_5" name="anchor_5"><i aria-hidden="true" class="fa fa-link"></i></a>4. 安装 Jenkins</h2>
 <p>使用 <code class="language-vim">yum</code> 安装 Jenkins：</p>
 <pre class="line-numbers"><code class="lang-bash">yum install -y jenkins
-
-curl -o /var/cache/jenkins/war/WEB-INF/update-center-rootCAs/update-center.der http://192.168.2.251/Centos/jenkins/update-center.der
 </code></pre>
 <p>启动 Jenkins 服务并将其设置为在启动时运行：</p>
 <pre class="line-numbers"><code class="lang-bash">systemctl start jenkins.service
 
 systemctl enable jenkins.service
+</code></pre>
+<p>添加证书</p>
+<pre class="line-numbers"><code class="lang-bash">curl -o /var/cache/jenkins/war/WEB-INF/update-center-rootCAs/update-center.der http://192.168.2.251/Centos/jenkins/update-center.der
 </code></pre>
 <p>为了允许访问者访问 Jenkins，你需要允许端口 8080 上的入站流量：</p>
 <pre class="line-numbers"><code class="lang-bash">firewall-cmd --zone=public --permanent --add-port=8080/tcp
@@ -212,10 +213,10 @@ java -version
 
 yum install -y jenkins
 
-curl -o /var/cache/jenkins/war/WEB-INF/update-center-rootCAs/update-center.der http://192.168.2.251/Centos/jenkins/update-center.der
-
 systemctl start jenkins.service
 systemctl enable jenkins.service
+
+curl -o /var/cache/jenkins/war/WEB-INF/update-center-rootCAs/update-center.der http://192.168.2.251/Centos/jenkins/update-center.der
 
 yum -y groupinstall &#x27;Development Tools&#x27;
 yum -y install zlib zlib-devel libffi-devel openssl-devel
