@@ -111,6 +111,11 @@ firewall-cmd --reload
 <p>现在，通过从浏览器访问以下地址来访问 Jenkins：</p>
 <pre class="line-numbers"><code class="lang-bash">http://服务器IP:8080
 </code></pre>
+<blockquote>
+<p>长时间提示：<code class="language-vim">Please wait while Jenkins is getting ready to work ...</code></p>
+<p>请执行以下命令，并重启虚拟机</p>
+<p><code class="language-vim">sed -i &#x27;s/https:\/\/updates.jenkins.io\/update-center.json/https:\/\/mirrors.tuna.tsinghua.edu.cn\/jenkins\/updates\/update-center.json/&#x27; /var/lib/jenkins/hudson.model.UpdateCenter.xml</code></p>
+</blockquote>
 <h3 id="anchor_6"><a class="anchor-navigation-ex-anchor" href="#anchor_6" name="anchor_6"><i aria-hidden="true" class="fa fa-link"></i></a>4.1. 基本配置</h3>
 <ol>
 <li>
