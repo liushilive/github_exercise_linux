@@ -108,14 +108,21 @@ systemctl enable jenkins.service
 
 firewall-cmd --reload
 </code></pre>
+<pre class="line-numbers"><code class="lang-bash">curl 127.0.0.1:8080
+curl 127.0.0.1:8080
+curl 127.0.0.1:8080
+curl 127.0.0.1:8080
+
+sed -i &#x27;s/https:\/\/updates.jenkins.io\/update-center.json/http:\/\/192.168.2.251\/Centos\/jenkins\/update-center.json/&#x27; /var/lib/jenkins/hudson.model.UpdateCenter.xml
+
+curl -o /var/cache/jenkins/war/WEB-INF/update-center-rootCAs/update-center.der http://192.168.2.251/Centos/jenkins/update-center.der
+
+systemctl restart jenkins.service
+
+</code></pre>
 <p>现在，通过从浏览器访问以下地址来访问 Jenkins：</p>
 <pre class="line-numbers"><code class="lang-bash">http://服务器IP:8080
 </code></pre>
-<blockquote>
-<p>长时间提示：<code class="language-vim">Please wait while Jenkins is getting ready to work ...</code></p>
-<p>请执行以下命令，并重启虚拟机</p>
-<p><code class="language-vim">sed -i &#x27;s/https:\/\/updates.jenkins.io\/update-center.json/https:\/\/mirrors.tuna.tsinghua.edu.cn\/jenkins\/updates\/update-center.json/&#x27; /var/lib/jenkins/hudson.model.UpdateCenter.xml</code></p>
-</blockquote>
 <h3 id="anchor_6"><a class="anchor-navigation-ex-anchor" href="#anchor_6" name="anchor_6"><i aria-hidden="true" class="fa fa-link"></i></a>4.1. 基本配置</h3>
 <ol>
 <li>
@@ -139,12 +146,6 @@ firewall-cmd --reload
 <li>
 <p>插件安装</p>
 <p>系统管理 -&gt; 管理插件 -&gt; 可选插件 -&gt; 过滤</p>
-<blockquote>
-<p>公司网络不好，配置内网转清华大学镜像：<code class="language-vim">http://192.168.2.251/Centos/jenkins/update-center.json</code>
-配置完成后，服务器添加证书</p>
-</blockquote>
-<pre class="line-numbers"><code class="lang-bash">curl -o /var/cache/jenkins/war/WEB-INF/update-center-rootCAs/update-center.der http://192.168.2.251/Centos/jenkins/update-center.der
-</code></pre>
 <blockquote>
 <p>如果无法上网，可将手动下载相关插件，上传至<code class="language-vim">/var/lib/jenkins/plugins</code>，重启 Jenkins 自动安装</p>
 </blockquote>
@@ -181,7 +182,7 @@ tar -xf Python-3.8.2.tgz
 <pre class="line-numbers"><code class="lang-bash">python3 --version
 </code></pre>
 <p>安装自动化依赖 Python 相关库</p>
-<pre class="line-numbers"><code class="lang-bash">pip3 install selenium ddt htmlreport
+<pre class="line-numbers"><code class="lang-bash">pip3 install selenium htmlreport -i https://mirrors.aliyun.com/pypi/simple/
 
 pip3 list
 </code></pre>
@@ -226,6 +227,20 @@ systemctl enable jenkins.service
 yum -y groupinstall &#x27;Development Tools&#x27;
 yum -y install zlib zlib-devel libffi-devel openssl-devel
 
+firewall-cmd --zone=public --permanent --add-port=8080/tcp
+firewall-cmd --reload
+
+curl 127.0.0.1:8080
+curl 127.0.0.1:8080
+curl 127.0.0.1:8080
+curl 127.0.0.1:8080
+
+sed -i &#x27;s/https:\/\/updates.jenkins.io\/update-center.json/http:\/\/192.168.2.251\/Centos\/jenkins\/update-center.json/&#x27; /var/lib/jenkins/hudson.model.UpdateCenter.xml
+
+curl -o /var/cache/jenkins/war/WEB-INF/update-center-rootCAs/update-center.der http://192.168.2.251/Centos/jenkins/update-center.der
+
+systemctl restart jenkins.service
+
 cd /tmp
 curl -O http://192.168.2.251/Centos/tools/Python/Python-3.8.2.tgz
 tar -xf Python-3.8.2.tgz
@@ -233,11 +248,9 @@ tar -xf Python-3.8.2.tgz
 make install Python-3.8.2
 python3 --version
 
-pip3 install selenium ddt htmlreport
+pip3 install selenium htmlreport -i https://mirrors.aliyun.com/pypi/simple/
 pip3 list
 
-firewall-cmd --zone=public --permanent --add-port=8080/tcp
-firewall-cmd --reload
 </code></pre>
 
                         <footer class="page-footer"><span class="copyright">© 2020 刘士. 
