@@ -108,14 +108,14 @@ systemctl enable jenkins.service
 
 firewall-cmd --reload
 </code></pre>
-<pre class="line-numbers"><code class="lang-bash">curl 127.0.0.1:8080
-curl 127.0.0.1:8080
-curl 127.0.0.1:8080
-curl 127.0.0.1:8080
-
-sed -i &#x27;s/https:\/\/updates.jenkins.io\/update-center.json/http:\/\/192.168.2.251\/Centos\/jenkins\/update-center.json/&#x27; /var/lib/jenkins/hudson.model.UpdateCenter.xml
+<pre class="line-numbers"><code class="lang-bash">curl -l 127.0.0.1:8080
+curl -l 127.0.0.1:8080
+curl -l 127.0.0.1:8080
+curl -l 127.0.0.1:8080
 
 curl -o /var/cache/jenkins/war/WEB-INF/update-center-rootCAs/update-center.der http://192.168.2.251/Centos/jenkins/update-center.der
+
+sed -i &#x27;s/https:\/\/updates.jenkins.io\/update-center.json/http:\/\/192.168.2.251\/Centos\/jenkins\/update-center.json/&#x27; /var/lib/jenkins/hudson.model.UpdateCenter.xml
 
 systemctl restart jenkins.service
 
@@ -211,44 +211,33 @@ pip3 list
 </li>
 </ul>
 <h2 id="anchor_9"><a class="anchor-navigation-ex-anchor" href="#anchor_9" name="anchor_9"><i aria-hidden="true" class="fa fa-link"></i></a>7. sh</h2>
-<pre class="line-numbers"><code class="lang-bash">rm -rf /etc/yum.repos.d/*
-curl -o /etc/yum.repos.d/CentOS-7.repo http://192.168.2.251/Centos/CentOS7.repo
-yum clean all
-yum makecache
-
-yum install -y java
-java -version
-
-yum install -y jenkins
-
-systemctl start jenkins.service
-systemctl enable jenkins.service
-
-yum -y groupinstall &#x27;Development Tools&#x27;
-yum -y install zlib zlib-devel libffi-devel openssl-devel
-
-firewall-cmd --zone=public --permanent --add-port=8080/tcp
-firewall-cmd --reload
-
-curl 127.0.0.1:8080
-curl 127.0.0.1:8080
-curl 127.0.0.1:8080
-curl 127.0.0.1:8080
-
-sed -i &#x27;s/https:\/\/updates.jenkins.io\/update-center.json/http:\/\/192.168.2.251\/Centos\/jenkins\/update-center.json/&#x27; /var/lib/jenkins/hudson.model.UpdateCenter.xml
-
-curl -o /var/cache/jenkins/war/WEB-INF/update-center-rootCAs/update-center.der http://192.168.2.251/Centos/jenkins/update-center.der
-
-systemctl restart jenkins.service
-
-cd /tmp
-curl -O http://192.168.2.251/Centos/tools/Python/Python-3.8.2.tgz
-tar -xf Python-3.8.2.tgz
-./Python-3.8.2/configure
-make install Python-3.8.2
-python3 --version
-
-pip3 install selenium htmlreport -i https://mirrors.aliyun.com/pypi/simple/
+<pre class="line-numbers"><code class="lang-bash">rm -rf /etc/yum.repos.d/* &amp;&amp;
+curl -o /etc/yum.repos.d/CentOS-7.repo http://192.168.2.251/Centos/CentOS7.repo &amp;&amp;
+yum clean all &amp;&amp;
+yum makecache &amp;&amp;
+yum install -y java &amp;&amp;
+java -version &amp;&amp;
+yum install -y jenkins &amp;&amp;
+systemctl start jenkins.service &amp;&amp;
+systemctl enable jenkins.service &amp;&amp;
+yum -y groupinstall &#x27;Development Tools&#x27; &amp;&amp;
+yum -y install zlib zlib-devel libffi-devel openssl-devel &amp;&amp;
+firewall-cmd --zone=public --permanent --add-port=8080/tcp &amp;&amp;
+firewall-cmd --reload &amp;&amp;
+curl -l 127.0.0.1:8080 &amp;&amp;
+curl -l 127.0.0.1:8080 &amp;&amp;
+curl -l 127.0.0.1:8080 &amp;&amp;
+curl -l 127.0.0.1:8080 &amp;&amp;
+curl -o /var/cache/jenkins/war/WEB-INF/update-center-rootCAs/update-center.der http://192.168.2.251/Centos/jenkins/update-center.der &amp;&amp;
+sed -i &#x27;s/https:\/\/updates.jenkins.io\/update-center.json/http:\/\/192.168.2.251\/Centos\/jenkins\/update-center.json/&#x27; /var/lib/jenkins/hudson.model.UpdateCenter.xml &amp;&amp;
+systemctl restart jenkins.service &amp;&amp;
+cd /tmp &amp;&amp;
+curl -O http://192.168.2.251/Centos/tools/Python/Python-3.8.2.tgz &amp;&amp;
+tar -xf Python-3.8.2.tgz &amp;&amp;
+./Python-3.8.2/configure &amp;&amp;
+make install Python-3.8.2 &amp;&amp;
+python3 --version &amp;&amp;
+pip3 install selenium htmlreport -i https://mirrors.aliyun.com/pypi/simple/ &amp;&amp;
 pip3 list
 
 </code></pre>
