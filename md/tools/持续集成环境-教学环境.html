@@ -108,10 +108,15 @@ systemctl enable jenkins.service
 
 firewall-cmd --reload
 </code></pre>
-<pre class="line-numbers"><code class="lang-bash">curl -l 127.0.0.1:8080
-curl -l 127.0.0.1:8080
-curl -l 127.0.0.1:8080
-curl -l 127.0.0.1:8080
+<pre class="line-numbers"><code class="lang-bash">until [ `systemctl status jenkins | grep Active | awk &#x27;{print $3}&#x27; | cut -d &quot;(&quot; -f2 | cut -d &quot;)&quot; -f1` == &quot;running&quot; ]
+do
+    sleep 1;
+    echo 等待 Jenkins 服务启动
+done
+
+sleep 3
+curl -L 127.0.0.1:8080
+curl -L 127.0.0.1:8080
 
 curl -o /var/cache/jenkins/war/WEB-INF/update-center-rootCAs/update-center.der http://192.168.2.251/Centos/jenkins/update-center.der
 
@@ -188,27 +193,13 @@ pip3 list
 </code></pre>
 <h2 id="anchor_8"><a class="anchor-navigation-ex-anchor" href="#anchor_8" name="anchor_8"><i aria-hidden="true" class="fa fa-link"></i></a>6. Jenkins 相关</h2>
 <ul>
-<li>
-<p>配置文件 <code class="language-vim">/etc/sysconfig/jenkins</code></p>
-</li>
-<li>
-<p>默认启用 <code class="language-vim">8080</code></p>
-</li>
-<li>
-<p>日志 <code class="language-vim">/var/log/jenkins/jenkins.log</code></p>
-</li>
-<li>
-<p>服务状态 <code class="language-vim">systemctl status jenkins</code></p>
-</li>
-<li>
-<p>启动服务 <code class="language-vim">systemctl start jenkins</code></p>
-</li>
-<li>
-<p>停止服务 <code class="language-vim">systemctl stop jenkins</code></p>
-</li>
-<li>
-<p>重启服务 <code class="language-vim">systemctl restart jenkins</code></p>
-</li>
+<li>配置文件 <code class="language-vim">/etc/sysconfig/jenkins</code></li>
+<li>默认启用 <code class="language-vim">8080</code></li>
+<li>日志 <code class="language-vim">/var/log/jenkins/jenkins.log</code></li>
+<li>服务状态 <code class="language-vim">systemctl status jenkins</code></li>
+<li>启动服务 <code class="language-vim">systemctl start jenkins</code></li>
+<li>停止服务 <code class="language-vim">systemctl stop jenkins</code></li>
+<li>重启服务 <code class="language-vim">systemctl restart jenkins</code></li>
 </ul>
 <h2 id="anchor_9"><a class="anchor-navigation-ex-anchor" href="#anchor_9" name="anchor_9"><i aria-hidden="true" class="fa fa-link"></i></a>7. sh</h2>
 <pre class="line-numbers"><code class="lang-bash">rm -rf /etc/yum.repos.d/* &amp;&amp;
@@ -224,10 +215,14 @@ yum -y groupinstall &#x27;Development Tools&#x27; &amp;&amp;
 yum -y install zlib zlib-devel libffi-devel openssl-devel &amp;&amp;
 firewall-cmd --zone=public --permanent --add-port=8080/tcp &amp;&amp;
 firewall-cmd --reload &amp;&amp;
-curl -l 127.0.0.1:8080 &amp;&amp;
-curl -l 127.0.0.1:8080 &amp;&amp;
-curl -l 127.0.0.1:8080 &amp;&amp;
-curl -l 127.0.0.1:8080 &amp;&amp;
+until [ `systemctl status jenkins | grep Active | awk &#x27;{print $3}&#x27; | cut -d &quot;(&quot; -f2 | cut -d &quot;)&quot; -f1` == &quot;running&quot; ]
+do
+    sleep 1;
+    echo 等待 Jenkins 服务启动
+done &amp;&amp;
+sleep 3 &amp;&amp;
+curl -L 127.0.0.1:8080 &amp;&amp;
+curl -L 127.0.0.1:8080 &amp;&amp;
 curl -o /var/cache/jenkins/war/WEB-INF/update-center-rootCAs/update-center.der http://192.168.2.251/Centos/jenkins/update-center.der &amp;&amp;
 sed -i &#x27;s/https:\/\/updates.jenkins.io\/update-center.json/http:\/\/192.168.2.251\/Centos\/jenkins\/update-center.json/&#x27; /var/lib/jenkins/hudson.model.UpdateCenter.xml &amp;&amp;
 systemctl restart jenkins.service &amp;&amp;
