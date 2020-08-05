@@ -100,8 +100,8 @@ yum makecache
 </code></pre>
 <p>启动 Jenkins 服务并将其设置为在启动时运行：</p>
 <pre class="line-numbers"><code class="lang-bash">systemctl start jenkins.service
-
-systemctl enable jenkins.service
+</code></pre>
+<pre class="line-numbers"><code class="lang-bash">systemctl enable jenkins.service
 </code></pre>
 <p>为了允许访问者访问 Jenkins，你需要允许端口 8080 上的入站流量：</p>
 <pre class="line-numbers"><code class="lang-bash">firewall-cmd --zone=public --permanent --add-port=8080/tcp
