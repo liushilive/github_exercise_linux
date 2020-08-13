@@ -23,7 +23,7 @@
 <link href="部署SVN.html" rel="next"/>
 </head>
 <body>
-<div class="book"><div class="book-summary">
+<div class="book match-braces"><div class="book-summary">
     <div id="book-search-input" role="search">
         <input placeholder="输入并搜索" type="text"/>
     </div>
@@ -79,10 +79,10 @@
 </li>
 </ul>
 <h2 id="anchor_2"><a class="anchor-navigation-ex-anchor" href="#anchor_2" name="anchor_2"><i aria-hidden="true" class="fa fa-link"></i></a>1. 安装必需的安装包</h2>
-<pre class="line-numbers"><code class="lang-bash">yum install -y libaio bc flex net-tools
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">yum install -y libaio bc flex net-tools
 </code></pre>
 <h2 id="anchor_3"><a class="anchor-navigation-ex-anchor" href="#anchor_3" name="anchor_3"><i aria-hidden="true" class="fa fa-link"></i></a>2. 安装 Oracle</h2>
-<pre class="line-numbers"><code class="lang-bash">curl -L -O https://github.com/liushilive/github_exercise_linux/releases/download/1.0/oracle-xe-11.2.0-1.0.x86_64.rpm
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">curl -L -O https://github.com/liushilive/github_exercise_linux/releases/download/1.0/oracle-xe-11.2.0-1.0.x86_64.rpm
 rpm -ivh oracle-xe-11.2.0-1.0.x86_64.rpm
 </code></pre>
 <h2 id="anchor_4"><a class="anchor-navigation-ex-anchor" href="#anchor_4" name="anchor_4"><i aria-hidden="true" class="fa fa-link"></i></a>3. 配置 Oracle</h2>
@@ -103,24 +103,24 @@ rpm -ivh oracle-xe-11.2.0-1.0.x86_64.rpm
 <p>数据库在计算机启动时自动启动（下次重新引导）</p>
 </li>
 </ul>
-<pre class="line-numbers"><code class="lang-bash">echo -e &quot;\n\n123456\n123456\ny&quot; | /etc/init.d/oracle-xe configure
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">echo -e &quot;\n\n123456\n123456\ny&quot; | /etc/init.d/oracle-xe configure
 </code></pre>
 <h2 id="anchor_5"><a class="anchor-navigation-ex-anchor" href="#anchor_5" name="anchor_5"><i aria-hidden="true" class="fa fa-link"></i></a>4. 环境变量配置</h2>
-<pre class="line-numbers"><code class="lang-bash">cat &gt;&gt; .bash_profile &lt;&lt; EOF
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">cat &gt;&gt; .bash_profile &lt;&lt; EOF
 . /u01/app/oracle/product/11.2.0/xe/bin/oracle_env.sh
 EOF
 </code></pre>
 <p>让环境变量生效</p>
-<pre class="line-numbers"><code class="lang-bash">su -
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">su -
 </code></pre>
 <h2 id="anchor_6"><a class="anchor-navigation-ex-anchor" href="#anchor_6" name="anchor_6"><i aria-hidden="true" class="fa fa-link"></i></a>5. 允许远程访问 Oracle 11g XE GUI</h2>
 <p>进入 SQL 命令窗口</p>
-<pre class="line-numbers"><code class="lang-bash">sqlplus &quot;sys/123456 as sysdba&quot; &lt;&lt;EOF
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">sqlplus &quot;sys/123456 as sysdba&quot; &lt;&lt;EOF
 EXEC DBMS_XDB.SETLISTENERLOCALACCESS(FALSE);
 EOF
 </code></pre>
 <h2 id="anchor_7"><a class="anchor-navigation-ex-anchor" href="#anchor_7" name="anchor_7"><i aria-hidden="true" class="fa fa-link"></i></a>6. 配置防火墙</h2>
-<pre class="line-numbers"><code class="lang-bash">firewall-cmd --zone=public --add-port=8080/tcp --permanent
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">firewall-cmd --zone=public --add-port=8080/tcp --permanent
 firewall-cmd --zone=public --add-port=1521/tcp --permanent
 firewall-cmd --reload
 </code></pre>

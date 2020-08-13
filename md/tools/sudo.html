@@ -23,7 +23,7 @@
 <link href="添加Swap.html" rel="next"/>
 </head>
 <body>
-<div class="book"><div class="book-summary">
+<div class="book match-braces"><div class="book-summary">
     <div id="book-search-input" role="search">
         <input placeholder="输入并搜索" type="text"/>
     </div>
@@ -73,13 +73,13 @@
 <p>使用 sudo 用户访问服务器并在根级别执行命令是 Linux 和 Unix 系统管理员中非常常见的做法。使用 asudo 用户通常通过禁用对其服务器的直接根访问来防止未经授权的访问。</p>
 <p>在本教程中，我们将介绍禁用直接 root 访问，创建 sudo 用户以及在 CentOS 上设置 sudo 组的基本步骤。</p>
 <h2 id="anchor_2"><a class="anchor-navigation-ex-anchor" href="#anchor_2" name="anchor_2"><i aria-hidden="true" class="fa fa-link"></i></a>1. 步骤 1：安装 sudo</h2>
-<pre class="line-numbers"><code class="lang-bash">yum install sudo -y
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">yum install sudo -y
 </code></pre>
 <h2 id="anchor_3"><a class="anchor-navigation-ex-anchor" href="#anchor_3" name="anchor_3"><i aria-hidden="true" class="fa fa-link"></i></a>2. 步骤 2：添加 sudo 用户</h2>
 <blockquote>
 <p>一个 sudo 用户是 Linux 机器上的普通用户帐户。</p>
 </blockquote>
-<pre class="line-numbers"><code class="lang-bash">adduser mynewusername
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">adduser mynewusername
 </code></pre>
 <h2 id="anchor_4"><a class="anchor-navigation-ex-anchor" href="#anchor_4" name="anchor_4"><i aria-hidden="true" class="fa fa-link"></i></a>3. 步骤 3：将新用户添加到 wheel 组（可选的）</h2>
 <blockquote>
@@ -87,40 +87,40 @@
 root，添加你的 sudo 用户到 wheel 组是完全可选的，但建议。</p>
 </blockquote>
 <p>在 CentOS 中，属于的 wheel 组的用户可以执行<code class="language-vim">su</code>直接上升到 root。同时，sudo 用户将会使用<code class="language-vim">sudo su</code>。基本上除了语法之外没有什么真正的区别成为 root，而属于这两个组的用户可以使用 sudo 命令。</p>
-<pre class="line-numbers"><code class="lang-bash">usermod -aG wheel mynewusername
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">usermod -aG wheel mynewusername
 </code></pre>
 <h2 id="anchor_5"><a class="anchor-navigation-ex-anchor" href="#anchor_5" name="anchor_5"><i aria-hidden="true" class="fa fa-link"></i></a>4. 步骤 4：确保你的 sudoers 文件设置正确</h2>
 <p>确保这一点很重要 sudoers 文件位于 /etc/sudoers 正确设置为了允许 sudo users 有效使用 sudo 命令。为了达到这个目标，我们将会看到内容 /etc/sudoers 并在适用的地方进行编辑。</p>
-<pre class="line-numbers"><code class="lang-bash">vim /etc/sudoers
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">vim /etc/sudoers
 </code></pre>
 <p>开始审查和编辑下面这行：</p>
-<pre class="line-numbers"><code class="lang-bash"># Allow members of group sudo to execute any command
+<pre class="line-numbers"><code class="lang-bash rainbow-braces"># Allow members of group sudo to execute any command
 </code></pre>
 <p>这一节 /etc/sudoers 经常看起来像这样：</p>
-<pre class="line-numbers"><code class="lang-bash"># Allow members of group sudo to execute any command
+<pre class="line-numbers"><code class="lang-bash rainbow-braces"># Allow members of group sudo to execute any command
 %sudo   ALL=(ALL:ALL) ALL
 </code></pre>
 <p>在某些系统中，你可能找不到 %wheel 代替 %sudo; 在这种情况下，这将是你将开始修改的行。</p>
 <p>如果行开始 %sudo 在 Debian 或 %wheel 在 CentOS 中没有注释掉（前缀为＃），这意味着 sudo 已经被设置并启用了。然后，你可以转到下一步。</p>
 <h2 id="anchor_6"><a class="anchor-navigation-ex-anchor" href="#anchor_6" name="anchor_6"><i aria-hidden="true" class="fa fa-link"></i></a>5. 步骤 5：允许不属于的用户 wheel 也不是 sudo 组执行 sudo 命令</h2>
 <p>可以允许不在用户组中的用户执行 sudo 只需将它们添加到命令中即可 /etc/sudoers 如下：</p>
-<pre class="line-numbers"><code class="lang-bash">anotherusername ALL=(ALL) ALL
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">anotherusername ALL=(ALL) ALL
 </code></pre>
 <h2 id="anchor_7"><a class="anchor-navigation-ex-anchor" href="#anchor_7" name="anchor_7"><i aria-hidden="true" class="fa fa-link"></i></a>6. 步骤 6：重新启动 SSHD 服务器</h2>
 <p>为了应用你所做的更改 /etc/sudoers，你需要重新启动 SSHD 服务器，如下所示：</p>
 <p>CentOS 6</p>
-<pre class="line-numbers"><code class="lang-bash">/etc/init.d/sshd restart
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">/etc/init.d/sshd restart
 </code></pre>
 <p>CentOS 7</p>
-<pre class="line-numbers"><code class="lang-bash">systemctl restart sshd.service
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">systemctl restart sshd.service
 </code></pre>
 <h2 id="anchor_8"><a class="anchor-navigation-ex-anchor" href="#anchor_8" name="anchor_8"><i aria-hidden="true" class="fa fa-link"></i></a>7. 步骤 7：测试</h2>
 <p>重新启动 SSH 服务器后，请注销，然后重新登录 sudo user，然后尝试执行一些测试命令，如下所示：</p>
-<pre class="line-numbers"><code class="lang-bash">sudo uptime
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">sudo uptime
 sudo whoami
 </code></pre>
 <p>任何以下命令将允许 sudo user 成为 root。</p>
-<pre class="line-numbers"><code class="lang-bash">sudo su -
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">sudo su -
 sudo -i
 sudo -S
 </code></pre>
@@ -135,10 +135,10 @@ sudo -S
 <h2 id="anchor_9"><a class="anchor-navigation-ex-anchor" href="#anchor_9" name="anchor_9"><i aria-hidden="true" class="fa fa-link"></i></a>8. 步骤 8：禁用直接 root 访问</h2>
 <p>现在你已经确认可以使用你的 sudo user 没有问题，现在是第八步的禁用直接根访问的时间。</p>
 <p>首先打开<code class="language-vim">/etc/ssh/sshd_config</code>使用你喜欢的文本编辑器，并找到包含以下字符串的行。它可能有一个前缀#字符。</p>
-<pre class="line-numbers"><code class="lang-bash">PermitRootLogin
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">PermitRootLogin
 </code></pre>
 <p>无论前缀或该选项的值 /etc/ssh/sshd_config 你需要将该行更改为以下内容：</p>
-<pre class="line-numbers"><code class="lang-bash">PermitRootLogin no
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">PermitRootLogin no
 </code></pre>
 <p>最后，重新启动你的 SSHD 服务器。</p>
 <p>注意：不要忘了通过尝试将 SSH 更改为服务器来测试你的更改 root。如果你无法这样做，这意味着你已成功完成所有必要的步骤。</p>

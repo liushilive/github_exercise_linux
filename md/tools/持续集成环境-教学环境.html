@@ -23,7 +23,7 @@
 <link href="" rel="next"/>
 </head>
 <body>
-<div class="book"><div class="book-summary">
+<div class="book match-braces"><div class="book-summary">
     <div id="book-search-input" role="search">
         <input placeholder="输入并搜索" type="text"/>
     </div>
@@ -79,7 +79,7 @@
 <li>root 权限</li>
 </ul>
 <h2 id="anchor_3"><a class="anchor-navigation-ex-anchor" href="#anchor_3" name="anchor_3"><i aria-hidden="true" class="fa fa-link"></i></a>2. 部署本地 yum 源</h2>
-<pre class="line-numbers"><code class="lang-bash">rm -rf /etc/yum.repos.d/*
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">rm -rf /etc/yum.repos.d/*
 
 curl -o /etc/yum.repos.d/CentOS-7.repo http://192.168.2.251/Centos/CentOS7.repo
 
@@ -89,26 +89,26 @@ yum makecache
 </code></pre>
 <h2 id="anchor_4"><a class="anchor-navigation-ex-anchor" href="#anchor_4" name="anchor_4"><i aria-hidden="true" class="fa fa-link"></i></a>3. 安装 Java</h2>
 <p>在安装 Jenkins 之前，需要在系统上安装一个 Java 虚拟机。在这里，让我们使用 yum 安装最新的 JDK：</p>
-<pre class="line-numbers"><code class="lang-bash">yum install -y java
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">yum install -y java
 </code></pre>
 <p>安装完成后，可以通过运行以下命令进行确认：</p>
-<pre class="line-numbers"><code class="lang-bash">java -version
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">java -version
 </code></pre>
 <h2 id="anchor_5"><a class="anchor-navigation-ex-anchor" href="#anchor_5" name="anchor_5"><i aria-hidden="true" class="fa fa-link"></i></a>4. 安装 Jenkins</h2>
 <p>使用 <code class="language-vim">yum</code> 安装 Jenkins：</p>
-<pre class="line-numbers"><code class="lang-bash">yum install -y jenkins
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">yum install -y jenkins
 </code></pre>
 <p>启动 Jenkins 服务并将其设置为在启动时运行：</p>
-<pre class="line-numbers"><code class="lang-bash">systemctl start jenkins.service
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">systemctl start jenkins.service
 </code></pre>
-<pre class="line-numbers"><code class="lang-bash">systemctl enable jenkins.service
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">systemctl enable jenkins.service
 </code></pre>
 <p>为了允许访问者访问 Jenkins，你需要允许端口 8080 上的入站流量：</p>
-<pre class="line-numbers"><code class="lang-bash">firewall-cmd --zone=public --permanent --add-port=8080/tcp
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">firewall-cmd --zone=public --permanent --add-port=8080/tcp
 
 firewall-cmd --reload
 </code></pre>
-<pre class="line-numbers"><code class="lang-bash">until [ `systemctl status jenkins | grep Active | awk &#x27;{print $3}&#x27; | cut -d &quot;(&quot; -f2 | cut -d &quot;)&quot; -f1` == &quot;running&quot; ]
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">until [ `systemctl status jenkins | grep Active | awk &#x27;{print $3}&#x27; | cut -d &quot;(&quot; -f2 | cut -d &quot;)&quot; -f1` == &quot;running&quot; ]
 do
     sleep 1;
     echo 等待 Jenkins 服务启动
@@ -126,14 +126,14 @@ systemctl restart jenkins.service
 
 </code></pre>
 <p>现在，通过从浏览器访问以下地址来访问 Jenkins：</p>
-<pre class="line-numbers"><code class="lang-bash">http://服务器IP:8080
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">http://服务器IP:8080
 </code></pre>
 <h3 id="anchor_6"><a class="anchor-navigation-ex-anchor" href="#anchor_6" name="anchor_6"><i aria-hidden="true" class="fa fa-link"></i></a>4.1. 基本配置</h3>
 <ol>
 <li>
 <p>解锁 jenkins</p>
 <p>根据提示使用 <code class="language-vim">cat</code> 命令查看密码</p>
-<pre class="line-numbers"><code class="lang-bash">cat /var/lib/jenkins/secrets/initialAdminPassword
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">cat /var/lib/jenkins/secrets/initialAdminPassword
 </code></pre>
 </li>
 <li>
@@ -163,7 +163,7 @@ systemctl restart jenkins.service
 </ol>
 <h2 id="anchor_7"><a class="anchor-navigation-ex-anchor" href="#anchor_7" name="anchor_7"><i aria-hidden="true" class="fa fa-link"></i></a>5. 部署 Python 3</h2>
 <p>部署编译环境</p>
-<pre class="line-numbers"><code class="lang-bash">yum -y groupinstall &#x27;Development Tools&#x27;
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">yum -y groupinstall &#x27;Development Tools&#x27;
 
 yum -y install zlib zlib-devel libffi-devel openssl-devel
 </code></pre>
@@ -171,23 +171,23 @@ yum -y install zlib zlib-devel libffi-devel openssl-devel
 <blockquote>
 <p>本文以 Python-3.8.5 为例</p>
 </blockquote>
-<pre class="line-numbers"><code class="lang-bash">cd /tmp
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">cd /tmp
 
 curl -O http://192.168.2.251/Centos/tools/Python/Python-3.8.5.tgz
 
 tar -xf Python-3.8.5.tgz
 </code></pre>
 <p>Python 配置</p>
-<pre class="line-numbers"><code class="lang-bash">./Python-3.8.5/configure
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">./Python-3.8.5/configure
 </code></pre>
 <p>构建并安装 Python 3</p>
-<pre class="line-numbers"><code class="lang-bash">make install Python-3.8.5
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">make install Python-3.8.5
 </code></pre>
 <p>确认 Python 3 部署成功</p>
-<pre class="line-numbers"><code class="lang-bash">python3 --version
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">python3 --version
 </code></pre>
 <p>安装自动化依赖 Python 相关库</p>
-<pre class="line-numbers"><code class="lang-bash">pip3 install selenium htmlreport -i https://mirrors.aliyun.com/pypi/simple/
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">pip3 install selenium htmlreport -i https://mirrors.aliyun.com/pypi/simple/
 
 pip3 list
 </code></pre>
@@ -202,7 +202,7 @@ pip3 list
 <li>重启服务 <code class="language-vim">systemctl restart jenkins</code></li>
 </ul>
 <h2 id="anchor_9"><a class="anchor-navigation-ex-anchor" href="#anchor_9" name="anchor_9"><i aria-hidden="true" class="fa fa-link"></i></a>7. sh</h2>
-<pre class="line-numbers"><code class="lang-bash">rm -rf /etc/yum.repos.d/* &amp;&amp;
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">rm -rf /etc/yum.repos.d/* &amp;&amp;
 curl -o /etc/yum.repos.d/CentOS-7.repo http://192.168.2.251/Centos/CentOS7.repo &amp;&amp;
 yum clean all &amp;&amp;
 yum makecache &amp;&amp;

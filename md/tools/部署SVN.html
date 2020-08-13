@@ -23,7 +23,7 @@
 <link href="持续集成环境.html" rel="next"/>
 </head>
 <body>
-<div class="book"><div class="book-summary">
+<div class="book match-braces"><div class="book-summary">
     <div id="book-search-input" role="search">
         <input placeholder="输入并搜索" type="text"/>
     </div>
@@ -80,20 +80,20 @@
 <p>非 root 用户请在命令前加 <code class="language-vim">sudo</code> 。</p>
 <h2 id="anchor_3"><a class="anchor-navigation-ex-anchor" href="#anchor_3" name="anchor_3"><i aria-hidden="true" class="fa fa-link"></i></a>2. 安装 Apache</h2>
 <p>使用 YUM 安装 Apache：</p>
-<pre class="line-numbers"><code class="lang-bash">yum install -y httpd
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">yum install -y httpd
 </code></pre>
 <p>删除 Apache 的默认欢迎页面：</p>
-<pre class="line-numbers"><code class="lang-bash">sed -i &#x27;s/^/#&amp;/g&#x27; /etc/httpd/conf.d/welcome.conf
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">sed -i &#x27;s/^/#&amp;/g&#x27; /etc/httpd/conf.d/welcome.conf
 </code></pre>
 <p>防止 Apache 在<code class="language-vim">/var/www/html</code>目录中显示文件：</p>
-<pre class="line-numbers"><code class="lang-bash">sed -i &quot;s/Options Indexes FollowSymLinks/Options FollowSymLinks/&quot; /etc/httpd/conf/httpd.conf
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">sed -i &quot;s/Options Indexes FollowSymLinks/Options FollowSymLinks/&quot; /etc/httpd/conf/httpd.conf
 </code></pre>
 <h2 id="anchor_4"><a class="anchor-navigation-ex-anchor" href="#anchor_4" name="anchor_4"><i aria-hidden="true" class="fa fa-link"></i></a>3. 安装 SVN 和 mod_dav_svn 模块</h2>
 <p>要使 SVN 与 Apache 配合使用，需要安装除 SVN 之外的 Apache 模块<code class="language-vim">mod dav svn</code>：</p>
-<pre class="line-numbers"><code class="lang-bash">yum install -y subversion mod_dav_svn
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">yum install -y subversion mod_dav_svn
 </code></pre>
 <h2 id="anchor_5"><a class="anchor-navigation-ex-anchor" href="#anchor_5" name="anchor_5"><i aria-hidden="true" class="fa fa-link"></i></a>4. 配置 SVN</h2>
-<pre class="line-numbers"><code class="lang-bash">cat &gt;&gt; /etc/httpd/conf.modules.d/10-subversion.conf &lt;&lt;EOF
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">cat &gt;&gt; /etc/httpd/conf.modules.d/10-subversion.conf &lt;&lt;EOF
 &lt;Location /svn&gt;
 DAV svn
 SVNParentPath /svn
@@ -107,7 +107,7 @@ EOF
 </code></pre>
 <p><strong>注意：</strong> 在此配置中，我们指定了一个 HTTP 访问认证文件<code class="language-vim">/etc/svn/svn-auth</code>和用户权限控制文件<code class="language-vim">/svn/authz</code>。两者都将在以后创建。</p>
 <h2 id="anchor_6"><a class="anchor-navigation-ex-anchor" href="#anchor_6" name="anchor_6"><i aria-hidden="true" class="fa fa-link"></i></a>5. 创建 SVN 仓库</h2>
-<pre class="line-numbers"><code class="lang-bash">mkdir /svn
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">mkdir /svn
 cd /svn
 svnadmin create repo1
 chown -R apache:apache repo1
@@ -117,15 +117,15 @@ setsebool -P httpd_unified=1
 </code></pre>
 <h2 id="anchor_7"><a class="anchor-navigation-ex-anchor" href="#anchor_7" name="anchor_7"><i aria-hidden="true" class="fa fa-link"></i></a>6. 设置 SVN 用户帐号</h2>
 <p>使用以下命令创建 HTTP 访问认证文件<code class="language-vim">/svn/svn-auth</code>和 SVN 用户帐户<code class="language-vim">user001</code>：</p>
-<pre class="line-numbers"><code class="lang-bash">mkdir /etc/svn
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">mkdir /etc/svn
 htpasswd -cm /etc/svn/svn-auth user001
 chown root:apache /etc/svn/svn-auth
 chmod 640 /etc/svn/svn-auth
 </code></pre>
 <p>如果要创建更多 SVN 用户帐户，请参阅以下命令：</p>
-<pre class="line-numbers"><code class="lang-bash">htpasswd -m /etc/svn/svn-auth user002
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">htpasswd -m /etc/svn/svn-auth user002
 </code></pre>
-<pre class="line-numbers"><code class="lang-bash">htpasswd -m /etc/svn/svn-auth user003
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">htpasswd -m /etc/svn/svn-auth user003
 </code></pre>
 <p><strong>警告：</strong> 现在不要使用<code class="language-vim">-c</code>标志，否则将重建身份验证文件，并清除之前设置的所有用户帐户。</p>
 <h2 id="anchor_8"><a class="anchor-navigation-ex-anchor" href="#anchor_8" name="anchor_8"><i aria-hidden="true" class="fa fa-link"></i></a>7. 为用户设置权限</h2>
@@ -134,7 +134,7 @@ chmod 640 /etc/svn/svn-auth
 <li>用户<code class="language-vim">user002</code>具有读写权限。</li>
 <li>用户<code class="language-vim">user003</code>只能读。</li>
 </ul>
-<pre class="line-numbers"><code class="lang-bash">cat &gt; /svn/authz &lt;&lt;EOF
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">cat &gt; /svn/authz &lt;&lt;EOF
 [groups]
 admin=user001
 repo1_user=user002
@@ -150,15 +150,15 @@ EOF
 </code></pre>
 <h2 id="anchor_9"><a class="anchor-navigation-ex-anchor" href="#anchor_9" name="anchor_9"><i aria-hidden="true" class="fa fa-link"></i></a>8. 启动 Apache 并修改防火墙规则</h2>
 <p>启动 Apache：</p>
-<pre class="line-numbers"><code class="lang-bash">systemctl start httpd.service
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">systemctl start httpd.service
 systemctl enable httpd.service
 </code></pre>
 <p>打开 HTTP 服务端口：</p>
-<pre class="line-numbers"><code class="lang-bash">firewall-cmd --zone=public --permanent --add-service=http
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">firewall-cmd --zone=public --permanent --add-service=http
 firewall-cmd --reload
 </code></pre>
 <p>最后，使用以下路径从 SVN 客户端访问服务器上的 SVN repo <code class="language-vim">repo1</code>：</p>
-<pre class="line-numbers"><code class="lang-bash">http://&lt;your-server-ip&gt;/svn/repo1/
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">http://&lt;your-server-ip&gt;/svn/repo1/
 </code></pre>
 
                         <footer class="page-footer"><span class="copyright">© 2020 刘士. 

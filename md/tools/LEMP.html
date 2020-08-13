@@ -23,7 +23,7 @@
 <link href="install-oracle-11g-express-xe-on-centos-7.html" rel="next"/>
 </head>
 <body>
-<div class="book"><div class="book-summary">
+<div class="book match-braces"><div class="book-summary">
     <div id="book-search-input" role="search">
         <input placeholder="输入并搜索" type="text"/>
     </div>
@@ -72,43 +72,43 @@
                         <h1 id="anchor_1"><a class="anchor-navigation-ex-anchor" href="#anchor_1" name="anchor_1"><i aria-hidden="true" class="fa fa-link"></i></a>如何在 CentOS 7 上安装 Linux，Nginx，MySQL，PHP（LEMP）环境</h1>
 <h2 id="anchor_2"><a class="anchor-navigation-ex-anchor" href="#anchor_2" name="anchor_2"><i aria-hidden="true" class="fa fa-link"></i></a>1. 第一步 - 安装 Nginx</h2>
 <p>要添加 CentOS 7 EPEL 仓库，请打开终端并使用以下命令：</p>
-<pre class="line-numbers"><code class="lang-bash">echo nameserver 8.8.8.8 &gt;&gt; /etc/resolv.conf
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">echo nameserver 8.8.8.8 &gt;&gt; /etc/resolv.conf
 curl -o /etc/yum.repos.d/CentOS-Base-ali.repo http://mirrors.aliyun.com/repo/Centos-7.repo
 yum makecache
 yum install -y epel-release
 </code></pre>
 <p>现在 Nginx 存储库已经安装在你的服务器上，使用以下 yum 命令安装 Nginx ：</p>
-<pre class="line-numbers"><code class="lang-bash">yum install -y nginx
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">yum install -y nginx
 </code></pre>
 <p>之后，你的 Web 服务器已安装。</p>
 <p>一旦安装，你就可以在你的 VPS 上启动 Nginx：</p>
-<pre class="line-numbers"><code class="lang-bash">systemctl start nginx
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">systemctl start nginx
 </code></pre>
 <p>添加防火墙规则</p>
-<pre class="line-numbers"><code class="lang-bash">firewall-cmd --zone=public --add-port=80/tcp --permanent
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">firewall-cmd --zone=public --add-port=80/tcp --permanent
 firewall-cmd --reload
 </code></pre>
 <p>你可以立即进行现场检查，通过在你的 Web 浏览器中访问服务器的公共 IP 地址来验证所有事情是否按计划进行（请参阅下一个标题下的注释，以了解你的公共 IP 地址是什么，如果你没有此信息已经）：</p>
-<pre class="line-numbers"><code class="lang-bash">http://server_domain_name_or_IP/
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">http://server_domain_name_or_IP/
 </code></pre>
 <p>你会看到默认的 CentOS 7 Nginx 网页，这是为了提供信息和测试目的。</p>
 <p>如果你看到这个页面，那么你的 Web 服务器现在已经正确安装了。</p>
 <p>在继续之前，你需要做的是启用 Nginx 启动。使用以下命令来执行此操作：</p>
-<pre class="line-numbers"><code class="lang-bash">systemctl enable nginx
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">systemctl enable nginx
 </code></pre>
 <h2 id="anchor_3"><a class="anchor-navigation-ex-anchor" href="#anchor_3" name="anchor_3"><i aria-hidden="true" class="fa fa-link"></i></a>2. 第二步 - 安装 MySQL（MariaDB）</h2>
 <p>现在我们已经启动了 Web 服务器，现在是时候安装一个 MySQL 插件替代品 MariaDB 了。MariaDB 是 MySQL 关系数据库管理系统的一个社区开发的分支。基本上，它将组织和提供访问我们的网站可以存储信息的数据库。</p>
 <p>再次，我们可以使用 yum 获取和安装我们的软件。这一次，我们还将安装一些其他<code class="language-vim">帮手</code>软件包，这些软件包可以帮助我们获得组件之间的通信。</p>
-<pre class="line-numbers"><code class="lang-bash">yum install -y mariadb-server mariadb
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">yum install -y mariadb-server mariadb
 </code></pre>
 <p>安装完成后，我们需要使用以下命令启动 MariaDB：</p>
-<pre class="line-numbers"><code class="lang-bash">systemctl start mariadb
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">systemctl start mariadb
 </code></pre>
 <p>现在我们的 MySQL 数据库正在运行，我们希望运行一个简单的安全脚本，它将删除一些危险的默认值，并锁定对数据库系统的访问。运行以下命令启动交互式脚本：</p>
-<pre class="line-numbers"><code class="lang-bash">mysql_secure_installation
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">mysql_secure_installation
 </code></pre>
 <p>提示符会询问你当前的 root 密码。由于你刚刚安装了 MySQL，你很可能不会拥有一个，因此请按 Enter 键将其留空。然后提示符会询问你是否要设置 root 密码。继续前进 Y，并按照说明：</p>
-<pre class="line-numbers"><code class="lang-bash">mysql_secure_installation prompts:
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">mysql_secure_installation prompts:
 Enter current password for root (enter for none):
 OK, successfully used password, moving on...
 
@@ -123,43 +123,43 @@ Reloading privilege tables..
 </code></pre>
 <p>对于其余的问题，你应该简单地通过每个提示点击<code class="language-vim">ENTER</code>键来接受默认值。这将删除一些示例用户和数据库，禁用远程 root 登录，并加载这些新规则，以便 MySQL 立即尊重我们所做的更改。</p>
 <p>你要做的最后一件事是启用 MariaDB 启动。使用以下命令来执行此操作：</p>
-<pre class="line-numbers"><code class="lang-bash">systemctl enable mariadb
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">systemctl enable mariadb
 </code></pre>
 <p>在这一点上，你的数据库系统现在已经建立，我们可以继续前进。</p>
 <h2 id="anchor_4"><a class="anchor-navigation-ex-anchor" href="#anchor_4" name="anchor_4"><i aria-hidden="true" class="fa fa-link"></i></a>3. 第三步 - 安装 PHP</h2>
 <p>PHP 是我们设置的组件，它将处理代码以显示动态内容。它可以运行脚本，连接到我们的 MySQL 数据库来获取信息，并将处理的内容交给我们的 Web 服务器来显示。</p>
 <p>我们可以再次利用该 yum 系统来安装我们的组件。我们将包括 php-mysql 和 php-fpm 包：</p>
-<pre class="line-numbers"><code class="lang-bash">rpm -Uvh https://mirror.webtatic.com/yum/el7/epel-release.rpm
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">rpm -Uvh https://mirror.webtatic.com/yum/el7/epel-release.rpm
 rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
 
 yum install -y yum install php56w php56w-mysql php56w-gd  php56w-imap php56w-ldap php56w-odbc php56w-pear php56w-xml php56w-xmlrpc php56w-mbstring php56w-mcrypt php56w-bcmath php56w-mhash php56w-fpm php56w-opcache
 </code></pre>
 <h3 id="anchor_5"><a class="anchor-navigation-ex-anchor" href="#anchor_5" name="anchor_5"><i aria-hidden="true" class="fa fa-link"></i></a>3.1. 配置 PHP 处理器</h3>
 <p>我们现在已经安装了我们的 PHP 组件，但是我们需要稍作修改，以使我们的安装更加安全。</p>
-<pre class="line-numbers"><code class="lang-bash">sed -i &#x27;s/^;date.timezone =/date.timezone = PRC/&#x27; /etc/php.ini
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">sed -i &#x27;s/^;date.timezone =/date.timezone = PRC/&#x27; /etc/php.ini
 sed -i &#x27;s/^;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/&#x27; /etc/php.ini
 </code></pre>
 <p>接下来，打开 php-fpm 配置文件 www.conf：</p>
-<pre class="line-numbers"><code class="lang-bash">sed -i &#x27;s/127.0.0.1:9000/\/var\/run\/php-fpm\/php-fpm.sock/&#x27; /etc/php-fpm.d/www.conf
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">sed -i &#x27;s/127.0.0.1:9000/\/var\/run\/php-fpm\/php-fpm.sock/&#x27; /etc/php-fpm.d/www.conf
 sed -i &#x27;s/;listen.owner = nobody/listen.owner = nginx/&#x27; /etc/php-fpm.d/www.conf
 sed -i &#x27;s/;listen.group = nobody/listen.group = nginx/&#x27; /etc/php-fpm.d/www.conf
 sed -i &#x27;s/;user = apache/user = nginx/&#x27; /etc/php-fpm.d/www.conf
 sed -i &#x27;s/group = apache/group = nginx/&#x27; /etc/php-fpm.d/www.conf
 </code></pre>
 <p>现在，我们只需要键入以下命令启动我们的 PHP 处理器：</p>
-<pre class="line-numbers"><code class="lang-bash">systemctl start php-fpm
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">systemctl start php-fpm
 chmod 666 /var/run/php-fpm/php-fpm.sock
 chown nginx:nginx /var/run/php-fpm/php-fpm.sock
 systemctl restart php-fpm
 </code></pre>
 <p>这将实施我们所做的改变。</p>
 <p>接下来，启用 php-fpm 在启动时启动：</p>
-<pre class="line-numbers"><code class="lang-bash">systemctl enable php-fpm
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">systemctl enable php-fpm
 </code></pre>
 <h2 id="anchor_6"><a class="anchor-navigation-ex-anchor" href="#anchor_6" name="anchor_6"><i aria-hidden="true" class="fa fa-link"></i></a>4. 第四步 - 配置 Nginx 来处理 PHP 页面</h2>
 <p>现在，我们已经安装了所有必需的组件。我们仍然需要做的唯一配置更改是告诉 Nginx 使用我们的 PHP 处理器来处理动态内容。</p>
 <p>我们在服务器块级别上执行此操作（服务器块类似于 Apache 的虚拟主机）。输入以下命令：</p>
-<pre class="line-numbers"><code class="lang-bash">(
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">(
 cat &lt;&lt;EOF
 index index.php index.html index.htm;
 server_name your domain name or IP;
@@ -176,16 +176,16 @@ EOF
 </code></pre>
 <p>完成上述更改后，可以保存并关闭文件。</p>
 <p>重新启动 Nginx 进行必要的更改：</p>
-<pre class="line-numbers"><code class="lang-bash">systemctl restart nginx
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">systemctl restart nginx
 </code></pre>
 <h2 id="anchor_7"><a class="anchor-navigation-ex-anchor" href="#anchor_7" name="anchor_7"><i aria-hidden="true" class="fa fa-link"></i></a>5. 第五步 - 在 Web 服务器上测试 PHP 处理</h2>
 <p>为了测试我们的系统是否正确配置了 PHP，我们可以创建一个非常基本的 PHP 脚本。</p>
 <p>我们将调用这个脚本 info.php。为了让 Apache 找到并正确提供，必须将其保存到一个非常特定的目录中，这个目录称为<code class="language-vim">Web 根目录</code>。</p>
 <p>在 CentOS 7 中，这个目录位于 /usr/share/nginx/html/。我们可以通过键入以下内容在该位置创建文件：</p>
-<pre class="line-numbers"><code class="lang-bash">vi /usr/share/nginx/html/info.php
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">vi /usr/share/nginx/html/info.php
 </code></pre>
 <p>这将打开一个空白文件。我们希望在文件中放入以下有效的 PHP 代码文本：</p>
-<pre class="line-numbers"><code class="lang-bash">(
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">(
 cat &lt;&lt; EOF
 &lt;?php
 phpinfo();
@@ -196,11 +196,11 @@ EOF
 <p>完成后，保存并关闭文件。</p>
 <p>现在我们可以测试我们的 Web 服务器是否可以正确显示由 PHP 脚本生成的内容。要尝试这一点，我们只需要在我们的网页浏览器中访问这个页面。你将需要你的服务器的公共 IP 地址。</p>
 <p>你想要访问的地址是：</p>
-<pre class="line-numbers"><code class="lang-bash">http://your_server_IP_address/info.php
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">http://your_server_IP_address/info.php
 </code></pre>
 <p>如果这是成功的，那么你的 PHP 工作正常。</p>
 <p>在测试之后，你可能希望删除此文件，因为它实际上可能会将你的服务器信息提供给未经授权的用户。要做到这一点，你可以输入这个：</p>
-<pre class="line-numbers"><code class="lang-bash">rm /usr/share/nginx/html/info.php
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">rm /usr/share/nginx/html/info.php
 </code></pre>
 <p>如果你以后需要再次访问该信息，则可以随时重新创建此页面。</p>
 
