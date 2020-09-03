@@ -182,7 +182,7 @@ tar -xf Python-3.8.5.tgz
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">./Python-3.8.5/configure
 </code></pre>
 <p>构建并安装 Python 3</p>
-<pre class="line-numbers"><code class="lang-bash rainbow-braces">make install Python-3.8.5
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">make -j install Python-3.8.5
 </code></pre>
 <p>确认 Python 3 部署成功</p>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">python3 --version
@@ -231,7 +231,7 @@ cd /tmp &amp;&amp;
 curl -O http://192.168.2.251/Centos/tools/Python/Python-3.8.5.tgz &amp;&amp;
 tar -xf Python-3.8.5.tgz &amp;&amp;
 ./Python-3.8.5/configure &amp;&amp;
-make install Python-3.8.5 &amp;&amp;
+make -j install Python-3.8.5 &amp;&amp;
 python3 --version &amp;&amp;
 pip3 install selenium htmlreport -i https://mirrors.aliyun.com/pypi/simple/ &amp;&amp;
 pip3 list
