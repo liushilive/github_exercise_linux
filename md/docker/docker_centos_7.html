@@ -20,7 +20,7 @@
       rel="apple-touch-icon-precomposed" sizes="152x152">
 <link href="../../../asserts/lsbook/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
 <!--分页-->
-<link href="docker_centos_7_教学环境.html" rel="next"/>
+<link href="" rel="next"/>
 </head>
 <body>
 <div class="book match-braces"><div class="book-summary">
@@ -43,8 +43,7 @@
 <li class="chapter" data-level="3.7" data-path="../tools/部署SVN.html"><a href="../tools/部署SVN.html"><b>3.7.</b>部署 SVN</a></li>
 <li class="chapter" data-level="3.8" data-path="../tools/持续集成环境.html"><a href="../tools/持续集成环境.html"><b>3.8.</b>Jenkins 部署</a></li>
 <li class="chapter" data-level="3.9" data-path="../tools/持续集成环境-教学环境.html"><a href="../tools/持续集成环境-教学环境.html"><b>3.9.</b>Jenkins 部署 教学环境</a></li>
-<li class="chapter active" data-level="3.10" data-path="docker_centos_7.html"><a href="docker_centos_7.html"><b>3.10.</b>Docker CentOS 7</a></li>
-<li class="chapter" data-level="3.11" data-path="docker_centos_7_教学环境.html"><a href="docker_centos_7_教学环境.html"><b>3.11.</b>Docker CentOS 7 教学环境</a></li></ul>
+<li class="chapter active" data-level="3.10" data-path="docker_centos_7.html"><a href="docker_centos_7.html"><b>3.10.</b>Docker CentOS 7</a></li></ul>
             <li class="divider"></li>
             <li>
                 <a class="lsbook-link" href="https://github.com/liushilive/lsbook" target="blank">
@@ -86,9 +85,8 @@
 </code></pre>
 <h2 id="anchor_4"><a class="anchor-navigation-ex-anchor" href="#anchor_4" name="anchor_4"><i aria-hidden="true" class="fa fa-link"></i></a>3. 部署官方 YUM 源</h2>
 <p>执行以下命令安装依赖包：</p>
-<pre class="line-numbers"><code class="lang-bash rainbow-braces"># yum install -y yum-utils device-mapper-persistent-data lvm2
-yum install -y yum-utils
-# 官方源
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">yum install -y yum-utils
+
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 </code></pre>
 <h2 id="anchor_5"><a class="anchor-navigation-ex-anchor" href="#anchor_5" name="anchor_5"><i aria-hidden="true" class="fa fa-link"></i></a>4. 安装 Docker CE</h2>
@@ -210,10 +208,6 @@ All rights reserved.</span><span class="footer-modification">
 </a>
 
 
-<a aria-label="Next page: Docker CentOS 7 教学环境" class="navigation navigation-next" href="docker_centos_7_教学环境.html">
-    <i class="fa fa-angle-right"></i>
-</a>
-
 
 </div>
 <script>
@@ -224,7 +218,7 @@ All rights reserved.</span><span class="footer-modification">
                 "github_url":"https://liushilive.github.io/",
                 "language": "zh-cn",
                 "previous_page_link": "../tools/持续集成环境-教学环境.html",
-                "next_page_link": "docker_centos_7_教学环境.html"
+                "next_page_link": ""
             },
             "basePath": "../..",
             "js": {'prism': ['../../../asserts/lsbook/prismjs/clipboard.min.js', '../../../asserts/lsbook/prismjs/prism.js']}
