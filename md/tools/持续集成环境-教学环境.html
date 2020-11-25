@@ -175,7 +175,7 @@ yum -y install zlib zlib-devel libffi-devel openssl-devel
 </blockquote>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">cd /tmp
 
-curl -O http://192.168.2.251/Centos/tools/Python/Python-3.8.5.tgz
+curl -O http://192.168.2.251/tools/Python/Python-3.8.5.tgz
 
 tar -xf Python-3.8.5.tgz
 </code></pre>
@@ -229,7 +229,7 @@ curl -o /var/cache/jenkins/war/WEB-INF/update-center-rootCAs/update-center.der h
 sed -i &#x27;s/https:\/\/updates.jenkins.io\/update-center.json/http:\/\/192.168.2.251\/Centos\/jenkins\/update-center.json/&#x27; /var/lib/jenkins/hudson.model.UpdateCenter.xml &amp;&amp;
 systemctl restart jenkins.service &amp;&amp;
 cd /tmp &amp;&amp;
-curl -O http://192.168.2.251/Centos/tools/Python/Python-3.8.5.tgz &amp;&amp;
+curl -O http://192.168.2.251/tools/Python/Python-3.8.5.tgz &amp;&amp;
 tar -xf Python-3.8.5.tgz &amp;&amp;
 ./Python-3.8.5/configure &amp;&amp;
 make -j install Python-3.8.5 &amp;&amp;
