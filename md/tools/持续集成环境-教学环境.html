@@ -115,11 +115,19 @@ do
     echo 等待 Jenkins 服务启动
 done
 
-sleep 3
-curl -L 127.0.0.1:8080
-curl -L 127.0.0.1:8080
+until [ -d &quot;/var/cache/jenkins/war/WEB-INF/update-center-rootCAs/&quot; ]
+do
+    sleep 1;
+    echo 等待 Jenkins 证书目录生成
+done
 
 curl -o /var/cache/jenkins/war/WEB-INF/update-center-rootCAs/update-center.der http://192.168.2.251/Centos/jenkins/update-center.der
+
+until [ -f &quot;/var/lib/jenkins/hudson.model.UpdateCenter.xml&quot; ]
+do
+    sleep 1;
+    echo 等待 Jenkins UpdateCenter 生成
+done
 
 sed -i &#x27;s/https:\/\/updates.jenkins.io\/update-center.json/http:\/\/192.168.2.251\/Centos\/jenkins\/update-center.json/&#x27; /var/lib/jenkins/hudson.model.UpdateCenter.xml
 
@@ -151,7 +159,7 @@ systemctl restart jenkins.service
 </li>
 <li>
 <p>插件安装</p>
-<p>系统管理 -&gt; 管理插件 -&gt; 可选插件 -&gt; 过滤</p>
+<p>系统管理<code class="language-vim">Manage Jenkins</code> -&gt; 管理插件<code class="language-vim">Available</code> -&gt; 可选插件<code class="language-vim">Manage Plugins</code> -&gt; 过滤<code class="language-vim">filter</code></p>
 <blockquote>
 <p>如果无法上网，可将手动下载相关插件，上传至<code class="language-vim">/var/lib/jenkins/plugins</code>，重启 Jenkins 自动安装</p>
 </blockquote>
@@ -222,10 +230,17 @@ do
     sleep 1;
     echo 等待 Jenkins 服务启动
 done &amp;&amp;
-sleep 3 &amp;&amp;
-curl -L 127.0.0.1:8080 &amp;&amp;
-curl -L 127.0.0.1:8080 &amp;&amp;
+until [ -d &quot;/var/cache/jenkins/war/WEB-INF/update-center-rootCAs/&quot; ]
+do
+    sleep 1;
+    echo 等待 Jenkins 证书目录生成
+done &amp;&amp;
 curl -o /var/cache/jenkins/war/WEB-INF/update-center-rootCAs/update-center.der http://192.168.2.251/Centos/jenkins/update-center.der &amp;&amp;
+until [ -f &quot;/var/lib/jenkins/hudson.model.UpdateCenter.xml&quot; ]
+do
+    sleep 1;
+    echo 等待 Jenkins UpdateCenter 生成
+done &amp;&amp;
 sed -i &#x27;s/https:\/\/updates.jenkins.io\/update-center.json/http:\/\/192.168.2.251\/Centos\/jenkins\/update-center.json/&#x27; /var/lib/jenkins/hudson.model.UpdateCenter.xml &amp;&amp;
 systemctl restart jenkins.service &amp;&amp;
 cd /tmp &amp;&amp;
@@ -236,6 +251,7 @@ make -j install Python-3.8.5 &amp;&amp;
 python3 --version &amp;&amp;
 pip3 install selenium htmlreport -i https://mirrors.aliyun.com/pypi/simple/ &amp;&amp;
 pip3 list
+
 
 </code></pre>
 
