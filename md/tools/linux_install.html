@@ -1,0 +1,223 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+<meta charset="UTF-8">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>Linux 相关 - 虚拟机部署 Linux</title>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="" name="description">
+<meta content="刘士" name="author">
+
+<link href="../../../asserts/lsbook/less/website.css" rel="stylesheet">
+<link href="../../../asserts/lsbook/katex/katex.min.css" rel="stylesheet">
+<link href="../../../asserts/lsbook/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+<meta content="true" name="HandheldFriendly"/>
+<meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<link href="../../../asserts/lsbook/images/apple-touch-icon-precomposed-152.png"
+      rel="apple-touch-icon-precomposed" sizes="152x152">
+<link href="../../../asserts/lsbook/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<!--分页-->
+<link href="bash-completion-zi-dong-bu-quan-gong-neng-zeng-qiang.html" rel="next"/>
+</head>
+<body>
+<div class="book match-braces"><div class="book-summary">
+    <div id="book-search-input" role="search">
+        <input placeholder="输入并搜索" type="text"/>
+    </div>
+    <nav role="navigation">
+        <ul class="summary">
+            <li class="header">Summary</li>
+<ul class="articles"><li class="chapter" data-level="1.1" data-path="../../index.html"><a href="../../index.html"><b>1.1.</b>介绍</a></li></ul>
+<li class="header">Linux 教程</li>
+<li class="header">项目</li>
+<ul class="articles"><li class="chapter" data-level="3.1" data-path="../项目/高阶项目环境部署.html"><a href="../项目/高阶项目环境部署.html"><b>3.1.</b>高阶项目环境部署</a></li></ul>
+<li class="header">Linux 常用工具部署</li>
+<ul class="articles"><li class="chapter active" data-level="4.1" data-path="linux_install.html"><a href="linux_install.html"><b>4.1.</b>虚拟机部署 Linux</a></li>
+<li class="chapter" data-level="4.2" data-path="bash-completion-zi-dong-bu-quan-gong-neng-zeng-qiang.html"><a href="bash-completion-zi-dong-bu-quan-gong-neng-zeng-qiang.html"><b>4.2.</b>自动补全功能增强</a></li>
+<li class="chapter" data-level="4.3" data-path="sudo.html"><a href="sudo.html"><b>4.3.</b>配置 Sudo</a></li>
+<li class="chapter" data-level="4.4" data-path="添加Swap.html"><a href="添加Swap.html"><b>4.4.</b>添加 Swap</a></li>
+<li class="chapter" data-level="4.5" data-path="LEMP.html"><a href="LEMP.html"><b>4.5.</b>LEMP 环境</a></li>
+<li class="chapter" data-level="4.6" data-path="install-oracle-11g-express-xe-on-centos-7.html"><a href="install-oracle-11g-express-xe-on-centos-7.html"><b>4.6.</b>Oracle 11g Express (XE)</a></li>
+<li class="chapter" data-level="4.7" data-path="部署SVN.html"><a href="部署SVN.html"><b>4.7.</b>部署 SVN</a></li>
+<li class="chapter" data-level="4.8" data-path="持续集成环境.html"><a href="持续集成环境.html"><b>4.8.</b>Jenkins 部署</a></li>
+<li class="chapter" data-level="4.9" data-path="持续集成环境-教学环境.html"><a href="持续集成环境-教学环境.html"><b>4.9.</b>Jenkins 部署 教学环境</a></li>
+<li class="chapter" data-level="4.10" data-path="../docker/docker_centos_7.html"><a href="../docker/docker_centos_7.html"><b>4.10.</b>Docker CentOS 7</a></li></ul>
+            <li class="divider"></li>
+            <li>
+                <a class="lsbook-link" href="https://github.com/liushilive/lsbook" target="blank">
+                    本书使用 LsBook 发布
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<div class="book-body">
+    <div class="body-inner">
+    <div class="book-header" role="navigation">
+        <!-- Title -->
+        <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i>
+            <a href="../..">虚拟机部署 Linux</a>
+        </h1>
+    </div>
+
+    <div class="page-wrapper" role="main" tabindex="-1">
+        <div class="page-inner">
+            <div class="search-plus" id="book-search-results">
+                <div class="search-noresults">
+                    <section class="normal markdown-section">
+                        <div id='anchor-navigation-ex-navbar'><i class='fa fa-anchor'></i><ul><li><span class='title-icon fa fa-hand-o-right'></span><a aria-label class='on-toolbar-action' href='' onclick="$('.fa.fa-align-justify').parent()[0].click();">目录</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_1'><b></b>虚拟机部署 Linux</a></li><ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_2'><b>1. </b>获得 CentOS</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_3'><b>2. </b>VM 硬件规划</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_4'><b>3. </b>系统安装</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_5'><b>4. </b>快照管理</a></li></ul></ul></div><a href='#anchor_1' id='anchorNavigationExGoTop'><i class='fa fa-arrow-up'></i></a>
+                        <h1 id="anchor_1"><a class="anchor-navigation-ex-anchor" href="#anchor_1" name="anchor_1"><i aria-hidden="true" class="fa fa-link"></i></a>虚拟机部署 Linux</h1>
+<blockquote>
+<p>本教程采用 <a target=_Blank href="https://www.vmware.com/go/downloadworkstation-cn">VMware Workstation Pro</a> 进行虚拟化部署 CentOS，如需真机部署或其他虚拟化软件部署，请自行 GOOGLE</p>
+</blockquote>
+<h2 id="anchor_2"><a class="anchor-navigation-ex-anchor" href="#anchor_2" name="anchor_2"><i aria-hidden="true" class="fa fa-link"></i></a>1. 获得 CentOS</h2>
+<ol>
+<li>
+<p>进入官网</p>
+<p>官网：<a target=_Blank href="https://www.centos.org">https://www.centos.org</a></p>
+<p><a data-lightbox="1" href="../../screenshot/2019-05-08-12-17-46.png"><img src="../../screenshot/2019-05-08-12-17-46.png" alt="首页" title="首页" /></a></p>
+</li>
+<li>
+<p>进入下载页面</p>
+<p><a data-lightbox="2" href="../../screenshot/2019-05-08-12-18-17.png"><img src="../../screenshot/2019-05-08-12-18-17.png" alt="点击进入" title="点击进入" /></a></p>
+<p>CentOS 提供两个镜像下载 <a data-lightbox="3" href="../../screenshot/2019-05-08-12-22-43.png"><img src="../../screenshot/2019-05-08-12-22-43.png" alt="镜像" title="镜像" /></a></p>
+<ul>
+<li>
+<p>DVD ISO</p>
+<p>此映像包含安装程序以及可在交互式安装期间安装的所有软件包的集合。这是大多数用户的推荐下载。</p>
+</li>
+<li>
+<p>Minimal ISO</p>
+<p>包含安装程序和一组最小的软件包，可用于安装非常基本的 CentOS 系统。然后，你可以使用 Yum 从更新存储库下载其他软件包。<strong>本教程的选择！</strong></p>
+</li>
+</ul>
+</li>
+<li>
+<p>选择镜像下载</p>
+<p>在下载列表中选择任意一个链接都可以下载。</p>
+<p><a data-lightbox="4" href="../../screenshot/2019-05-08-12-23-46.png"><img src="../../screenshot/2019-05-08-12-23-46.png" alt="下载列表" title="下载列表" /></a></p>
+</li>
+</ol>
+<p>下载后，你将得到一个 iso 文件</p>
+<h2 id="anchor_3"><a class="anchor-navigation-ex-anchor" href="#anchor_3" name="anchor_3"><i aria-hidden="true" class="fa fa-link"></i></a>2. VM 硬件规划</h2>
+<p>请预备 不小于 2G 硬盘空间</p>
+<p><a data-lightbox="5" href="../../screenshot/2019-05-08-12-42-34.png"><img src="../../screenshot/2019-05-08-12-42-34.png" alt="新建虚拟机" title="新建虚拟机" /></a></p>
+<p><a data-lightbox="6" href="../../screenshot/2019-05-08-12-43-03.png"><img src="../../screenshot/2019-05-08-12-43-03.png" alt="自定义虚拟机硬件" title="自定义虚拟机硬件" /></a></p>
+<p><a data-lightbox="7" href="../../screenshot/2019-05-08-12-43-28.png"><img src="../../screenshot/2019-05-08-12-43-28.png" alt="兼容性选择" title="兼容性选择" /></a></p>
+<p><a data-lightbox="8" href="../../screenshot/2019-05-08-12-45-30.png"><img src="../../screenshot/2019-05-08-12-45-30.png" alt="选择镜像" title="选择镜像" /></a></p>
+<p><a data-lightbox="9" href="../../screenshot/2019-05-08-12-45-53.png"><img src="../../screenshot/2019-05-08-12-45-53.png" alt="选择安装目录" title="选择安装目录" /></a></p>
+<p>如果 C 盘剩余空间不少于 10G 的请默认路径安装，切记 C 盘速度最快！</p>
+<p><a data-lightbox="10" href="../../screenshot/2019-05-08-12-47-41.png"><img src="../../screenshot/2019-05-08-12-47-41.png" alt="CPU" title="CPU" /></a></p>
+<p><a data-lightbox="11" href="../../screenshot/2019-05-08-12-48-11.png"><img src="../../screenshot/2019-05-08-12-48-11.png" alt="内存" title="内存" /></a></p>
+<p><a data-lightbox="12" href="../../screenshot/2019-05-08-12-48-51.png"><img src="../../screenshot/2019-05-08-12-48-51.png" alt="网络" title="网络" /></a></p>
+<p>电脑是连接路由器的可以考虑选择 <code class="language-vim">桥接网络</code>，电脑拨号上网之类的选择 <code class="language-vim">NAT</code></p>
+<p><a data-lightbox="13" href="../../screenshot/2019-05-08-12-49-55.png"><img src="../../screenshot/2019-05-08-12-49-55.png" alt="IO控制器" title="IO控制器" /></a></p>
+<p><a data-lightbox="14" href="../../screenshot/2019-05-08-12-50-14.png"><img src="../../screenshot/2019-05-08-12-50-14.png" alt="磁盘类型" title="磁盘类型" /></a></p>
+<p><a data-lightbox="15" href="../../screenshot/2019-05-08-12-50-32.png"><img src="../../screenshot/2019-05-08-12-50-32.png" alt="新建虚拟磁盘" title="新建虚拟磁盘" /></a></p>
+<p><a data-lightbox="16" href="../../screenshot/2019-05-08-12-51-07.png"><img src="../../screenshot/2019-05-08-12-51-07.png" alt="虚拟磁盘容量" title="虚拟磁盘容量" /></a></p>
+<p>完成本教程学习，5G 足矣</p>
+<p><a data-lightbox="17" href="../../screenshot/2019-05-08-12-51-48.png"><img src="../../screenshot/2019-05-08-12-51-48.png" alt="虚拟磁盘文件名" title="虚拟磁盘文件名" /></a></p>
+<p><a data-lightbox="18" href="../../screenshot/2019-05-08-12-53-00.png"><img src="../../screenshot/2019-05-08-12-53-00.png" alt="自定义硬件" title="自定义硬件" /></a></p>
+<p><a data-lightbox="19" href="../../screenshot/2019-05-08-12-53-39.png"><img src="../../screenshot/2019-05-08-12-53-39.png" alt="移除无用设备" title="移除无用设备" /></a></p>
+<p>移除 <code class="language-vim">USB 控制器</code>、<code class="language-vim">声卡</code>、<code class="language-vim">打印机</code>。关闭回到上一界面，点<code class="language-vim">完成</code></p>
+<h2 id="anchor_4"><a class="anchor-navigation-ex-anchor" href="#anchor_4" name="anchor_4"><i aria-hidden="true" class="fa fa-link"></i></a>3. 系统安装</h2>
+<p><a data-lightbox="20" href="../../screenshot/2019-05-08-12-55-25.png"><img src="../../screenshot/2019-05-08-12-55-25.png" alt="开启虚拟机" title="开启虚拟机" /></a></p>
+<p><a data-lightbox="21" href="../../screenshot/2019-05-08-12-56-51.png"><img src="../../screenshot/2019-05-08-12-56-51.png" alt="菜单选择" title="菜单选择" /></a></p>
+<p>鼠标点击去，上下键移动选择：<code class="language-vim">Install CentOS 7</code> ，回车确认</p>
+<p><a data-lightbox="22" href="../../screenshot/2019-05-08-12-58-21.png"><img src="../../screenshot/2019-05-08-12-58-21.png" alt="等待引导完毕" title="等待引导完毕" /></a></p>
+<p>等待引导完毕，进入安装界面</p>
+<p><a data-lightbox="23" href="../../screenshot/2019-05-08-12-59-44.png"><img src="../../screenshot/2019-05-08-12-59-44.png" alt="选择语言" title="选择语言" /></a></p>
+<p><a data-lightbox="24" href="../../screenshot/2019-05-08-13-02-27.png"><img src="../../screenshot/2019-05-08-13-02-27.png" alt="选择安装位置" title="选择安装位置" /></a></p>
+<p>不需要做任何配置，直接点 <a data-lightbox="25" href="../../screenshot/2019-05-08-13-03-06.png"><img src="../../screenshot/2019-05-08-13-03-06.png" alt="完成" title="完成" /></a> 回到上一界面</p>
+<p><a data-lightbox="26" href="../../screenshot/2019-05-08-13-03-44.png"><img src="../../screenshot/2019-05-08-13-03-44.png" alt="配置网络" title="配置网络" /></a></p>
+<p><a data-lightbox="27" href="../../screenshot/2019-05-08-13-04-34.png"><img src="../../screenshot/2019-05-08-13-04-34.png" alt="打开网络接口" title="打开网络接口" /></a></p>
+<p>点击 <a data-lightbox="28" href="../../screenshot/2019-05-08-13-05-11.png"><img src="../../screenshot/2019-05-08-13-05-11.png" alt="开始安装" title="开始安装" /></a></p>
+<p><a data-lightbox="29" href="../../screenshot/2019-05-08-13-05-32.png"><img src="../../screenshot/2019-05-08-13-05-32.png" alt="设置root密码" title="设置root密码" /></a></p>
+<p><a data-lightbox="30" href="../../screenshot/2019-05-08-13-06-53.png"><img src="../../screenshot/2019-05-08-13-06-53.png" alt="root密码" title="root密码" /></a></p>
+<p>等待安装完毕</p>
+<p><a data-lightbox="31" href="../../screenshot/2019-05-08-13-10-11.png"><img src="../../screenshot/2019-05-08-13-10-11.png" alt="重启" title="重启" /></a></p>
+<p>等待重启完毕，看到登录界面</p>
+<p><a data-lightbox="32" href="../../screenshot/2019-05-08-13-10-57.png"><img src="../../screenshot/2019-05-08-13-10-57.png" alt="登录界面" title="登录界面" /></a></p>
+<p><a data-lightbox="33" href="../../screenshot/2019-05-08-13-11-18.png"><img src="../../screenshot/2019-05-08-13-11-18.png" alt="输入用户名 root" title="输入用户名 root" /></a></p>
+<p><a data-lightbox="34" href="../../screenshot/2019-05-08-13-11-52.png"><img src="../../screenshot/2019-05-08-13-11-52.png" alt="输入密码" title="输入密码" /></a></p>
+<p>Linux 下输入密码无回显，如果为数字，请勿使用小键盘输入。输入完毕后回车</p>
+<p><a data-lightbox="35" href="../../screenshot/2019-05-08-13-12-33.png"><img src="../../screenshot/2019-05-08-13-12-33.png" alt="登录成功" title="登录成功" /></a></p>
+<p>至此系统安装完毕，请输入 <code class="language-vim">poweroff</code> 回车，关机。</p>
+<p><a data-lightbox="36" href="../../screenshot/2019-05-08-13-13-28.png"><img src="../../screenshot/2019-05-08-13-13-28.png" alt="关机" title="关机" /></a></p>
+<h2 id="anchor_5"><a class="anchor-navigation-ex-anchor" href="#anchor_5" name="anchor_5"><i aria-hidden="true" class="fa fa-link"></i></a>4. 快照管理</h2>
+<p>为了防止系统玩坏需要重新安装导致时间浪费，应采用<code class="language-vim">快照功能</code>保存现场</p>
+<p><a data-lightbox="37" href="../../screenshot/2019-05-08-13-15-39.png"><img src="../../screenshot/2019-05-08-13-15-39.png" alt="拍摄虚拟机快照" title="拍摄虚拟机快照" /></a></p>
+<p><a data-lightbox="38" href="../../screenshot/2019-05-08-13-16-36.png"><img src="../../screenshot/2019-05-08-13-16-36.png" alt="系统安装完毕" title="系统安装完毕" /></a></p>
+<p>拍摄快照后，如 CentOS 被玩坏了，可通过快照管理功能还原快照</p>
+<p><a data-lightbox="39" href="../../screenshot/2019-05-08-13-17-58.png"><img src="../../screenshot/2019-05-08-13-17-58.png" alt="快照管理" title="快照管理" /></a></p>
+
+                        <footer class="page-footer">
+<span class="copyright">© 2020 刘士. All rights reserved.</span>
+<span class="footer-modification">
+<span id="busuanzi_container_site_uv" style="display:none">本站访客数 <span id="busuanzi_value_site_uv">
+</span> 人次</span></span>
+</footer><script>
+function busuanzi(){
+    if (document.domain != "127.0.0.1") {$.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");}
+}
+setTimeout('busuanzi()', 2000);
+</script><script>
+
+</script>
+                    </section>
+                </div>
+                <div class="search-results">
+                    <div class="has-results">
+                        <h1 class="search-results-title"><span class='search-results-count'></span> 结果匹配 "<span class='search-query'></span>"</h1>
+                        <ul class="search-results-list"></ul>
+                    </div>
+                    <div class="no-results">
+                        <h1 class="search-results-title">没有匹配的结果 "<span class='search-query'></span>"</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<a aria-label="Previous page: 高阶项目环境部署" class="navigation navigation-prev" href="../项目/高阶项目环境部署.html">
+    <i class="fa fa-angle-left"></i>
+</a>
+
+
+<a aria-label="Next page: 自动补全功能增强" class="navigation navigation-next" href="bash-completion-zi-dong-bu-quan-gong-neng-zeng-qiang.html">
+    <i class="fa fa-angle-right"></i>
+</a>
+
+
+</div>
+<script>
+    var lsbook = lsbook || [];
+    lsbook.push(function () {
+        lsbook.page.hasChanged({
+            "config": {
+                "github_url":"https://liushilive.github.io/",
+                "language": "zh-cn",
+                "previous_page_link": "../项目/高阶项目环境部署.html",
+                "next_page_link": "bash-completion-zi-dong-bu-quan-gong-neng-zeng-qiang.html"
+            },
+            "basePath": "../..",
+            "js": {'prism': ['../../../asserts/lsbook/prismjs/clipboard.min.js', '../../../asserts/lsbook/prismjs/prism.js']}
+        });
+    });
+</script>
+</div>
+
+<script src="../../../asserts/lsbook/jquery-3.3.1.min.js"></script>
+<script charset="UTF-8" src="../../../asserts/lsbook/jquery_mar/jquery.mark.js"></script>
+<script src="../../../asserts/lsbook/lightbox/js/lightbox.min.js"></script>
+<script src="../../../asserts/lsbook/lsbook.min.js"></script>
+
+</body>
+</html>
