@@ -83,7 +83,7 @@
 <h2 id="anchor_3"><a class="anchor-navigation-ex-anchor" href="#anchor_3" name="anchor_3"><i aria-hidden="true" class="fa fa-link"></i></a>2. 部署本地 yum 源</h2>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">rm -rf /etc/yum.repos.d/*
 
-curl -o /etc/yum.repos.d/CentOS-7.repo http://192.168.2.251/Centos/CentOS7.repo
+curl -o /etc/yum.repos.d/CentOS7.repo http://192.168.2.251/Centos/CentOS7.repo
 
 yum clean all
 
@@ -214,7 +214,7 @@ pip3 list
 </ul>
 <h2 id="anchor_9"><a class="anchor-navigation-ex-anchor" href="#anchor_9" name="anchor_9"><i aria-hidden="true" class="fa fa-link"></i></a>7. sh</h2>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">rm -rf /etc/yum.repos.d/* &amp;&amp;
-curl -o /etc/yum.repos.d/CentOS-7.repo http://192.168.2.251/Centos/CentOS7.repo &amp;&amp;
+curl -o /etc/yum.repos.d/CentOS7.repo http://192.168.2.251/Centos/CentOS7.repo &amp;&amp;
 yum clean all &amp;&amp;
 yum makecache &amp;&amp;
 yum install -y java &amp;&amp;
