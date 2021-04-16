@@ -71,16 +71,28 @@
                 <div class="search-noresults">
                     <section class="normal markdown-section">
                         <div id='anchor-navigation-ex-navbar'><i class='fa fa-anchor'></i><ul><li><span class='title-icon fa fa-hand-o-right'></span><a aria-label class='on-toolbar-action' href='' onclick="$('.fa.fa-align-justify').parent()[0].click();">目录</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_1'><b></b>CentOS 7 部署 Jenkins 持续集成环境（教学环境）</a></li><ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_2'><b>1. </b>先决条件</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_3'><b>2. </b>部署本地 yum 源</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_4'><b>3. </b>安装 Java</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_5'><b>4. </b>安装 Jenkins</a></li><ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_6'><b>4.1. </b>基本配置</a></li></ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_7'><b>5. </b>部署 Python 3</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_8'><b>6. </b>Jenkins 相关</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_9'><b>7. </b>sh</a></li></ul></ul></div><a href='#anchor_1' id='anchorNavigationExGoTop'><i class='fa fa-arrow-up'></i></a>
-                        <h1 id="anchor_1"><a class="anchor-navigation-ex-anchor" href="#anchor_1" name="anchor_1"><i aria-hidden="true" class="fa fa-link"></i></a>CentOS 7 部署 Jenkins 持续集成环境（教学环境）</h1>
+                        <h1 id="anchor_1">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_1" name="anchor_1">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>CentOS 7 部署 Jenkins 持续集成环境（教学环境）
+</h1>
 <p>詹金斯是一种流行的开源 CI（持续集成）工具，广泛用于项目开发，部署和自动化。</p>
 <p>本文将引导你完成在 CentOS 7 服务器实例上安装 Jenkins 的过程。</p>
-<h2 id="anchor_2"><a class="anchor-navigation-ex-anchor" href="#anchor_2" name="anchor_2"><i aria-hidden="true" class="fa fa-link"></i></a>1. 先决条件</h2>
+<h2 id="anchor_2">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_2" name="anchor_2">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>1. 先决条件
+</h2>
 <p>在继续之前，你必须具备：</p>
 <ul>
 <li>从零开始部署了 CentOS 7 服务器实例。</li>
 <li>root 权限</li>
 </ul>
-<h2 id="anchor_3"><a class="anchor-navigation-ex-anchor" href="#anchor_3" name="anchor_3"><i aria-hidden="true" class="fa fa-link"></i></a>2. 部署本地 yum 源</h2>
+<h2 id="anchor_3">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_3" name="anchor_3">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>2. 部署本地 yum 源
+</h2>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">rm -rf /etc/yum.repos.d/*
 
 curl -o /etc/yum.repos.d/CentOS7.repo http://192.168.2.251/Centos/CentOS7.repo
@@ -89,14 +101,22 @@ yum clean all
 
 yum makecache
 </code></pre>
-<h2 id="anchor_4"><a class="anchor-navigation-ex-anchor" href="#anchor_4" name="anchor_4"><i aria-hidden="true" class="fa fa-link"></i></a>3. 安装 Java</h2>
+<h2 id="anchor_4">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_4" name="anchor_4">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>3. 安装 Java
+</h2>
 <p>在安装 Jenkins 之前，需要在系统上安装一个 Java 虚拟机。在这里，让我们使用 yum 安装最新的 JDK：</p>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">yum install -y java
 </code></pre>
 <p>安装完成后，可以通过运行以下命令进行确认：</p>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">java -version
 </code></pre>
-<h2 id="anchor_5"><a class="anchor-navigation-ex-anchor" href="#anchor_5" name="anchor_5"><i aria-hidden="true" class="fa fa-link"></i></a>4. 安装 Jenkins</h2>
+<h2 id="anchor_5">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_5" name="anchor_5">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>4. 安装 Jenkins
+</h2>
 <p>使用 <code class="language-vim">yum</code> 安装 Jenkins：</p>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">yum install -y jenkins
 </code></pre>
@@ -138,7 +158,11 @@ systemctl restart jenkins.service
 <p>现在，通过从浏览器访问以下地址来访问 Jenkins：</p>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">http://服务器IP:8080
 </code></pre>
-<h3 id="anchor_6"><a class="anchor-navigation-ex-anchor" href="#anchor_6" name="anchor_6"><i aria-hidden="true" class="fa fa-link"></i></a>4.1. 基本配置</h3>
+<h3 id="anchor_6">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_6" name="anchor_6">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>4.1. 基本配置
+</h3>
 <ol>
 <li>
 <p>解锁 jenkins</p>
@@ -172,7 +196,11 @@ systemctl restart jenkins.service
 <p><code class="language-vim">Email Extension</code></p>
 </li>
 </ol>
-<h2 id="anchor_7"><a class="anchor-navigation-ex-anchor" href="#anchor_7" name="anchor_7"><i aria-hidden="true" class="fa fa-link"></i></a>5. 部署 Python 3</h2>
+<h2 id="anchor_7">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_7" name="anchor_7">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>5. 部署 Python 3
+</h2>
 <p>部署编译环境</p>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">yum -y groupinstall &#x27;Development Tools&#x27;
 
@@ -202,7 +230,11 @@ tar -xf Python-3.8.5.tgz
 
 pip3 list
 </code></pre>
-<h2 id="anchor_8"><a class="anchor-navigation-ex-anchor" href="#anchor_8" name="anchor_8"><i aria-hidden="true" class="fa fa-link"></i></a>6. Jenkins 相关</h2>
+<h2 id="anchor_8">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_8" name="anchor_8">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>6. Jenkins 相关
+</h2>
 <ul>
 <li>配置文件 <code class="language-vim">/etc/sysconfig/jenkins</code></li>
 <li>默认启用 <code class="language-vim">8080</code></li>
@@ -212,7 +244,11 @@ pip3 list
 <li>停止服务 <code class="language-vim">systemctl stop jenkins</code></li>
 <li>重启服务 <code class="language-vim">systemctl restart jenkins</code></li>
 </ul>
-<h2 id="anchor_9"><a class="anchor-navigation-ex-anchor" href="#anchor_9" name="anchor_9"><i aria-hidden="true" class="fa fa-link"></i></a>7. sh</h2>
+<h2 id="anchor_9">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_9" name="anchor_9">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>7. sh
+</h2>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">rm -rf /etc/yum.repos.d/* &amp;&amp;
 curl -o /etc/yum.repos.d/CentOS7.repo http://192.168.2.251/Centos/CentOS7.repo &amp;&amp;
 yum clean all &amp;&amp;

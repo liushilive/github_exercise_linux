@@ -71,12 +71,24 @@
                 <div class="search-noresults">
                     <section class="normal markdown-section">
                         <div id='anchor-navigation-ex-navbar'><i class='fa fa-anchor'></i><ul><li><span class='title-icon fa fa-hand-o-right'></span><a aria-label class='on-toolbar-action' href='' onclick="$('.fa.fa-align-justify').parent()[0].click();">目录</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_1'><b></b>如何在 CentOS 7 上添加 Swap</a></li><ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_2'><b>1. </b>介绍</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_3'><b>2. </b>检查系统的交换信息</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_4'><b>3. </b>检查硬盘驱动器分区上的可用空间</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_5'><b>4. </b>创建一个交换文件</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_6'><b>5. </b>启用交换文件</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_7'><b>6. </b>永久使交换文件</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_8'><b>7. </b>调整你的交换设置</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_9'><b>8. </b>结论</a></li></ul></ul></div><a href='#anchor_1' id='anchorNavigationExGoTop'><i class='fa fa-arrow-up'></i></a>
-                        <h1 id="anchor_1"><a class="anchor-navigation-ex-anchor" href="#anchor_1" name="anchor_1"><i aria-hidden="true" class="fa fa-link"></i></a>如何在 CentOS 7 上添加 Swap</h1>
-<h2 id="anchor_2"><a class="anchor-navigation-ex-anchor" href="#anchor_2" name="anchor_2"><i aria-hidden="true" class="fa fa-link"></i></a>1. 介绍</h2>
+                        <h1 id="anchor_1">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_1" name="anchor_1">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>如何在 CentOS 7 上添加 Swap
+</h1>
+<h2 id="anchor_2">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_2" name="anchor_2">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>1. 介绍
+</h2>
 <p>提高服务器响应速度和防止应用程序内存不足错误的最简单方法之一是添加一些交换空间。 Swap 是硬盘上的一个区域，它被指定为操作系统可以临时存储数据的地方，这些数据不能再保存在 RAM 中。</p>
 <p>写入磁盘的信息将比保存在 RAM 中的信息慢，但操作系统更愿意将应用程序数据保存在内存中，并使用 Swap 交换旧数据。总的来说，当系统的 RAM 耗尽时，将 Swap 作为数据存储空间是一个很好的选择。</p>
 <p>在本指南中，我们将介绍如何在 CentOS 7 服务器上创建和启用交换文件。</p>
-<h2 id="anchor_3"><a class="anchor-navigation-ex-anchor" href="#anchor_3" name="anchor_3"><i aria-hidden="true" class="fa fa-link"></i></a>2. 检查系统的交换信息</h2>
+<h2 id="anchor_3">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_3" name="anchor_3">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>2. 检查系统的交换信息
+</h2>
 <p>在我们开始之前，我们将看看我们的操作系统，看看我们是否已经有一些可用的交换空间。我们可以有多个交换文件或交换分区，但通常一个就足够了。</p>
 <p>我们可以通过键入以下命令来查看系统是否有任何配置交换：</p>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">sudo swapon -s
@@ -89,7 +101,11 @@
 Mem:            472         111          36           4         324         308
 Swap:             0           0           0
 </code></pre>
-<h2 id="anchor_4"><a class="anchor-navigation-ex-anchor" href="#anchor_4" name="anchor_4"><i aria-hidden="true" class="fa fa-link"></i></a>3. 检查硬盘驱动器分区上的可用空间</h2>
+<h2 id="anchor_4">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_4" name="anchor_4">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>3. 检查硬盘驱动器分区上的可用空间
+</h2>
 <p>为 swap 分配空间的典型方式是使用专门用于该任务的单独分区。但是，改变分区方案并不总是可能的。我们可以轻松地创建驻留在现有分区上的交换文件。</p>
 <p>在我们这样做之前，我们应该知道我们当前的磁盘使用情况。我们可以通过输入以下内容来获得这些信息：</p>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">df -h
@@ -106,7 +122,11 @@ tmpfs                 48M     0   48M    0% /run/user/0
 <p>正如第一行中看到的，我们的硬盘分区有 13G 可用，所以我们有大量空间可用。这是在一个新的，中等规模的 VPS 实例上，所以你的实际使用可能会有很大的不同。</p>
 <p>尽管对于交换空间的适当大小有很多意见，但这取决于你的个人偏好和应用程序要求。一般来说，等于或者是系统内存量的两倍是一个很好的起点。</p>
 <p>由于我的老古董机器只具有 512M 的 RAM，并且加倍会占用我不太愿意被占用的大量磁盘空间，所以我将创建 1GB 的交换空间以匹配我系统的 RAM。</p>
-<h2 id="anchor_5"><a class="anchor-navigation-ex-anchor" href="#anchor_5" name="anchor_5"><i aria-hidden="true" class="fa fa-link"></i></a>4. 创建一个交换文件</h2>
+<h2 id="anchor_5">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_5" name="anchor_5">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>4. 创建一个交换文件
+</h2>
 <p>现在我们知道了可用的存储空间，我们可以在我们的文件系统中创建一个交换文件。我们将<code class="language-vim">swapfile</code>在我们的 root（<code class="language-vim">/</code>）目录中创建一个文件，尽管如果你愿意，可以将文件命名为其他文件。该文件必须分配我们想要的交换文件的空间量。</p>
 <p>传统上，我们将通过使用该<code class="language-vim">dd</code>命令来创建具有预分配空间的文件。这个多功能的磁盘工具从一个位置写入另一个位置。</p>
 <p>我们可以使用它在 Linux 系统中的特殊设备上将文件零写入文件，该系统<code class="language-vim">/dev/zero</code>只需要根据请求分配尽可能多的零。</p>
@@ -128,7 +148,11 @@ tmpfs                 48M     0   48M    0% /run/user/0
 </code></pre>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">-rw-r--r--. 1 root root 1.0G 2月  22 16:36 /swapfile
 </code></pre>
-<h2 id="anchor_6"><a class="anchor-navigation-ex-anchor" href="#anchor_6" name="anchor_6"><i aria-hidden="true" class="fa fa-link"></i></a>5. 启用交换文件</h2>
+<h2 id="anchor_6">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_6" name="anchor_6">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>5. 启用交换文件
+</h2>
 <p>目前，我们的文件已创建，但我们的系统不知道这应该用于交换。我们需要告诉我们的系统将该文件格式化为交换，然后启用它。</p>
 <p>在我们这样做之前，我们需要调整我们文件的权限，以便除 root 之外的任何人都无法读取它。允许其他用户读取或写入此文件将是一个巨大的安全风险。我们可以通过输入以下内容来锁定权限：</p>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">chmod 600 /swapfile
@@ -162,7 +186,11 @@ Mem:            472         106           5           4         360         314
 Swap:          1023           0        1023
 </code></pre>
 <p>我们的交换已成功建立，我们的操作系统将根据需要开始使用它。</p>
-<h2 id="anchor_7"><a class="anchor-navigation-ex-anchor" href="#anchor_7" name="anchor_7"><i aria-hidden="true" class="fa fa-link"></i></a>6. 永久使交换文件</h2>
+<h2 id="anchor_7">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_7" name="anchor_7">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>6. 永久使交换文件
+</h2>
 <p>我们启用了我们的交换文件，但是当我们重新启动时，服务器不会自动启用该文件。我们可以通过修改<code class="language-vim">fstab</code>文件来改变它。</p>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">vi /etc/fstab
 </code></pre>
@@ -170,7 +198,11 @@ Swap:          1023           0        1023
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">/swapfile   none    swap    sw    0   0
 </code></pre>
 <p>完成后保存并关闭文件。</p>
-<h2 id="anchor_8"><a class="anchor-navigation-ex-anchor" href="#anchor_8" name="anchor_8"><i aria-hidden="true" class="fa fa-link"></i></a>7. 调整你的交换设置</h2>
+<h2 id="anchor_8">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_8" name="anchor_8">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>7. 调整你的交换设置
+</h2>
 <p>在处理交换时，可以配置几个选项，这些选项会影响系统的性能。</p>
 <p>该<code class="language-vim">swappiness</code>参数配置系统将数据从 RAM 交换到交换空间的频率。这是介于 0 和 100 之间的值，表示百分比。</p>
 <p>如果值接近零，内核将不会将数据交换到磁盘，除非绝对必要。请记住，与交换文件的交互是<code class="language-vim">昂贵的</code>，因为它们比与 RAM 的交互花费更多时间，并且可能导致性能的显着降低。告诉系统不要太依赖交换通常会使系统更快。</p>
@@ -212,7 +244,11 @@ Swap:          1023           0        1023
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">vm.vfs_cache_pressure = 50
 </code></pre>
 <p>完成后保存并关闭文件。</p>
-<h2 id="anchor_9"><a class="anchor-navigation-ex-anchor" href="#anchor_9" name="anchor_9"><i aria-hidden="true" class="fa fa-link"></i></a>8. 结论</h2>
+<h2 id="anchor_9">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_9" name="anchor_9">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>8. 结论
+</h2>
 <p>按照本指南中的步骤，将为你提供一些 Swap，以便使用 RAM。交换空间在避免一些常见问题方面非常有用。</p>
 <p>如果遇到 OOM（内存不足）错误，或者如果发现系统无法使用所需的应用程序，则最佳解决方案是优化应用程序配置或升级服务器。然而，配置交换空间可以给你更多的灵活性。</p>
 

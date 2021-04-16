@@ -71,42 +71,74 @@
                 <div class="search-noresults">
                     <section class="normal markdown-section">
                         <div id='anchor-navigation-ex-navbar'><i class='fa fa-anchor'></i><ul><li><span class='title-icon fa fa-hand-o-right'></span><a aria-label class='on-toolbar-action' href='' onclick="$('.fa.fa-align-justify').parent()[0].click();">目录</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_1'><b></b>CentOS 7 部署 Docker Engine</a></li><ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_2'><b>1. </b>系统要求</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_3'><b>2. </b>卸载旧版本</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_4'><b>3. </b>部署官方 YUM 源</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_5'><b>4. </b>安装 Docker CE</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_6'><b>5. </b>启动 Docker CE</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_7'><b>6. </b>docker 用户组 （root 用户忽略）</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_8'><b>7. </b>镜像加速器</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_9'><b>8. </b>添加内核参数</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_10'><b>9. </b>测试 Docker 是否安装正确</a></li></ul></ul></div><a href='#anchor_1' id='anchorNavigationExGoTop'><i class='fa fa-arrow-up'></i></a>
-                        <h1 id="anchor_1"><a class="anchor-navigation-ex-anchor" href="#anchor_1" name="anchor_1"><i aria-hidden="true" class="fa fa-link"></i></a>CentOS 7 部署 Docker Engine</h1>
+                        <h1 id="anchor_1">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_1" name="anchor_1">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>CentOS 7 部署 Docker Engine
+</h1>
 <p>Docker 分为 CE 和 EE 两大版本。CE 即社区版（免费，支持周期 7 个月），EE 即企业版，强调安全，付费使用，支持周期 24 个月。</p>
 <p>Docker CE 分为 stable、test 和 nightly 三个更新频道。</p>
 <p>官方网站上有各种环境下的 安装指南，这里主要介绍 Docker CE 在 CentOS 上的安装。</p>
 <blockquote>
 <p><strong>警告：</strong>切勿在没有配置 Docker YUM 源的情况下直接使用 yum 命令安装 Docker.</p>
 </blockquote>
-<h2 id="anchor_2"><a class="anchor-navigation-ex-anchor" href="#anchor_2" name="anchor_2"><i aria-hidden="true" class="fa fa-link"></i></a>1. 系统要求</h2>
+<h2 id="anchor_2">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_2" name="anchor_2">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>1. 系统要求
+</h2>
 <p>Docker CE 支持 64 位版本 CentOS 7，并且要求内核版本不低于 3.10。 CentOS 7 满足最低内核的要求，但由于内核版本比较低，部分功能（如 overlay2 存储层驱动）无法使用，并且部分功能可能不太稳定。</p>
-<h2 id="anchor_3"><a class="anchor-navigation-ex-anchor" href="#anchor_3" name="anchor_3"><i aria-hidden="true" class="fa fa-link"></i></a>2. 卸载旧版本</h2>
+<h2 id="anchor_3">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_3" name="anchor_3">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>2. 卸载旧版本
+</h2>
 <p>旧版本的 Docker 称为 docker 或者 docker-engine，使用以下命令卸载旧版本：</p>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">yum remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-selinux docker-engine-selinux docker-engine
 </code></pre>
-<h2 id="anchor_4"><a class="anchor-navigation-ex-anchor" href="#anchor_4" name="anchor_4"><i aria-hidden="true" class="fa fa-link"></i></a>3. 部署官方 YUM 源</h2>
+<h2 id="anchor_4">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_4" name="anchor_4">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>3. 部署官方 YUM 源
+</h2>
 <p>执行以下命令安装依赖包：</p>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">yum install -y yum-utils
 
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 </code></pre>
-<h2 id="anchor_5"><a class="anchor-navigation-ex-anchor" href="#anchor_5" name="anchor_5"><i aria-hidden="true" class="fa fa-link"></i></a>4. 安装 Docker CE</h2>
+<h2 id="anchor_5">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_5" name="anchor_5">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>4. 安装 Docker CE
+</h2>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">yum install -y docker-ce docker-ce-cli containerd.io
 </code></pre>
-<h2 id="anchor_6"><a class="anchor-navigation-ex-anchor" href="#anchor_6" name="anchor_6"><i aria-hidden="true" class="fa fa-link"></i></a>5. 启动 Docker CE</h2>
+<h2 id="anchor_6">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_6" name="anchor_6">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>5. 启动 Docker CE
+</h2>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">systemctl enable docker
 </code></pre>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">systemctl start docker
 </code></pre>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">systemctl status docker
 </code></pre>
-<h2 id="anchor_7"><a class="anchor-navigation-ex-anchor" href="#anchor_7" name="anchor_7"><i aria-hidden="true" class="fa fa-link"></i></a>6. docker 用户组 （root 用户忽略）</h2>
+<h2 id="anchor_7">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_7" name="anchor_7">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>6. docker 用户组 （root 用户忽略）
+</h2>
 <p>默认情况下，docker 命令会使用 Unix socket 与 Docker 引擎通讯。而只有 root 用户和 docker 组的用户才可以访问 Docker 引擎的 Unix socket。出于安全考虑，一般 Linux 系统上不会直接使用 root 用户。因此，更好地做法是将需要使用 docker 的用户加入 docker 用户组。</p>
 <p>将当前用户加入 docker 组：</p>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">usermod -aG docker $USER
 </code></pre>
 <p>退出当前终端并重新登录。</p>
-<h2 id="anchor_8"><a class="anchor-navigation-ex-anchor" href="#anchor_8" name="anchor_8"><i aria-hidden="true" class="fa fa-link"></i></a>7. 镜像加速器</h2>
+<h2 id="anchor_8">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_8" name="anchor_8">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>7. 镜像加速器
+</h2>
 <p>国内从 Docker Hub 拉取镜像有时会遇到困难，此时可以配置镜像加速器。由于镜像服务可能出现宕机，建议同时配置多个镜像。</p>
 <p><a target=_Blank href="https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors">https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors</a></p>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">(
@@ -133,7 +165,11 @@ EOF
 <p>检查加速器是否生效</p>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">docker info
 </code></pre>
-<h2 id="anchor_9"><a class="anchor-navigation-ex-anchor" href="#anchor_9" name="anchor_9"><i aria-hidden="true" class="fa fa-link"></i></a>8. 添加内核参数</h2>
+<h2 id="anchor_9">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_9" name="anchor_9">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>8. 添加内核参数
+</h2>
 <p>如果在 CentOS 使用 Docker CE 看到下面的这些警告信息：</p>
 <pre class="line-numbers"><code class="lang-vim rainbow-braces">WARNING: bridge-nf-call-iptables is disabled
 WARNING: bridge-nf-call-ip6tables is disabled
@@ -147,7 +183,11 @@ EOF
 <p>然后重新加载 sysctl.conf 即可</p>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">sysctl -p
 </code></pre>
-<h2 id="anchor_10"><a class="anchor-navigation-ex-anchor" href="#anchor_10" name="anchor_10"><i aria-hidden="true" class="fa fa-link"></i></a>9. 测试 Docker 是否安装正确</h2>
+<h2 id="anchor_10">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_10" name="anchor_10">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>9. 测试 Docker 是否安装正确
+</h2>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">$ docker run hello-world
 
 Unable to find image &#x27;hello-world:latest&#x27; locally

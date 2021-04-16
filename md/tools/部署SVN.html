@@ -71,16 +71,28 @@
                 <div class="search-noresults">
                     <section class="normal markdown-section">
                         <div id='anchor-navigation-ex-navbar'><i class='fa fa-anchor'></i><ul><li><span class='title-icon fa fa-hand-o-right'></span><a aria-label class='on-toolbar-action' href='' onclick="$('.fa.fa-align-justify').parent()[0].click();">目录</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_1'><b></b>CentOS 7 上部署 Apache Subversion（SVN）服务器</a></li><ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_2'><b>1. </b>先决条件</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_3'><b>2. </b>安装 Apache</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_4'><b>3. </b>安装 SVN 和 mod_dav_svn 模块</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_5'><b>4. </b>配置 SVN</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_6'><b>5. </b>创建 SVN 仓库</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_7'><b>6. </b>设置 SVN 用户帐号</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_8'><b>7. </b>为用户设置权限</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_9'><b>8. </b>启动 Apache 并修改防火墙规则</a></li></ul></ul></div><a href='#anchor_1' id='anchorNavigationExGoTop'><i class='fa fa-arrow-up'></i></a>
-                        <h1 id="anchor_1"><a class="anchor-navigation-ex-anchor" href="#anchor_1" name="anchor_1"><i aria-hidden="true" class="fa fa-link"></i></a>CentOS 7 上部署 Apache Subversion（SVN）服务器</h1>
+                        <h1 id="anchor_1">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_1" name="anchor_1">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>CentOS 7 上部署 Apache Subversion（SVN）服务器
+</h1>
 <p>Apache Subversion（SVN）是一种广泛使用的版本控制解决方案，可帮助存储各种版本的文件，如源代码和文档。</p>
 <p>在本文中，我将介绍如何使用 Apache Subversion 和 Apache 在 CentOS 7 服务器实例上构建 SVN 服务器。</p>
-<h2 id="anchor_2"><a class="anchor-navigation-ex-anchor" href="#anchor_2" name="anchor_2"><i aria-hidden="true" class="fa fa-link"></i></a>1. 先决条件</h2>
+<h2 id="anchor_2">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_2" name="anchor_2">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>1. 先决条件
+</h2>
 <ul>
 <li>CentOS 7（最小化安装，但不是必需）。</li>
 <li>一个 sudo  用户登录（直接使用 root 亦可）。</li>
 </ul>
 <p>非 root 用户请在命令前加 <code class="language-vim">sudo</code> 。</p>
-<h2 id="anchor_3"><a class="anchor-navigation-ex-anchor" href="#anchor_3" name="anchor_3"><i aria-hidden="true" class="fa fa-link"></i></a>2. 安装 Apache</h2>
+<h2 id="anchor_3">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_3" name="anchor_3">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>2. 安装 Apache
+</h2>
 <p>使用 YUM 安装 Apache：</p>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">yum install -y httpd
 </code></pre>
@@ -90,11 +102,19 @@
 <p>防止 Apache 在<code class="language-vim">/var/www/html</code>目录中显示文件：</p>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">sed -i &quot;s/Options Indexes FollowSymLinks/Options FollowSymLinks/&quot; /etc/httpd/conf/httpd.conf
 </code></pre>
-<h2 id="anchor_4"><a class="anchor-navigation-ex-anchor" href="#anchor_4" name="anchor_4"><i aria-hidden="true" class="fa fa-link"></i></a>3. 安装 SVN 和 mod_dav_svn 模块</h2>
+<h2 id="anchor_4">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_4" name="anchor_4">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>3. 安装 SVN 和 mod_dav_svn 模块
+</h2>
 <p>要使 SVN 与 Apache 配合使用，需要安装除 SVN 之外的 Apache 模块<code class="language-vim">mod dav svn</code>：</p>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">yum install -y subversion mod_dav_svn
 </code></pre>
-<h2 id="anchor_5"><a class="anchor-navigation-ex-anchor" href="#anchor_5" name="anchor_5"><i aria-hidden="true" class="fa fa-link"></i></a>4. 配置 SVN</h2>
+<h2 id="anchor_5">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_5" name="anchor_5">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>4. 配置 SVN
+</h2>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">cat &gt;&gt; /etc/httpd/conf.modules.d/10-subversion.conf &lt;&lt;EOF
 &lt;Location /svn&gt;
 DAV svn
@@ -108,7 +128,11 @@ Require valid-user
 EOF
 </code></pre>
 <p><strong>注意：</strong> 在此配置中，我们指定了一个 HTTP 访问认证文件<code class="language-vim">/etc/svn/svn-auth</code>和用户权限控制文件<code class="language-vim">/svn/authz</code>。两者都将在以后创建。</p>
-<h2 id="anchor_6"><a class="anchor-navigation-ex-anchor" href="#anchor_6" name="anchor_6"><i aria-hidden="true" class="fa fa-link"></i></a>5. 创建 SVN 仓库</h2>
+<h2 id="anchor_6">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_6" name="anchor_6">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>5. 创建 SVN 仓库
+</h2>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">mkdir /svn
 cd /svn
 svnadmin create repo1
@@ -117,7 +141,11 @@ chown -R apache:apache repo1
 chcon -Rv --type=httpd_sys_content_t /svn
 setsebool -P httpd_unified=1
 </code></pre>
-<h2 id="anchor_7"><a class="anchor-navigation-ex-anchor" href="#anchor_7" name="anchor_7"><i aria-hidden="true" class="fa fa-link"></i></a>6. 设置 SVN 用户帐号</h2>
+<h2 id="anchor_7">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_7" name="anchor_7">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>6. 设置 SVN 用户帐号
+</h2>
 <p>使用以下命令创建 HTTP 访问认证文件<code class="language-vim">/svn/svn-auth</code>和 SVN 用户帐户<code class="language-vim">user001</code>：</p>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">mkdir /etc/svn
 htpasswd -cm /etc/svn/svn-auth user001
@@ -130,7 +158,11 @@ chmod 640 /etc/svn/svn-auth
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">htpasswd -m /etc/svn/svn-auth user003
 </code></pre>
 <p><strong>警告：</strong> 现在不要使用<code class="language-vim">-c</code>标志，否则将重建身份验证文件，并清除之前设置的所有用户帐户。</p>
-<h2 id="anchor_8"><a class="anchor-navigation-ex-anchor" href="#anchor_8" name="anchor_8"><i aria-hidden="true" class="fa fa-link"></i></a>7. 为用户设置权限</h2>
+<h2 id="anchor_8">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_8" name="anchor_8">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>7. 为用户设置权限
+</h2>
 <ul>
 <li>用户<code class="language-vim">user001</code>是管理员。</li>
 <li>用户<code class="language-vim">user002</code>具有读写权限。</li>
@@ -150,7 +182,11 @@ repo1_trainee=user003
 @repo1_trainee=r
 EOF
 </code></pre>
-<h2 id="anchor_9"><a class="anchor-navigation-ex-anchor" href="#anchor_9" name="anchor_9"><i aria-hidden="true" class="fa fa-link"></i></a>8. 启动 Apache 并修改防火墙规则</h2>
+<h2 id="anchor_9">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_9" name="anchor_9">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>8. 启动 Apache 并修改防火墙规则
+</h2>
 <p>启动 Apache：</p>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">systemctl start httpd.service
 systemctl enable httpd.service
