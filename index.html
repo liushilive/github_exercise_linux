@@ -70,17 +70,254 @@
             <div class="search-plus" id="book-search-results">
                 <div class="search-noresults">
                     <section class="normal markdown-section">
-                        <div id='anchor-navigation-ex-navbar'><i class='fa fa-anchor'></i><ul><li><span class='title-icon fa fa-hand-o-right'></span><a aria-label class='on-toolbar-action' href='' onclick="$('.fa.fa-align-justify').parent()[0].click();">目录</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_1'><b></b>Linux 相关</a></li><ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_2'><b>1. </b>Linux 常用命令</a></li></ul></ul></div><a href='#anchor_1' id='anchorNavigationExGoTop'><i class='fa fa-arrow-up'></i></a>
+                        <div id='anchor-navigation-ex-navbar'><i class='fa fa-anchor'></i><ul><li><span class='title-icon fa fa-hand-o-right'></span><a aria-label class='on-toolbar-action' href='' onclick="$('.fa.fa-align-justify').parent()[0].click();">目录</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_1'><b></b>Linux 相关</a></li><ul><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_2'><b>1. </b>磁盘目录命令</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_3'><b>2. </b>文件基本操作</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_4'><b>3. </b>查看文件内容</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_5'><b>4. </b>打包压缩</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_6'><b>5. </b>重定向与管道</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_7'><b>6. </b>用户与组</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_8'><b>7. </b>权限</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_9'><b>8. </b>切换用户</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_10'><b>9. </b>系统信息</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_11'><b>10. </b>进程管理</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_12'><b>11. </b>前后台切换</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_13'><b>12. </b>关机</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_14'><b>13. </b>软件管理</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_15'><b>14. </b>网络管理</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_16'><b>15. </b>下载上传</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_17'><b>16. </b>查找文件</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_18'><b>17. </b>文件编辑</a></li><li><span class='title-icon fa fa-hand-o-right'></span><a href='#anchor_19'><b>18. </b>Linux Shell 开发高频命令</a></li></ul></ul></div><a href='#anchor_1' id='anchorNavigationExGoTop'><i class='fa fa-arrow-up'></i></a>
                         <h1 id="anchor_1">
     <a class="anchor-navigation-ex-anchor" href="#anchor_1" name="anchor_1">
         <i aria-hidden="true" class="fa fa-link"></i>
     </a>Linux 相关
 </h1>
 <p>我只是搬运工，如果文中有冒犯到你的地方，请告知我删除内容，或添加来源。</p>
+<ol>
+<li><code class="language-vim">exit</code>：退出 shell</li>
+<li><code class="language-vim">echo</code>：回显，即将字符串输出到标准输出设备</li>
+<li><code class="language-vim">man</code>：帮助</li>
+<li><code class="language-vim">history</code>：历史记录</li>
+<li><code class="language-vim">clear</code>：清屏</li>
+</ol>
 <h2 id="anchor_2">
     <a class="anchor-navigation-ex-anchor" href="#anchor_2" name="anchor_2">
         <i aria-hidden="true" class="fa fa-link"></i>
-    </a>1. Linux 常用命令
+    </a>1. 磁盘目录命令
+</h2>
+<ol>
+<li><code class="language-vim">pwd</code>：显示当前目录</li>
+<li><code class="language-vim">ls</code>：列出目录中的内容</li>
+<li><code class="language-vim">file</code>：显示文件的类型</li>
+<li><code class="language-vim">cd</code>：改变当前工作目录</li>
+<li><code class="language-vim">ln</code>：链接</li>
+<li><code class="language-vim">df</code>：对文件系统的磁盘空间使用情况进行统计</li>
+<li><code class="language-vim">du</code>：统计目录大小</li>
+</ol>
+<h2 id="anchor_3">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_3" name="anchor_3">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>2. 文件基本操作
+</h2>
+<ol>
+<li><code class="language-vim">touch</code>：新建文件，更新时间</li>
+<li><code class="language-vim">mkdir</code>：创建目录</li>
+<li><code class="language-vim">cp</code>：复制文件</li>
+<li><code class="language-vim">mv</code>：移动文件</li>
+<li><code class="language-vim">rmdir</code>：删除目录，要求目录为空</li>
+<li><code class="language-vim">rm</code>：删除文件</li>
+<li><code class="language-vim">*</code>：匹配任意长度的任意字符</li>
+<li><code class="language-vim">?</code>：匹配任意一个字符</li>
+<li><code class="language-vim">[]</code>：匹配属于字符组的字符</li>
+</ol>
+<h2 id="anchor_4">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_4" name="anchor_4">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>3. 查看文件内容
+</h2>
+<ol>
+<li><code class="language-vim">wc</code>：计算文件的单词数、行数、字符数</li>
+<li><code class="language-vim">cat</code>：一次性显示输出文件的全部内容</li>
+<li><code class="language-vim">more</code>：显示文件内容</li>
+<li><code class="language-vim">less</code>：滚动显示文件的内容</li>
+<li><code class="language-vim">head</code>：显示文件的开始部分，默认为前 10 行</li>
+<li><code class="language-vim">tail</code>：显示文件的结尾部分，默认为后 10 行</li>
+<li><code class="language-vim">grep</code>：查找指定的字符串</li>
+</ol>
+<h2 id="anchor_5">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_5" name="anchor_5">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>4. 打包压缩
+</h2>
+<ol>
+<li><code class="language-vim">gzip</code>：压缩文件</li>
+<li><code class="language-vim">gunzip</code>：解压缩文件</li>
+<li><code class="language-vim">tar</code>：打包</li>
+</ol>
+<h2 id="anchor_6">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_6" name="anchor_6">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>5. 重定向与管道
+</h2>
+<ol>
+<li><code class="language-vim">&lt;</code>：输入重定向</li>
+<li><code class="language-vim">&gt;</code>：输出重定向</li>
+<li><code class="language-vim">&gt;&gt;</code>：附加到指定文件的结尾</li>
+<li><code class="language-vim">|</code>：管道符，用于连接多个命令，前一个命令的输出作为后一命令的输入</li>
+</ol>
+<h2 id="anchor_7">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_7" name="anchor_7">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>6. 用户与组
+</h2>
+<ol>
+<li><code class="language-vim">id</code>：用户 ID</li>
+<li><code class="language-vim">useradd</code>：添加用户</li>
+<li><code class="language-vim">passwd</code>：修改用户密码</li>
+<li><code class="language-vim">usermod</code>：修改用户</li>
+<li><code class="language-vim">userdel</code>：删除用户</li>
+<li><code class="language-vim">groupadd</code>：添加组</li>
+<li><code class="language-vim">groupmod</code>：修改组</li>
+<li><code class="language-vim">groupdel</code>：删除组</li>
+</ol>
+<h2 id="anchor_8">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_8" name="anchor_8">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>7. 权限
+</h2>
+<ol>
+<li><code class="language-vim">chmod</code>：修改文件或目录的权限</li>
+<li><code class="language-vim">chown</code>：修改文件或目录的所属用户</li>
+<li><code class="language-vim">chgrp</code>：修改文件或目录的用户组</li>
+</ol>
+<h2 id="anchor_9">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_9" name="anchor_9">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>8. 切换用户
+</h2>
+<ol>
+<li><code class="language-vim">su</code>：切换用户</li>
+<li><code class="language-vim">sudo</code>：管理员执行</li>
+</ol>
+<h2 id="anchor_10">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_10" name="anchor_10">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>9. 系统信息
+</h2>
+<ol>
+<li><code class="language-vim">uname</code>：系统信息</li>
+<li><code class="language-vim">free</code>：内存</li>
+<li><code class="language-vim">date</code>：查看时间</li>
+<li><code class="language-vim">uptime</code>：系统的负载信息</li>
+<li><code class="language-vim">w</code>：当前在线用户</li>
+</ol>
+<h2 id="anchor_11">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_11" name="anchor_11">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>10. 进程管理
+</h2>
+<ol>
+<li><code class="language-vim">ps</code>：查进程</li>
+<li><code class="language-vim">top</code>：任务管理器</li>
+<li><code class="language-vim">kill</code>：杀进程</li>
+<li><code class="language-vim">pkill</code>：按进程名杀进程</li>
+</ol>
+<h2 id="anchor_12">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_12" name="anchor_12">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>11. 前后台切换
+</h2>
+<ol>
+<li><code class="language-vim">&amp;</code>：在后台执行</li>
+<li><code class="language-vim">jobs</code>：后台任务</li>
+<li><code class="language-vim">bg</code>：继续在后台运行</li>
+<li><code class="language-vim">fg</code>：拉回到前台</li>
+</ol>
+<h2 id="anchor_13">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_13" name="anchor_13">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>12. 关机
+</h2>
+<ol>
+<li><code class="language-vim">shutdown</code>：关机</li>
+<li><code class="language-vim">reboot</code>：重启</li>
+<li><code class="language-vim">poweroff</code>：关机</li>
+</ol>
+<h2 id="anchor_14">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_14" name="anchor_14">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>13. 软件管理
+</h2>
+<ol>
+<li><code class="language-vim">rpm</code>：安装 rpm 包</li>
+<li><code class="language-vim">yum</code>：yum 安装</li>
+<li><code class="language-vim">systemctl</code>：服务管理</li>
+</ol>
+<h2 id="anchor_15">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_15" name="anchor_15">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>14. 网络管理
+</h2>
+<ol>
+<li>
+<p><code class="language-vim">ip addr</code>：查 IP</p>
+</li>
+<li>
+<p><code class="language-vim">ifup</code>：网络接口启用</p>
+</li>
+<li>
+<p><code class="language-vim">ifdown</code>：网络接口禁用</p>
+</li>
+<li>
+<p><code class="language-vim">nmtui</code>：网络配置</p>
+</li>
+<li>
+<p><code class="language-vim">/etc/sysconfig/network-scripts/ifcfg-ens32</code>：网卡配置文件</p>
+</li>
+<li>
+<p><code class="language-vim">/etc/resolv.conf</code>：DNS 配置文件</p>
+</li>
+<li>
+<p><code class="language-vim">ping</code>：检查网络通断</p>
+</li>
+<li>
+<p><code class="language-vim">ss</code>：查端口</p>
+</li>
+<li>
+<p><code class="language-vim">systemctl restart network</code>：重启网络服务</p>
+</li>
+<li>
+<p><code class="language-vim">systemctl status firewalld</code>：查看防火墙状态</p>
+</li>
+<li>
+<p><code class="language-vim">firewall-cmd --zone=public --add-port=8080/tcp --permanent</code>：添加 8080 TCP 端口到公共区域并永久生效</p>
+</li>
+<li>
+<p><code class="language-vim">firewall-cmd --reload</code>：重新加载防火墙配置</p>
+</li>
+<li>
+<p><code class="language-vim">systemctl stop firewalld</code>：停止防火墙</p>
+</li>
+<li>
+<p><code class="language-vim">systemctl disable firewalld</code>：禁止防火墙开机启动</p>
+</li>
+</ol>
+<h2 id="anchor_16">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_16" name="anchor_16">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>15. 下载上传
+</h2>
+<ol>
+<li><code class="language-vim">curl</code>：下载</li>
+<li><code class="language-vim">Xftp</code>：上传</li>
+</ol>
+<h2 id="anchor_17">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_17" name="anchor_17">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>16. 查找文件
+</h2>
+<ol>
+<li><code class="language-vim">find</code>：查找指定的文件</li>
+<li><code class="language-vim">which</code>：查找命令位置</li>
+</ol>
+<h2 id="anchor_18">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_18" name="anchor_18">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>17. 文件编辑
+</h2>
+<ol>
+<li><code class="language-vim">vi</code>：编辑文件内容</li>
+<li><code class="language-vim">sed</code>：替换文件内容</li>
+<li><code class="language-vim">split</code>：分割大文件</li>
+</ol>
+<h2 id="anchor_19">
+    <a class="anchor-navigation-ex-anchor" href="#anchor_19" name="anchor_19">
+        <i aria-hidden="true" class="fa fa-link"></i>
+    </a>18. Linux Shell 开发高频命令
 </h2>
 <ul>
 <li><code class="language-vim">&amp;</code>：在后台执行</li>
